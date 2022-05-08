@@ -1,4 +1,4 @@
-package com.example.orderstock_2;
+package com.kluster.orderstock_2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
