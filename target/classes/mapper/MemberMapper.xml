@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kluster.orderstock_2.admin.mapper.MemberMapper">
+
+	<select id="getMemberList" resultType="list">
+		SELECT
+			 member_idx			as memberIdx
+			,member_name		as memberName
+			,member_email		as memberEmail
+			,member_phone		as memberPhone
+			,member_nickname	as memberNickname
+		from
+			os_member
+		order by member_idx desc;
+	</select>
+	
+</mapper>
