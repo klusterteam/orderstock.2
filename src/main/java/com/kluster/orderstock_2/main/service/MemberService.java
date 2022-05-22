@@ -3,14 +3,21 @@ package com.kluster.orderstock_2.main.service;
 import com.kluster.orderstock_2.main.domain.Member;
 import com.kluster.orderstock_2.main.repository.MemberRepository;
 import com.kluster.orderstock_2.main.repository.MemoryMemberRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
 
+    /* 외부에서 넣어주는것 DI */
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+    /* Test 단축키 Cntl + Shift + T */
     /* 회원가입 */
     public Long join(Member member){
         // 같은 이름이 있는 중복 회원 X

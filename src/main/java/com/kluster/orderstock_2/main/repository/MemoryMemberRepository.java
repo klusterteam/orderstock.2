@@ -1,6 +1,7 @@
 package com.kluster.orderstock_2.main.repository;
 
 import com.kluster.orderstock_2.main.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
