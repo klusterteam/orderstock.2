@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kluster.orderstock_2.mapper.wholstockmapper">
+<mapper namespace="com.kluster.orderstock_2.wholestock.mapper.WholestockMapper">
 
     <!--RESULTMAP 1 : 도매상 창고-->
-    <resultMap id="wholestock_storage" type="Wholestock">
+    <resultMap id="wholestock_storage" type="com.kluster.orderstock_2.wholestock.domain.Wholestock">
         <result property="storageCode" column="storage_code"></result>
         <result property="storageName" column="storage_name"></result>
         <result property="storageType" column="storage_type"></result>
@@ -11,7 +11,7 @@
     </resultMap>
 
     <!--RESULTMAP 2 : 도매 상품(재고)-->
-    <resultMap id="wholestock_item" type="Wholestock">
+    <resultMap id="wholestock_item" type="com.kluster.orderstock_2.wholestock.domain.Wholestock">
         <result property="itemCode" column="item_code"></result>
         <result property="itemName" column="item_name"></result>
         <result property="itemType" column="item_type"></result>
@@ -44,6 +44,6 @@
         FROM
             os_wholestock_item
         WHERE
-            rec_sts='A';
+            rec_sts='A'
     </select>
 </mapper>
