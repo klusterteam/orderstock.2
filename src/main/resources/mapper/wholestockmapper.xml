@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kluster.orderstock_2.mapper.wholstockmapper">
+
+    <!--RESULTMAP 1 : 도매상 창고-->
+    <resultMap id="wholestock_storage" type="Wholestock">
+        <result property="storageCode" column="storage_code"></result>
+        <result property="storageName" column="storage_name"></result>
+        <result property="storageType" column="storage_type"></result>
+        <result property="storageOwn" column="storage_own"></result>
+    </resultMap>
+
+    <!--RESULTMAP 2 : 도매 상품(재고)-->
+    <resultMap id="wholestock_item" type="Wholestock">
+        <result property="itemCode" column="item_code"></result>
+        <result property="itemName" column="item_name"></result>
+        <result property="itemType" column="item_type"></result>
+        <result property="itemOrigin" column="item_origin"></result>
+        <result property="itemUnit" column="item_unit"></result>
+        <result property="itemQuan" column="item_quan"></result>
+        <result property="itemDesc" column="item_desc"></result>
+        <result property="itemProd" column="item_prod"></result>
+        <result property="itemLife" column="item_life"></result>
+        <result property="itemMark" column="item_mark"></result>
+        <result property="storageCode" column="storage_code"></result>
+        <result property="itemDate" column="item_date"></result>
+        <result property="recSts" column="rec_sts"></result>
+    </resultMap>
+
+    <select id="getWholestockItem" resultMap="wholestock_item">
+        SELECT
+            item_code,
+            item_name,
+            item_type,
+            item_origin,
+            item_unit,
+            item_quan,
+            item_desc,
+            item_prod,
+            item_life,
+            item_mark,
+            storage_code,
+            item_date
+        FROM
+            os_wholestock_item
+        WHERE
+            rec_sts='A';
+    </select>
+</mapper>
