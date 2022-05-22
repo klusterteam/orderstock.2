@@ -18,12 +18,12 @@ public class WholestockController {
     }
 
     /*도매상 1 : 도매상의 재고 목록*/
-    @GetMapping("/wholestockitemlist")
+    @GetMapping("wholestockitemlist")
     public String wholestockItemList(Model model){
 
         List<Wholestock> wholestockItemList = wholestockService.getWholestockItem();
         model.addAttribute("wholestockItemList", wholestockItemList);
-        return "/wholestock";
+        return "wholestock";
     }
 }
 
