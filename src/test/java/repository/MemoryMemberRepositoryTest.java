@@ -27,7 +27,7 @@ public class MemoryMemberRepositoryTest {
 
         repository.save(member);
 
-        Member result = repository.findById(member.getId()).get();
+        Member result = repository.findByIdx(member.getIdx()).get();
 
         assertThat(member).isEqualTo(result);
     }
@@ -57,7 +57,7 @@ public class MemoryMemberRepositoryTest {
         member2.setName("spring2");
         repository.save(member2);
 
-        List<Member> result = repository.finaAll();
+        List<Member> result = repository.findAll();
 
         assertThat(result.size()).isEqualTo(2);
     }

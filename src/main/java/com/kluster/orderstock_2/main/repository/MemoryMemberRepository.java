@@ -12,14 +12,14 @@ public class MemoryMemberRepository implements MemberRepository {
 
     @Override
     public Member save(Member member) {
-        member.setId(++sequence);
-        store.put(member.getId(), member);
+        member.setIdx(++sequence);
+        store.put(member.getIdx(), member);
         return member;
     }
 
     @Override
-    public Optional<Member> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+    public Optional<Member> findByIdx(Long idx) {
+        return Optional.ofNullable(store.get(idx));
     }
 
     @Override
@@ -30,7 +30,7 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public List<Member> finaAll() {
+    public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }
 

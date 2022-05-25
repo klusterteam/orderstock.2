@@ -31,9 +31,14 @@ public class MemberController {
     @PostMapping("/members/new")
     public String create(MemberForm form){
         Member member = new Member();
-        member.setName(form.getName());
 
-        System.out.println("member =" + member.getName());
+        member.setName(form.getName());
+        member.setMemberId(form.getMemberId());
+        member.setMemberPassword(form.getMemberPassword());
+
+        System.out.println("member Name = " + member.getName());
+        System.out.println("member Id = " + member.getMemberId());
+        System.out.println("member Password = " + member.getMemberPassword());
 
         memberService.join(member);
 
