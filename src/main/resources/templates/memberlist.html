@@ -6,6 +6,7 @@
 
 <th:block layout:fragment="content">
     <body>
+ 
     <h3>회원 리스트</h3>
     <table>
       <tbody>
@@ -29,8 +30,8 @@
         </tr>
       </tbody>
     </table>
-		<table>
-			<thead class="table">
+		<table class="table table-hover">
+			<thead >
 				<tr>
 					<td>번호</td>
 					<td>이름</td>
@@ -42,7 +43,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="memberlist : ${memberlist}">
+				<tr th:each="memberlist : ${memberList}">
 					<td th:text="${memberlist.memberIdx}"></td>
 					<td th:text="${memberlist.memberName}"></td>
 					<td>구현중</td>
