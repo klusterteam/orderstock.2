@@ -1,11 +1,11 @@
-package com.kluster.orderstock_2.admin.service;
+package com.kluster.orderstock_2.member.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.kluster.orderstock_2.admin.domain.Member;
-import com.kluster.orderstock_2.admin.mapper.MemberMapper;
+import com.kluster.orderstock_2.member.domain.Member;
+import com.kluster.orderstock_2.member.mapper.MemberMapper;
 
 @Service
 public class MemberService {
@@ -14,7 +14,7 @@ public class MemberService {
 		this.memberMapper = memberMapper;
 	}
 	
-	public List<Member> getMember(){
+	public List<Member> getMemberList(){
 		List<Member> memberList = memberMapper.getMemberList();
 		return  memberList;
 	}

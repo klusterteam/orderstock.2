@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/main}">
+      layout:decorate="~{layout/wholestocklayout}">
 
 <th:block layout:fragment="content">
-    <body>
-
-    </body>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">재고번호</th>
+            <th scope="col">품명</th>
+            <th scope="col">유형</th>
+            <th scope="col">원산지</th>
+            <th scope="col">단위</th>
+            <th scope="col">수량</th>
+            <th scope="col">상세</th>
+            <th scope="col">생산자</th>
+            <th scope="col">유통기한</th>
+            <th scope="col">등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="t : ${wholestockItemList}">
+                <tr>
+                    <td th:text="${t.itemCode}"></td>
+                    <td th:text="${t.itemName}"></td>
+                    <td th:text="${t.itemType}"></td>
+                    <td th:text="${t.itemOrigin}"></td>
+                    <td th:text="${t.itemUnit}"></td>
+                    <td th:text="${t.itemQuan}"></td>
+                    <td th:text="${t.itemDesc}"></td>
+                    <td th:text="${t.itemProd}"></td>
+                    <td th:text="${t.storageCode}"></td>
+                    <td th:text="${t.itemDate}"></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
 </th:block>
 
 </html>

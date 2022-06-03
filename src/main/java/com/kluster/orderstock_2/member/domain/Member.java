@@ -1,4 +1,4 @@
-package com.kluster.orderstock_2.admin.domain;
+package com.kluster.orderstock_2.member.domain;
 
 public class Member {
 	private int memberIdx;
@@ -46,22 +46,11 @@ public class Member {
 	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("member [memberIdx=");
-		builder.append(memberIdx);
-		builder.append(", memberName=");
-		builder.append(memberName);
-		builder.append(", memberId=");
-		builder.append(memberId);
-		builder.append(", memberEmail=");
-		builder.append(memberEmail);
-		builder.append(", memberPhone=");
-		builder.append(memberPhone);
-		builder.append(", memberNickname=");
-		builder.append(memberNickname);
-		builder.append("]");
-		return builder.toString();
+		return "Member [memberIdx=" + memberIdx + ", memberName=" + memberName + ", memberId=" + memberId
+				+ ", memberEmail=" + memberEmail + ", memberPhone=" + memberPhone + ", memberNickname=" + memberNickname
+				+ "]";
 	}
+	
 	
 
 }
