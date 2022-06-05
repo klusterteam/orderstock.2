@@ -2,7 +2,7 @@ package com.kluster.orderstock_2.wholestock.domain;
 
 public class Wholestock {
 
-    /*Wholestock 재고
+    /*wholestock_item 재고
     itemCode : 재고 코드
     itemName : 재고명
     itemType : 재고 타입(농산, 수산 등)
@@ -30,6 +30,20 @@ public class Wholestock {
     private String storageCode;
     private int itemDate;
     private String recSts;
+
+   /* origin_country 원산지 정보
+    originCode : 원산지 코드
+    originName : 원산지 국가명*/
+
+    private String originCode;
+    private String originName;
+
+    /*os_item_type_category 재고 유형 정보
+    itemTypeCode : 재고 유형 코드
+    itemTypeName : 재고 유형명*/
+
+    private String itemTypeCode;
+    private String itemTypeName;
 
     public String getItemCode() {
         return itemCode;
@@ -135,6 +149,38 @@ public class Wholestock {
         this.recSts = recSts;
     }
 
+    public String getOriginCode() {
+        return originCode;
+    }
+
+    public void setOriginCode(String originCode) {
+        this.originCode = originCode;
+    }
+
+    public String getOriginName() {
+        return originName;
+    }
+
+    public void setOriginName(String originName) {
+        this.originName = originName;
+    }
+
+    public String getItemTypeCode() {
+        return itemTypeCode;
+    }
+
+    public void setItemTypeCode(String itemTypeCode) {
+        this.itemTypeCode = itemTypeCode;
+    }
+
+    public String getItemTypeName() {
+        return itemTypeName;
+    }
+
+    public void setItemTypeName(String itemTypeName) {
+        this.itemTypeName = itemTypeName;
+    }
+
     @Override
     public String toString() {
         return "Wholestock{" +
@@ -151,6 +197,10 @@ public class Wholestock {
                 ", storageCode='" + storageCode + '\'' +
                 ", itemDate=" + itemDate +
                 ", recSts='" + recSts + '\'' +
+                ", originCode='" + originCode + '\'' +
+                ", originName='" + originName + '\'' +
+                ", itemTypeCode='" + itemTypeCode + '\'' +
+                ", itemTypeName='" + itemTypeName + '\'' +
                 '}';
     }
 }

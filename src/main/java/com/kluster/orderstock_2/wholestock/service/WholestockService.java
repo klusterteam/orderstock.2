@@ -21,5 +21,15 @@ public class WholestockService {
         List<Wholestock> wholestockList = wholestockMapper.getWholestockItem();
         return wholestockList;
     }
+
+    public List<Wholestock> getItemType(){
+        List<Wholestock> itemList = wholestockMapper.getItemType();
+        return itemList;
+    }
+
+    public List<Wholestock> getOriginCountry(){
+        List<Wholestock> originCountry = wholestockMapper.getOriginCountry();
+        return originCountry;
+    }
 }
 
