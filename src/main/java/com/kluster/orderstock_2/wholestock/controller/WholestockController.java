@@ -22,7 +22,13 @@ public class WholestockController {
     public String wholestockItemList(Model model){
 
         List<Wholestock> wholestockItemList = wholestockService.getWholestockItem();
+        List<Wholestock> itemType = wholestockService.getItemType();
+        List<Wholestock> originCountry = wholestockService.getOriginCountry();
+
         model.addAttribute("wholestockItemList", wholestockItemList);
+        model.addAttribute("itemType", itemType);
+        model.addAttribute("originCountry", originCountry);
+
         return "wholestock";
     }
 }
