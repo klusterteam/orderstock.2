@@ -3,18 +3,24 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.kluster.orderstock_2.admin.mapper.MemberMapper">
-
-	<select id="getMemberList" resultType="list">
+<mapper namespace="com.kluster.orderstock_2.member.mapper.MemberMapper">
+	<!-- RESULTMAP 회원정보  -->
+	<resultMap id="member" type="com.kluster.orderstock_2.member.domain.Member">
+		<result property="memberIdx" column="member_idx"></result>
+		<result property="memberName" column="member_name"></result>
+		<result property="memberEmail" column="member_email"></result>
+		<result property="memberPhone" column="member_phone"></result>
+		<result property="memberNickname" column="member_nickname"></result>
+	</resultMap>
+	<select id="getMemberList" resultMap="member">
 		SELECT
-			 member_idx			as memberIdx
-			,member_name		as memberName
-			,member_email		as memberEmail
-			,member_phone		as memberPhone
-			,member_nickname	as memberNickname
+			 member_idx			
+			,member_name		
+			,member_email		
+			,member_phone		
+			,member_nickname	
 		from
 			os_member
-		order by member_idx desc;
+		order by member_idx desc
 	</select>
-	
 </mapper>
