@@ -25,25 +25,53 @@
         <result property="storageCode" column="storage_code"></result>
         <result property="itemDate" column="item_date"></result>
         <result property="recSts" column="rec_sts"></result>
+        <result property="originCode" column="origin_code"></result>
+        <result property="originName" column="origin_name"></result>
+        <result property="itemTypeCode" column="item_type_code"></result>
+        <result property="itemTypeName" column="item_type_name"></result>
     </resultMap>
+
+    <select id="getOriginCountry" resultMap="wholestock_item">
+        SELECT
+            origin_code,
+            origin_name
+        FROM
+            os_origin_country
+    </select>
+
+    <select id="getItemType" resultMap="wholestock_item">
+        SELECT
+            item_type_code,
+            item_type_name
+        FROM
+            os_item_type_category
+    </select>
 
     <select id="getWholestockItem" resultMap="wholestock_item">
         SELECT
-            item_code,
-            item_name,
-            item_type,
-            item_origin,
-            item_unit,
-            item_quan,
-            item_desc,
-            item_prod,
-            item_life,
-            item_mark,
-            storage_code,
-            item_date
+            A.item_code,
+            A.item_name,
+            C.item_type_name,
+            B.origin_name,
+            A.item_unit,
+            A.item_quan,
+            A.item_desc,
+            A.item_prod,
+            A.item_life,
+            A.item_mark,
+            A.storage_code,
+            A.item_date
         FROM
-            os_wholestock_item
+            os_wholestock_item A
+        INNER JOIN
+            os_origin_country B
+        ON
+            A.item_origin = B.origin_code
+        INNER JOIN
+            os_item_type_category C
+        ON
+            A.item_type = C.item_type_code
         WHERE
-            rec_sts='A'
+            A.rec_sts='A'
     </select>
 </mapper>

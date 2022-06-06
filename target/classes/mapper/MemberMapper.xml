@@ -23,5 +23,4 @@
 			os_member
 		order by member_idx desc
 	</select>
-	
 </mapper>
