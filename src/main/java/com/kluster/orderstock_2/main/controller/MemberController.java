@@ -51,4 +51,9 @@ public class MemberController {
         model.addAttribute("members", members);
         return "members/memberList";
     }
+
+    @GetMapping("/members/login")
+    public String login(){
+        return "members/login";
+    }
 }

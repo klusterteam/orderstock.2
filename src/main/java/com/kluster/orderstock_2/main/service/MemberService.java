@@ -4,10 +4,12 @@ import com.kluster.orderstock_2.main.domain.Member;
 import com.kluster.orderstock_2.main.repository.MemberRepository;
 import com.kluster.orderstock_2.main.repository.MemoryMemberRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;

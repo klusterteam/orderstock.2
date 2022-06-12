@@ -19,7 +19,7 @@ public class JdbcMemberRepository implements MemberRepository{
 
     @Override
     public Member save(Member os_member){
-        String sql = "insert into klusterdb.os_member(member_name, member_id, member_password) values(?, ?, ?)";
+        String sql = "insert into os_member(member_name,member_id,member_password) values(?,?,?)";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -32,6 +32,7 @@ public class JdbcMemberRepository implements MemberRepository{
             pstmt.setString(1, os_member.getName());
             pstmt.setString(2, os_member.getMemberId());
             pstmt.setString(3, os_member.getMemberPassword());
+
 
             pstmt.executeUpdate();
 
@@ -89,7 +90,7 @@ public class JdbcMemberRepository implements MemberRepository{
             while(rs.next()) {
                 Member member = new Member();
                 member.setIdx(rs.getLong("idx"));
-                member.setName(rs.getString("name"));
+                member.setName(rs.getString("member_name"));
                 members.add(member);
             }
             return members;
@@ -113,7 +114,7 @@ public class JdbcMemberRepository implements MemberRepository{
             if(rs.next()) {
                 Member member = new Member();
                 member.setIdx(rs.getLong("idx"));
-                member.setName(rs.getString("name"));
+                member.setName(rs.getString("member_name"));
                 return Optional.of(member);
             }
             return Optional.empty();
