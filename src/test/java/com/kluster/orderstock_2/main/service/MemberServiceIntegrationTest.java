@@ -62,6 +62,8 @@ class MemberServiceIntegrationTest {
         // given
         Member member = new Member();
         member.setName("Test code");
+        member.setMemberId("홍길동12");
+        member.setMemberPassword("비밀번호123");
 
         // when 검증
         Long saveId = memberService.join(member);

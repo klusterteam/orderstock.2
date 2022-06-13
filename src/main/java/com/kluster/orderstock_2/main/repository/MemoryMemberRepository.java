@@ -17,11 +17,13 @@ public class MemoryMemberRepository implements MemberRepository {
         return member;
     }
 
+    /* 멤버 인덱스 */
     @Override
     public Optional<Member> findByIdx(Long idx) {
         return Optional.ofNullable(store.get(idx));
     }
 
+    /* 이름 저장 */
     @Override
     public Optional<Member> findByName(String name) {
         return store.values().stream()

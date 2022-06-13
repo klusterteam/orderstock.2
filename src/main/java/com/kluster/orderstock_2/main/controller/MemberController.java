@@ -24,7 +24,7 @@ public class MemberController {
     /* 조회 */
     @GetMapping("/members/new")
     public String createFrom(){
-        return "members/createMemberForm";
+        return "members/joinus";
     }
 
     /* 등록 */
@@ -32,13 +32,15 @@ public class MemberController {
     public String create(MemberForm form){
         Member member = new Member();
 
-        member.setName(form.getName());
         member.setMemberId(form.getMemberId());
         member.setMemberPassword(form.getMemberPassword());
+        member.setName(form.getName());
+
 
         System.out.println("member Name = " + member.getName());
         System.out.println("member Id = " + member.getMemberId());
         System.out.println("member Password = " + member.getMemberPassword());
+        System.out.println("member Name = " + member.getName());
 
         memberService.join(member);
 
