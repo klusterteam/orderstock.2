@@ -54,21 +54,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form name="setItem" th:action="@{wholestockitemlist/setitem}" method="post">
                         <div class="mb-3">
                             <label for="itemNameForm" class="form-label">품명</label>
                             <input type="text" name="itemName" class="form-control" id="itemNameForm" placeholder="등록할 품명을 입력하세요.">
                         </div>
                         <div class="mb-3">
                             <label for="itemTypeNameForm" class="form-label">유형</label>
-                            <select name="itemTypeCode" class="form-select form-select-sm mb-3" id="itemTypeNameForm">
+                            <select name="itemType" class="form-select form-select-sm mb-3" id="itemTypeNameForm">
                                 <option selected>품목의 유형을 선택하세요.</option>
                                 <option th:each="list : ${itemType}" th:value="${list.itemTypeCode}">[[${list.itemTypeName}]]</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="originNameForm" class="form-label">원산지</label>
-                            <select name="originCode" class="form-select form-select-sm mb-3" id="originNameForm">
+                            <select name="itemOrigin" class="form-select form-select-sm mb-3" id="originNameForm">
                                 <option selected>원산지를 선택하세요.</option>
                                 <option th:each="list : ${originCountry}" th:value="${list.originCode}">[[${list.originName}]]</option>
                             </select>
@@ -98,13 +98,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="itemLifeForm" class="form-label">유통기한</label>
-                            <input type="text" name="itemLife" class="form-control" id="itemLifeForm" placeholder="생산일로부터 유통 가능한 일 수를 기입하세요.">
+                            <input type="date" name="itemLife" class="form-control" id="itemLifeForm" th:value="${todayDate}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                            <button type="button" class="btn btn-primary" onclick="saveItem();">등록</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary">등록</button>
                 </div>
             </div>
         </div>

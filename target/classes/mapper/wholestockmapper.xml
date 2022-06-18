@@ -21,7 +21,6 @@
         <result property="itemDesc" column="item_desc"></result>
         <result property="itemProd" column="item_prod"></result>
         <result property="itemLife" column="item_life"></result>
-        <result property="itemMark" column="item_mark"></result>
         <result property="storageCode" column="storage_code"></result>
         <result property="itemDate" column="item_date"></result>
         <result property="recSts" column="rec_sts"></result>
@@ -31,20 +30,28 @@
         <result property="itemTypeName" column="item_type_name"></result>
     </resultMap>
 
-    <select id="getOriginCountry" resultMap="wholestock_item">
+    <select id="getOriginCountry" resultMap="wholestock_item" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
         SELECT
             origin_code,
             origin_name
         FROM
             os_origin_country
+        <if test = "originCode != null">
+        WHERE
+            origin_code = #{originCode}
+        </if>
     </select>
 
-    <select id="getItemType" resultMap="wholestock_item">
+    <select id="getItemType" resultMap="wholestock_item" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
         SELECT
             item_type_code,
             item_type_name
         FROM
             os_item_type_category
+        <if test = "itemTypeCode != null">
+            WHERE
+            item_type_code = #{itemTypeCode}
+        </if>
     </select>
 
     <select id="getWholestockItem" resultMap="wholestock_item">
@@ -58,7 +65,6 @@
             A.item_desc,
             A.item_prod,
             A.item_life,
-            A.item_mark,
             A.storage_code,
             A.item_date
         FROM
@@ -74,4 +80,14 @@
         WHERE
             A.rec_sts='A'
     </select>
+
+    <insert id="setWholestockItem" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
+        INSERT INTO os_wholestock_item (item_code, item_name, item_type, item_origin, item_unit, item_quan, item_desc,
+                                        item_prod, item_life, storage_code, item_date, rec_sts)
+        VALUES ((SELECT CONCAT(A.itemEntryDate, '-', RIGHT(CONCAT('000000', rowCount + 1), 7))
+                 FROM (SELECT CONCAT(SUBSTR(DATE_FORMAT(NOW(), '%Y%m%d'), 1, 8))                        itemEntryDate,
+                              (SELECT COUNT(item_code) FROM os_wholestock_item WHERE item_date = CURDATE()) rowCount) A),
+                #{itemName}, #{itemType}, #{itemOrigin}, #{itemUnit}, #{itemQuan}, #{itemDesc}, #{itemProd},
+                #{itemLife}, #{storageCode}, NOW(), 'A')
+    </insert>
 </mapper>
