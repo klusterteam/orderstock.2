@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/boardlayout}">
+
+<script type="text/javascript"
+	src="../static/EasyTree/jquery.easytree.min.js"></script>
+<link rel="stylesheet"
+	href="../static/EasyTree/skin-win8/ui.easytree.css" class="skins"
+	type="text/css" />
+<th:block layout:fragment="content">
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">게시판 코드</th>
+				<th scope="col">게시판명</th>
+				<th scope="col">분류</th>
+				<th scope="col">생성자ID</th>
+				<th scope="col">생성일시</th>
+				<th scope="col">활성상태</th>
+				<th scope="col">정렬순서</th>
+			</tr>
+		</thead>
+		<tbody>
+			<th:block th:each="b : ${boardList}">
+				<tr>
+					<td th:text="${b.boardCode}"></td>
+					<td th:text="${b.boardTitle}"></td>
+					<td th:text="${b.categoryCode}"></td>
+					<td th:text="${b.boardConstuctor}"></td>
+					<td th:text="${b.boardConstuctionDT}"></td>
+					<td th:text="${b.boardActiveStatus}"></td>
+					<td th:text="${b.boardSortOrder}"></td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+	<section class="section">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">게시판 목록</h5>
+						<div class="tree_box">
+							<div class="con">
+								<ul id="tree_menu" class="tree_menu">
+									<li class="depth_1"><strong>게시판</strong> 
+									<th:block th:each="b : ${boardList}">
+										<ul class="depth_2">
+											<li>
+												<a href="#none" class="boardList" th:text="${b.boardTitle}">-</a>
+											</li>
+										</ul>
+									</th:block>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">게시판 정보</h5>
+
+						<!-- General Form Elements -->
+						<form id = "form-board">
+							<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">게시판명</label>
+								<div class="col-sm-10">
+									<input id="ipb-Title" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">게시판 코드</label>
+								<div class="col-sm-10">
+									<input id="ipb-Code" type="text" class="form-control">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">카테고리</label>
+								<div class="col-sm-10">
+									<select class="form-select" aria-label="Default select example" id="select-Category">
+										<option selected>대분류</option>
+										<option value="board">board</option>
+										<option value="menu">menu</option>
+										<option value="item">item</option>
+									</select> 
+								</div>
+							</div>
+							<div class="row mb-3">
+								<legend class="col-form-label col-sm-2 pt-0">사용여부</legend>
+								<div class="col-sm-10">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="gridRadios" id="active" value="true"> 
+										<label class="form-check-label" for="active"> 게시판 사용</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="gridRadios" id="inactive" value="false">
+										<label class="form-check-label" for="inactive"> 게시판 숨기기</label>
+									</div>
+								</div>
+								<label for="inputNumber" class="col-sm-2 col-form-label">정렬순서</label>
+								<div class="col-sm-10">
+									<input id="ipb-SortOrder" type="number" class="form-control">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<div class="col-sm-12" style="text-align: right">
+									<button type="button" class="btn btn-primary btn-save">저장</button>
+									<button type="reset" class="btn btn-secondary btn-refresh">취소</button>
+								</div>
+							</div>
+						</form>
+						<!-- End General Form Elements -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+<script type="text/javascript">
+function tree_menu() {
+  // $('.depth_2');
+  $('ul.depth_2 >li > a').click(function(e) {
+
+    var temp_el = $(this).next('ul');
+    var depth_3 = $('.depth_3');
+
+    // 처음에 모두 슬라이드 업 시켜준다.
+    depth_3.slideUp(300);
+    // 클릭한 순간 모두 on(-)을 제거한다.// +가 나오도록
+    depth_3.parent().find('em').removeClass('on');
+
+    if (temp_el.is(':hidden')) {
+      temp_el.slideDown(300);
+      $(this).find('em').addClass('on').html('하위폴더 열림');
+    } else {
+      temp_el.slideUp(300);
+      $(this).find('em').removeClass('on').html('하위폴더 닫힘');
+    }
+
+    return false;
+
+  });
+}
+if ($('#tree_menu').is(':visible')) {
+  tree_menu();
+}
+</script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	/* 타임리프로 가져온 데이터 자바스크립트에서 가져오기  */
+    var boardList = /*[[${boardList}]]*/ 'default';
+/*]]>*/
+$(document).ready(function(){
+	
+	$(".boardList").on({				// 모든 <button>요소에
+		click: function() {			// click 이벤트를 설정함.
+			for(var i =0; i< boardList.length; i++){
+				if(this.text == boardList[i].boardTitle){
+					$("#ipb-Title")[0].value = boardList[i].boardTitle;
+					$("#ipb-Code")[0].value = boardList[i].boardCode;
+					$("#select-Category")[0].value = boardList[i].categoryCode;
+					$("#ipb-SortOrder")[0].value = boardList[i].boardSortOrder;
+					if(boardList[i].boardActiveStatus == "true"){
+						$("#active")[0].checked = true;
+					}else{
+						$("#inactive")[0].checked = true;
+					}
+				}
+			}
+		},
+	});
+	
+	$(".btn-refresh").click(function(){
+		$("#form-board").reset();
+	})
+	$(".btn-save").click(function(){
+		/* 변수 선언부 */
+		var boardTitle = $("#ipb-Title").val();
+		var boardCode = $("#ipb-Code").val();
+		var categoryCode = $("#select-Category").val();
+		var boardSortOrder = $("#ipb-SortOrder").val();
+		var boardActiveStatus = $("#active")[0].checked;
+		
+		var request = $.ajax({
+			url : "/board/update", 
+			method : "POST", 
+			data : {
+				boardTitle : boardTitle,
+				boardCode : boardCode,
+				categoryCode : categoryCode,
+				boardSortOrder : boardSortOrder, 
+				boardActiveStatus : boardActiveStatus
+				},
+			dataType : "json"
+		});
+		
+		request.done(function(data) {
+// 			if(data.userId=="사용가능"){
+// 				if(blank == false){
+// 					alert("사용 가능한 아이디입니다.");
+// 					idChecked = true;
+// 				}
+// 			}else{
+// 				alert("사용할 수 없는 아이디입니다");
+// 				$('#user_id').val('');
+// 				$('#user_id').focus();
+// 				idChecked = false;
+// 			}
+			
+		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("요청 실패: " + textStatus);
+		});
+	})
+});
+</script>
+
+</th:block>
+
+</html>
