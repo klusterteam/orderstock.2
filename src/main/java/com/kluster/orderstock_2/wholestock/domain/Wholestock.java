@@ -12,7 +12,6 @@ public class Wholestock {
     itemDesc : 재고 설명 및 유의사항
     itemProd : 생산자 정보
     itemLife : 유통기한
-    itemMark : 관리군 또는 일반군 표시
     storageCode : 보관 창고 코드
     itemDate : 재고 등록일
     recSts : 재고 정보 유효 또는 삭제*/
@@ -25,10 +24,9 @@ public class Wholestock {
     private int itemQuan;
     private String itemDesc;
     private String itemProd;
-    private int itemLife;
-    private String itemMark;
+    private String itemLife;
     private String storageCode;
-    private int itemDate;
+    private String itemDate;
     private String recSts;
 
    /* origin_country 원산지 정보
@@ -109,20 +107,12 @@ public class Wholestock {
         this.itemProd = itemProd;
     }
 
-    public int getItemLife() {
+    public String getItemLife() {
         return itemLife;
     }
 
-    public void setItemLife(int itemLife) {
+    public void setItemLife(String itemLife) {
         this.itemLife = itemLife;
-    }
-
-    public String getItemMark() {
-        return itemMark;
-    }
-
-    public void setItemMark(String itemMark) {
-        this.itemMark = itemMark;
     }
 
     public String getStorageCode() {
@@ -133,11 +123,11 @@ public class Wholestock {
         this.storageCode = storageCode;
     }
 
-    public int getItemDate() {
+    public String getItemDate() {
         return itemDate;
     }
 
-    public void setItemDate(int itemDate) {
+    public void setItemDate(String itemDate) {
         this.itemDate = itemDate;
     }
 
@@ -193,7 +183,6 @@ public class Wholestock {
                 ", itemDesc='" + itemDesc + '\'' +
                 ", itemProd='" + itemProd + '\'' +
                 ", itemLife=" + itemLife +
-                ", itemMark='" + itemMark + '\'' +
                 ", storageCode='" + storageCode + '\'' +
                 ", itemDate=" + itemDate +
                 ", recSts='" + recSts + '\'' +
