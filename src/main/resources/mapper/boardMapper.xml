@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kluster.orderstock_2.board.mapper.BoardMapper">
+	<!--RESULTMAP 1 : 도매상 창고-->
+    <resultMap id="os_board" type="com.kluster.orderstock_2.board.domain.Board">
+        <result property="boardCode" column="board_code"></result>
+        <result property="boardTitle" column="board_title"></result>
+        <result property="categoryCode" column="category_code"></result>
+        <result property="boardConstuctor" column="board_constructor"></result>
+        <result property="boardConstuctionDT" column="board_construction_dt"></result>
+        <result property="boardActiveStatus" column="board_active_status"></result>
+        <result property="boardSortOrder" column="board_sort_order"></result>
+    </resultMap>
+    
+	<select id="getBoardList" resultMap="os_board">
+		SELECT
+		  board_code
+		, board_title
+		, category_code
+		, board_constructor
+		, board_construction_dt
+		, board_active_status
+		, board_sort_order
+		FROM
+		os_board
+	</select>
+	
+	<update id="updateBoardList" parameterType="Map">
+		UPDATE os_board
+		SET 
+			  board_title =  #{boardTitle}
+			, category_code =  #{categoryCode}
+			, board_active_status =  #{boardActiveStatus}
+			, board_sort_order =  #{boardSortOrder}
+		
+		WHERE board_code = #{boardCode}
+	</update>
+
+</mapper>
