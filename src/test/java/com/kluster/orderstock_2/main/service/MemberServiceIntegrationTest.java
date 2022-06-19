@@ -1,11 +1,9 @@
 package com.kluster.orderstock_2.main.service;
 
-import com.kluster.orderstock_2.main.domain.Member;
-import com.kluster.orderstock_2.main.repository.MemberRepository;
-import com.kluster.orderstock_2.main.repository.MemoryMemberRepository;
+import com.kluster.orderstock_2.member.domain.Member;
+import com.kluster.orderstock_2.member.repository.MemberRepository;
+import com.kluster.orderstock_2.member.service.MemberService;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Transactional
 class MemberServiceIntegrationTest {
 
-    @Autowired MemberService memberService ;
+    @Autowired
+    MemberService memberService ;
     @Autowired MemberRepository memberRepository;
 
    /*
@@ -58,29 +57,40 @@ class MemberServiceIntegrationTest {
         */
 
     @Test
-    public void 회원가입() {
+    public void 회원가입() throws Exception {
         // given
         Member member = new Member();
-        member.setName("Test code");
-        member.setMemberId("홍길동12");
-        member.setMemberPassword("비밀번호123");
+        member.setMember_name("name__");
+        member.setMember_id("id__");
+        member.setMember_password("password");
+        member.setMember_address("address");
+        member.setMember_email("email");
+        member.setMember_phone(123455);
 
         // when 검증
-        Long saveId = memberService.join(member);
+        Long saveIdx = memberService.join(member);
 
         // then
-        Member findMember = memberRepository.findByIdx(saveId).get();
-        Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
+        Member findMember = memberRepository.findByIdx(saveIdx).get();
+        System.out.println("member.getname = "+member.getMember_name());
+        System.out.println("findemember.getname = "+findMember.getMember_name());
+        assertEquals(member.getMember_name(),findMember.getMember_name());
+        System.out.println("member.getid = " + member.getMember_id());
+        System.out.println("member.password = " + member.getMember_password());
+        System.out.println("member.address = " + member.getMember_address());
+        System.out.println("member.email = " + member.getMember_email());
+        System.out.println("member.phone = " + member.getMember_phone());
+        /* AssertThat(Actual).isEqualTo(expected) */
     }
 
     @Test
     public void 중복_회원_예외() throws Exception {
         // given
         Member member1 = new Member();
-        member1.setName("spring");
+        member1.setMember_name("spring");
 
         Member member2 = new Member();
-        member2.setName("spring");
+        member2.setMember_name("spring");
 
         // when
         memberService.join(member1);

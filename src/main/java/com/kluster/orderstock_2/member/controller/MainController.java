@@ -1,4 +1,4 @@
-package com.kluster.orderstock_2.main.controller;
+package com.kluster.orderstock_2.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

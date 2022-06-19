@@ -1,13 +1,11 @@
-package com.kluster.orderstock_2.main.service;
+package com.kluster.orderstock_2.member.service;
 
-import com.kluster.orderstock_2.main.repository.JdbcMemberRepository;
-import com.kluster.orderstock_2.main.repository.MemberRepository;
-import com.kluster.orderstock_2.main.repository.MemoryMemberRepository;
+import com.kluster.orderstock_2.member.repository.JdbcMemberRepository;
+import com.kluster.orderstock_2.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 @Configuration

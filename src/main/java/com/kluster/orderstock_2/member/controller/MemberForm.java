@@ -1,26 +1,29 @@
-package com.kluster.orderstock_2.main.domain;
+package com.kluster.orderstock_2.member.controller;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+public class MemberForm {
 
-@Entity
-public class Member {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idx;
     private String name;
     private int memberCategoryNumber;
     private String memberId;
     private String memberPassword;
+    private String memberEmail;
+    private String memberAddress;
+    private int memberPhone;
 
-    public Long getIdx() {
-        return idx;
+    public String getMemberAddress() {
+        return memberAddress;
     }
 
-    public void setIdx(Long idx) {
-        this.idx = idx;
+    public void setMemberAddress(String memberAddress) {
+        this.memberAddress = memberAddress;
+    }
+
+    public int getMemberPhone() {
+        return memberPhone;
+    }
+
+    public void setMemberPhone(int memberPhone) {
+        this.memberPhone = memberPhone;
     }
 
     public String getName() {
@@ -53,5 +56,13 @@ public class Member {
 
     public void setMemberPassword(String memberPassword) {
         this.memberPassword = memberPassword;
+    }
+
+    public String getMemberEmail() {
+        return memberEmail;
+    }
+
+    public void setMemberEmail(String memberEmail) {
+        this.memberEmail = memberEmail;
     }
 }

@@ -1,7 +1,6 @@
-package com.kluster.orderstock_2.main.repository;
+package com.kluster.orderstock_2.member.repository;
 
-import com.kluster.orderstock_2.main.domain.Member;
-import org.springframework.stereotype.Repository;
+import com.kluster.orderstock_2.member.domain.Member;
 
 import java.util.*;
 
@@ -22,12 +21,17 @@ public class MemoryMemberRepository implements MemberRepository {
     public Optional<Member> findByIdx(Long idx) {
         return Optional.ofNullable(store.get(idx));
     }
+    /* 멤버 인덱스 */
+    @Override
+    public Optional<Member> findById(String id) {
+        return Optional.ofNullable(store.get(id));
+    }
 
     /* 이름 저장 */
     @Override
     public Optional<Member> findByName(String name) {
         return store.values().stream()
-                .filter(member -> member.getName().equals(name))
+                .filter(member -> member.getMember_name().equals(name))
                 .findAny();
     }
 
@@ -39,4 +43,6 @@ public class MemoryMemberRepository implements MemberRepository {
     public void clearStore(){
         store.clear();
     }
+
+    /* 로그인 유지 처리 */
 }

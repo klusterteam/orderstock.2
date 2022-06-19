@@ -1,7 +1,7 @@
-package com.kluster.orderstock_2.main.repository;
+package com.kluster.orderstock_2.member.repository;
 
-import com.kluster.orderstock_2.main.domain.Member;
 
+import com.kluster.orderstock_2.member.domain.Member;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import javax.sql.DataSource;
 import java.sql.*;
@@ -19,7 +19,7 @@ public class JdbcMemberRepository implements MemberRepository{
 
     @Override
     public Member save(Member os_member){
-        String sql = "insert into os_member(member_name,member_id,member_password) values(?,?,?)";
+        String sql = "insert into os_member(member_name, member_id,member_password,member_email,member_address,member_phone) values(?,?,?,?,?,?)";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -29,10 +29,12 @@ public class JdbcMemberRepository implements MemberRepository{
             conn = getConnection();
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            pstmt.setString(1, os_member.getName());
-            pstmt.setString(2, os_member.getMemberId());
-            pstmt.setString(3, os_member.getMemberPassword());
-
+            pstmt.setString(1, os_member.getMember_name());
+            pstmt.setString(2, os_member.getMember_id());
+            pstmt.setString(3, os_member.getMember_password());
+            pstmt.setString(4, os_member.getMember_email());
+            pstmt.setString(5, os_member.getMember_address());
+            pstmt.setLong(6, os_member.getMember_phone());
 
             pstmt.executeUpdate();
 
@@ -53,7 +55,7 @@ public class JdbcMemberRepository implements MemberRepository{
 
     @Override
     public Optional<Member> findByIdx(Long idx) {
-        String sql = "select * from os_member where member_idx = ?";
+        String sql = "select * from os_member where idx = ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -65,7 +67,7 @@ public class JdbcMemberRepository implements MemberRepository{
             if(rs.next()) {
                 Member member = new Member();
                 member.setIdx(rs.getLong("idx"));
-                member.setName(rs.getString("name"));
+                member.setMember_name(rs.getString("member_name"));
                 return Optional.of(member);
             } else {
                 return Optional.empty();
@@ -76,6 +78,33 @@ public class JdbcMemberRepository implements MemberRepository{
             close(conn, pstmt, rs);
         }
     }
+
+    @Override
+    public Optional<Member> findById(String id) {
+        String sql = "select * from os_member where member_id = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                Member member = new Member();
+                member.setIdx(rs.getLong("id"));
+                member.setMember_name(rs.getString("member_id"));
+                return Optional.of(member);
+            } else {
+                return Optional.empty();
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
+    }
+
     @Override
     public List<Member> findAll() {
         String sql = "select * from os_member";
@@ -90,7 +119,7 @@ public class JdbcMemberRepository implements MemberRepository{
             while(rs.next()) {
                 Member member = new Member();
                 member.setIdx(rs.getLong("idx"));
-                member.setName(rs.getString("member_name"));
+                member.setMember_name(rs.getString("member_name"));
                 members.add(member);
             }
             return members;
@@ -100,6 +129,7 @@ public class JdbcMemberRepository implements MemberRepository{
             close(conn, pstmt, rs);
         }
     }
+
     @Override
     public Optional<Member> findByName(String name) {
         String sql = "select * from os_member where member_name = ?";
@@ -114,7 +144,7 @@ public class JdbcMemberRepository implements MemberRepository{
             if(rs.next()) {
                 Member member = new Member();
                 member.setIdx(rs.getLong("idx"));
-                member.setName(rs.getString("member_name"));
+                member.setMember_name(rs.getString("member_name"));
                 return Optional.of(member);
             }
             return Optional.empty();
