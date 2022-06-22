@@ -31,6 +31,7 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
         parameters.put("password", member.getMember_password());
         parameters.put("address", member.getMember_address());
         parameters.put("email", member.getMember_email());
+        parameters.put("phone", member.getMember_phone());
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         member.setIdx(key.longValue());
@@ -40,12 +41,6 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
     @Override
     public Optional<Member> findByIdx(Long idx) {
         List<Member> result = jdbcTemplate.query("select * from os_member where idx = ?", memberRowMapper(), idx);
-        return result.stream().findAny();
-    }
-
-    @Override
-    public Optional<Member> findById(String id) {
-        List<Member> result = jdbcTemplate.query("select * from os_member where member_id = ?", memberRowMapper(), id);
         return result.stream().findAny();
     }
 
@@ -65,6 +60,12 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
             Member member = new Member();
             member.setIdx(rs.getLong("idx"));
             member.setMember_name(rs.getString("member_name"));
+            member.setMember_email(rs.getString("getMember_email"));
+            member.setMember_address(rs.getString("getMember_address"));
+            member.setMember_password(rs.getString("getMember_password"));
+            member.setMember_id(rs.getString("getMember_id"));
+            member.setMember_phone(rs.getInt("getMember_phone"));
+
             return member;
         };
     }

@@ -60,7 +60,7 @@ class MemberServiceIntegrationTest {
     public void 회원가입() throws Exception {
         // given
         Member member = new Member();
-        member.setMember_name("name__");
+        member.setMember_name("name1122");
         member.setMember_id("id__");
         member.setMember_password("password");
         member.setMember_address("address");

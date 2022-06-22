@@ -7,7 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -62,6 +65,15 @@ public class MemberController {
     @GetMapping("/login")
     public String login(){
         return "members/login";
+    }
+
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    public String login(HttpServletRequest request, Model model){
+        String id = request.getParameter("member_id");
+        String pw = request.getParameter("member_password");
+        /*System.out.println("id = " +  );
+        System.out.println("password = " + member_password );*/
+        return "main";
     }
 
 }

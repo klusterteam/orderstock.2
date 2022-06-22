@@ -104,11 +104,11 @@
     <h1>New Kluster Information</h1>
     <form action="/members/new" method="post">
         <div class="int-area">
-            <input type="text" name="id" id="id" autocomplete="off" required/>
+            <input type="text" name="memberId" id="id" autocomplete="off" required/>
             <label for="id">User Id</label>
         </div>
         <div class="int-area">
-            <input type="password" name="pw" id ="pw" autocomplete="off" onchange="check_pw()" required>
+            <input type="password" name="memberPassword" id ="pw" autocomplete="off" onchange="check_pw()" required>
             <label for="pw">Password</label>
         </div>
         <div class="int-area">
@@ -117,19 +117,20 @@
             <br><span class="span" id="check" style="text-align: center"></span>
         </div>
         <div class="int-area">
+            <!--form에서 name 호출-->
             <input type="text" name="name" id ="name" autocomplete="off" required>
             <label for="name">Name</label>
         </div>
         <div class="int-area">
-            <input type="text" name="address" id ="address" autocomplete="off" required>
+            <input type="text" name="memberAddress" id ="address" autocomplete="off" required>
             <label for="address">Address</label>
         </div>
         <div class="int-area">
-            <input type="email" name="email" id ="email" autocomplete="off" required>
+            <input type="email" name="memberEmail" id ="email" autocomplete="off" required>
             <label for="email">Email</label>
         </div>
         <div class="int-area">
-            <input type="number" name="phone" id ="phone" autocomplete="off" required>
+            <input type="number" name="memberPhone" id ="phone" autocomplete="off" required>
             <label for="phone">Phone</label>
         </div>
         <div class="btn-area">

@@ -21,11 +21,6 @@ public class MemoryMemberRepository implements MemberRepository {
     public Optional<Member> findByIdx(Long idx) {
         return Optional.ofNullable(store.get(idx));
     }
-    /* 멤버 인덱스 */
-    @Override
-    public Optional<Member> findById(String id) {
-        return Optional.ofNullable(store.get(id));
-    }
 
     /* 이름 저장 */
     @Override

@@ -80,32 +80,6 @@ public class JdbcMemberRepository implements MemberRepository{
     }
 
     @Override
-    public Optional<Member> findById(String id) {
-        String sql = "select * from os_member where member_id = ?";
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            conn = getConnection();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, id);
-            rs = pstmt.executeQuery();
-            if(rs.next()) {
-                Member member = new Member();
-                member.setIdx(rs.getLong("id"));
-                member.setMember_name(rs.getString("member_id"));
-                return Optional.of(member);
-            } else {
-                return Optional.empty();
-            }
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        } finally {
-            close(conn, pstmt, rs);
-        }
-    }
-
-    @Override
     public List<Member> findAll() {
         String sql = "select * from os_member";
         Connection conn = null;
