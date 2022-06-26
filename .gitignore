@@ -170,3 +170,4 @@ Temporary Items
 .apdisk
 
 !/src/main/resources/application.properties
+target/
