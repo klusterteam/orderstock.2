@@ -31,7 +31,7 @@ public class WholestockService {
         return itemList;
     }
 
-    public List<Wholestock> getOriginCountry(){
+    public List<Wholestock> getOriginCountry(Wholestock wholestock){
         List<Wholestock> originCountry = wholestockMapper.getOriginCountry();
         return originCountry;
     }
