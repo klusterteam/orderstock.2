@@ -9,6 +9,6 @@ import java.util.List;
 public interface WholestockMapper {
     List<Wholestock> getWholestockItem();
     List<Wholestock> getItemType(Wholestock wholestock);
-    List<Wholestock> getOriginCountry();
+    List<Wholestock> getOriginCountry(Wholestock wholestock);
     int setWholestockItem(Wholestock wholestock);
 }

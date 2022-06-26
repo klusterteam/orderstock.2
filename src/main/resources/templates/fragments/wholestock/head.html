@@ -6,8 +6,30 @@
 
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <meta th:name="viewport" content="width=device-width, initial-scale=1">
+<!--    &lt;!&ndash; jquery 최신 버전 &ndash;&gt;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    &lt;!&ndash; Favicons &ndash;&gt;
+    <link th:href="@{/NiceAdmin/assets/img/favicon.png}" rel="icon">
+    <link th:href="@{/NiceAdmin/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+    &lt;!&ndash; Google Fonts &ndash;&gt;
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    &lt;!&ndash; Vendor CSS Files &ndash;&gt;
+    <link th:href="@{/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/NiceAdmin/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/NiceAdmin/assets/vendor/quill/quill.snow.css}" rel="stylesheet">
+    <link th:href="@{/NiceAdmin/assets/vendor/quill/quill.bubble.css}" rel="stylesheet">
+    <link th:href="@{/NiceAdmin/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/NiceAdmin/assets/vendor/simple-datatables/style.css}" rel="stylesheet">
+
+    &lt;!&ndash; Template Main CSS File &ndash;&gt;
+    <link th:href="@{/NiceAdmin/assets/css/style.css}" rel="stylesheet">-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <style>
 
     </style>
@@ -27,6 +49,10 @@
             let itemLife = document.getElementById("itemLifeForm");
             let unitIndex = (itemUnit.value).substring(1);
 
+            let itemTypeCode = itemType.options[itemType.selectedIndex].value;
+            let originCode = itemOrigin.options[itemOrigin.selectedIndex].value;
+            let itemOriginObj = { "itemTypeCode": itemTypeCode, "originCode": originCode };
+
             if(!itemName.value){
                 alert("품명이 입력되지 않았습니다.");
                 itemName.focus();
@@ -40,7 +66,7 @@
             }
 
             if(!itemOrigin.value){
-                alert("원산지가 입력되지 않았습니다.");
+                alert("원산지가 선택되지 않았습니다.");
                 itemOrigin.focus();
                 return false;
             }
@@ -63,20 +89,28 @@
                 return false;
             }
 
-            /*IN PROGRESS 20220618*/
-            /*$.ajax({
-                url: /
-
-
-            })*/
-
-            if(!confirm((itemOrigin.value) + "산 " + (itemType.value) + "품 " + (itemName.value) + "를 " +
-                (itemQuan.value) + unitIndex + " 등록하시겠습니까?")){
-                return false;
-            }else{
-                document.setItem.submit();
-                alert("등록이 완료되었습니다.");
-            }
+            $.ajax({
+                url: 'wholestockitemlist/setitem/getcategories',
+                data: itemOriginObj,
+                dataType: 'json',
+                type : 'get',
+                success: function(data){
+                    console.log(data);
+                    if(!confirm(data.itemOriginCountry + "산 " + data.itemTypeName + "품 " + (itemName.value) + "를 " +
+                        (itemQuan.value) + unitIndex + " 등록하시겠습니까?")){
+                        return false;
+                    }else{
+                        document.setItem.submit();
+                        alert("등록이 완료되었습니다.");
+                        return false;
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("재고 수동 등록에 실패하였습니다. 관리자에게 문의하세요.");
+                    console.log("Following error occured \n" + textStatus + " : " + errorThrown);
+                    //self.close();
+                }
+            });
         }
     </script>
 </head>
