@@ -11,4 +11,6 @@ import com.kluster.orderstock_2.board.domain.Board;
 public interface BoardMapper {
 	List<Board> getBoardList();
 	void updateBoardList(HashMap<String, String> paramMap);
+	void createBoardList(HashMap<String, String> paramMap);
+	void deleteBoardList(String boardCode);
 }

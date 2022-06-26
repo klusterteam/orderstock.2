@@ -1,5 +1,6 @@
 package com.kluster.orderstock_2.board.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,5 +32,21 @@ public class BoardService {
 		paramMap.put("boardActiveStatus", boardActiveStatus);
 		paramMap.put("boardSortOrder", boardSortOrder);
 		boardMapper.updateBoardList(paramMap);
+	}
+
+	public void createBoardList(String boardTitle, String categoryCode, String boardActiveStatus, String boardSortOrder, String boardConstructor, String boardConstructionDate) {
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("boardTitle", boardTitle);
+		paramMap.put("categoryCode", categoryCode);
+		paramMap.put("boardActiveStatus", boardActiveStatus);
+		paramMap.put("boardSortOrder", boardSortOrder);
+		paramMap.put("boardConstructor", boardConstructor);
+		paramMap.put("boardConstructionDate", boardConstructionDate );
+		boardMapper.createBoardList(paramMap);
+	}
+
+	public void deleteBoardList(String boardCode) {
+		// TODO Auto-generated method stub
+		boardMapper.deleteBoardList(boardCode);
 	}
 }
