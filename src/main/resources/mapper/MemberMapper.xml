@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kluster.orderstock_2.member.mapper.AdminMemberMapper">
+	<!-- RESULTMAP 회원정보  -->
+	<resultMap id="member" type="com.kluster.orderstock_2.member.domain.Amember">
+		<result property="idx" column="idx"></result>
+		<result property="memberName" column="member_name"></result>
+		<result property="memberEmail" column="member_email"></result>
+		<result property="memberPhone" column="member_phone"></result>
+		<result property="memberNickName" column="member_nickname"></result>
+		<association property="memberCategory" javaType="com.kluster.orderstock_2.member.domain.MemberCategory">
+        	<id 	property="memberCategoryNumberIdx" 	column="member_category_number_idx"/>
+        	<result property="memberCategoryName" 		column="member_category_name" />
+        	
+        </association>
+	</resultMap>
+	<select id="getMemberList" resultMap="member">
+		SELECT
+			 idx
+			,member_name		
+			,member_email		
+			,member_phone
+			,c.member_category_name
+		from
+			os_member as m
+			inner join
+			os_member_category as c
+			on m.member_category_number = c.member_category_number_idx
+			
+		order by idx desc
+	</select>
+</mapper>
