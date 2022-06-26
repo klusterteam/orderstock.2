@@ -2,12 +2,29 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/adminlayout}">
+      layout:decorate="~{layout/niceadminlayout}">
 
 <th:block layout:fragment="content">
     <body>
+ <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>회원리스트</h1>
+    <!--   <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav> -->
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+      <!-- 여기서부터 시작 -->
+      
+      
  
-    <h3>회원 리스트</h3>
+    
     <table>
       <tbody>
         <tr>
@@ -44,17 +61,28 @@
 			</thead>
 			<tbody>
 				<tr th:each="memberlist : ${memberList}">
-					<td th:text="${memberlist.memberIdx}"></td>
+					<td th:text="${memberlist.idx}"></td>
 					<td th:text="${memberlist.memberName}"></td>
-					<td>구현중</td>
+					<td th:text="${memberlist.memberCategory.memberCategoryName}"></td>
 					<td th:text="${memberlist.memberEmail}"></td>
 					<td th:text="${memberlist.memberPhone}"></td>
 					<td>구현중</td>
-					<td>구현중</td>
+					<td >  <a th:href="@{/admin/memberdetail(idx=${memberlist.idx})}" class="btn btn-primary" >상세보기</a></td>
 				</tr>
 			</tbody>
 		</table>
+		
+		
+		
+		
+	<!-- 여기가 끝 -->
+    </div>
+    </section>
+
+  </main><!-- End #main -->
+
     </body>
 </th:block>
+
 
 </html>
