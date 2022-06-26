@@ -46,4 +46,5 @@ public class SpringConfig {
         /*return new JpaMemberRepository(em);*/
         return new JdbcMemberRepository(dataSource);
     }
+
 }

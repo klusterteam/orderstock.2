@@ -17,6 +17,8 @@
         	
         </association>
 	</resultMap>
+
+	<!-- 로그인 -->
 	<select id="getMemberList" resultMap="member">
 		SELECT
 			 idx
@@ -32,4 +34,27 @@
 			
 		order by idx desc
 	</select>
+
+	<select id="login_check" resultMap="member">
+			select
+			       member_id
+			     , member_password
+			from
+				os_member
+			where
+				member_id = ${member_Id} and member_password = ${member_password}
+	</select>
+
+	<select id="readMember"  resultMap="member">
+		select *
+		from os_member
+		where member_id=#{member_Id}
+	</select>
+
+	<select id="readMemberWithIDPW"  resultMap="member">
+		select *
+		from os_member
+		where member_id=#{member_Id} and member_password=#{member_password}
+	</select>
+
 </mapper>

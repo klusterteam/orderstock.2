@@ -1,6 +1,8 @@
 package com.kluster.orderstock_2.member.repository;
 
 import com.kluster.orderstock_2.member.domain.Member;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class JdbcTemplateMemberRepository implements MemberRepository{
+public abstract class JdbcTemplateMemberRepository implements MemberRepository{
 
     private final JdbcTemplate jdbcTemplate;
 

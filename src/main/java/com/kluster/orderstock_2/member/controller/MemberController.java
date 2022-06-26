@@ -5,10 +5,7 @@ import com.kluster.orderstock_2.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -71,8 +68,9 @@ public class MemberController {
     public String login(HttpServletRequest request, Model model){
         String id = request.getParameter("member_id");
         String pw = request.getParameter("member_password");
-        /*System.out.println("id = " +  );
-        System.out.println("password = " + member_password );*/
+        System.out.println("입력된 id = " + id );
+        System.out.println("입력된 password = " + pw );
+
         return "main";
     }
 

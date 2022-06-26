@@ -2,16 +2,20 @@ package com.kluster.orderstock_2.member.repository;
 
 
 import com.kluster.orderstock_2.member.domain.Member;
+import org.apache.ibatis.session.SqlSession;
+import org.hibernate.service.spi.InjectService;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// DAO
 public class JdbcMemberRepository implements MemberRepository{
 
-    private final DataSource dataSource;
+    private DataSource dataSource;
 
     public JdbcMemberRepository(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -94,6 +98,10 @@ public class JdbcMemberRepository implements MemberRepository{
                 Member member = new Member();
                 member.setIdx(rs.getLong("idx"));
                 member.setMember_name(rs.getString("member_name"));
+                member.setMember_id(rs.getString("member_id"));
+                member.setMember_password(rs.getString("member_password"));
+                member.setMember_address(rs.getString("member_address"));
+                member.setMember_email(rs.getString("member_email"));
                 members.add(member);
             }
             return members;

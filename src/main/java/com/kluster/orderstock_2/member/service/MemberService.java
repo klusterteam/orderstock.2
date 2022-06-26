@@ -1,16 +1,24 @@
 package com.kluster.orderstock_2.member.service;
 
 import com.kluster.orderstock_2.member.domain.Member;
+import com.kluster.orderstock_2.member.repository.JdbcMemberRepository;
+import com.kluster.orderstock_2.member.repository.JdbcTemplateMemberRepository;
 import com.kluster.orderstock_2.member.repository.MemberRepository;
+import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
 @Transactional
 public class MemberService {
 
+    private Member member;
+
+    /* ServiceImpl */
     private final MemberRepository memberRepository;
 
     /* 외부에서 넣어주는것 DI */
@@ -18,7 +26,6 @@ public class MemberService {
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
-
     /* Test 단축키 Cntl + Shift + T */
     /* 회원가입 */
     public Long join(Member member){
@@ -43,4 +50,6 @@ public class MemberService {
     public Optional<Member> findOne(Long memberIdx){
         return memberRepository.findByIdx(memberIdx);
     }
+
+
 }

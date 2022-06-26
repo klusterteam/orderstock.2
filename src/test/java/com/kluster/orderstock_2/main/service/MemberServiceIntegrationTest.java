@@ -101,4 +101,16 @@ class MemberServiceIntegrationTest {
 
         // then
     }
+
+    /*@Test
+    public void 로그인() throws Exception{
+        Member member = new Member();
+        // 변수 선언 및 초기화
+
+        member.setMember_id("test1");
+        member.setMember_password("test1");
+
+        memberRepository.getMember(member)
+        System.out.println("결과 값 : " + memberRepository.getMember(member));
+    }*/
 }
