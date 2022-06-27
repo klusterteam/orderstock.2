@@ -30,14 +30,21 @@ public class BoardController {
 	@PostMapping("/update")
 	@ResponseBody
 	public void updateBoardList (String boardCode, String boardTitle, String categoryCode, String boardActiveStatus, String boardSortOrder) {
-		System.out.println(boardCode);
-		System.out.println(boardTitle);
-		System.out.println(categoryCode);
-		System.out.println(boardActiveStatus);
-		System.out.println(boardSortOrder);
 		boardService.updateBoardList(boardCode, boardTitle ,categoryCode,boardActiveStatus,boardSortOrder);
 	}
+	@PostMapping("/create")
+	@ResponseBody
+	public void createBoardList (String boardTitle, String categoryCode, String boardActiveStatus, String boardSortOrder, String boardConstructor, String boardConstructionDate) {
+		boardService.createBoardList(boardTitle ,categoryCode,boardActiveStatus,boardSortOrder,boardConstructor, boardConstructionDate);
+	}
+	@PostMapping("/delete")
+	@ResponseBody
+	public void deleteBoardList (String boardCode) {
+		boardService.deleteBoardList(boardCode);
+	}
+		
 }
+
 
 /* 게시판 테이블 DTO [os_board]
  * boardCode : 게시판 코드

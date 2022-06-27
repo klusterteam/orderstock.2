@@ -1,9 +1,15 @@
 package com.kluster.orderstock_2.member.repository;
 
 import com.kluster.orderstock_2.member.domain.Member;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+
+/* Impl */
+@Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();
@@ -38,6 +44,4 @@ public class MemoryMemberRepository implements MemberRepository {
     public void clearStore(){
         store.clear();
     }
-
-    /* 로그인 유지 처리 */
 }

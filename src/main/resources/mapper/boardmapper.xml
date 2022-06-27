@@ -37,5 +37,15 @@
 		
 		WHERE board_code = #{boardCode}
 	</update>
+	
+	<insert id="createBoardList" parameterType="Map">
+		INSERT INTO os_board (board_title,category_code,board_constructor,board_construction_dt,board_active_status,board_sort_order)
+	VALUES (#{boardTitle},#{categoryCode},#{boardConstructor},#{boardConstructionDate},#{boardActiveStatus},#{boardSortOrder})
+	</insert>
+	
+	<delete id="deleteBoardList" parameterType="String">
+		DELETE FROM os_board
+		WHERE board_code = #{boardCode}
+	</delete>
 
 </mapper>

@@ -3,24 +3,58 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.kluster.orderstock_2.member.mapper.MemberMapper">
+<mapper namespace="com.kluster.orderstock_2.member.mapper.AdminMemberMapper">
 	<!-- RESULTMAP 회원정보  -->
-	<resultMap id="member" type="com.kluster.orderstock_2.member.domain.Member">
-		<result property="memberIdx" column="member_idx"></result>
+	<resultMap id="member" type="com.kluster.orderstock_2.member.domain.Amember">
+		<result property="idx" column="idx"></result>
 		<result property="memberName" column="member_name"></result>
 		<result property="memberEmail" column="member_email"></result>
 		<result property="memberPhone" column="member_phone"></result>
-		<result property="memberNickname" column="member_nickname"></result>
+		<result property="memberNickName" column="member_nickname"></result>
+		<association property="memberCategory" javaType="com.kluster.orderstock_2.member.domain.MemberCategory">
+        	<id 	property="memberCategoryNumberIdx" 	column="member_category_number_idx"/>
+        	<result property="memberCategoryName" 		column="member_category_name" />
+        	
+        </association>
 	</resultMap>
+
+	<!-- 로그인 -->
 	<select id="getMemberList" resultMap="member">
 		SELECT
-			 member_idx
+			 idx
 			,member_name		
 			,member_email		
-			,member_phone		
-			,member_nickname	
+			,member_phone
+			,c.member_category_name
 		from
-			os_member
-		order by member_idx desc
+			os_member as m
+			inner join
+			os_member_category as c
+			on m.member_category_number = c.member_category_number_idx
+			
+		order by idx desc
 	</select>
+
+	<select id="login_check" resultMap="member">
+			select
+			       member_id
+			     , member_password
+			from
+				os_member
+			where
+				member_id = ${member_Id} and member_password = ${member_password}
+	</select>
+
+	<select id="readMember"  resultMap="member">
+		select *
+		from os_member
+		where member_id=#{member_Id}
+	</select>
+
+	<select id="readMemberWithIDPW"  resultMap="member">
+		select *
+		from os_member
+		where member_id=#{member_Id} and member_password=#{member_password}
+	</select>
+
 </mapper>
