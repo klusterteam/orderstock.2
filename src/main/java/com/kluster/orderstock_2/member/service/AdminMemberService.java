@@ -20,4 +20,14 @@ public class AdminMemberService {
     	List<Amember> memberList = adminMemberMapper.getMemberList();
     	return memberList;
     }
+    
+    public Amember getMemberDetail(int idx) {
+    	Amember memberDetail = adminMemberMapper.getMemberDetail(idx);
+    	return memberDetail;
+    }
+    public int memberModipy(Amember amember) {
+    	int membermodipy = adminMemberMapper.memberModipy(amember);
+    	return membermodipy;
+    	
+    }
 }
