@@ -4,7 +4,10 @@ package com.kluster.orderstock_2.member.repository;
 import com.kluster.orderstock_2.member.domain.Member;
 import org.apache.ibatis.session.SqlSession;
 import org.hibernate.service.spi.InjectService;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -13,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 // DAO
+@Repository
 public class JdbcMemberRepository implements MemberRepository{
 
     private DataSource dataSource;

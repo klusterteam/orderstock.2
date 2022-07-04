@@ -98,7 +98,7 @@
 <body>
     <section class="login-form">
         <h1>Kluster Corporation</h1>
-        <form action="/login.do" method="post" name="form1">
+        <form action="/doLogin" method="post">
             <div class="int-area">
                 <input type="text" name="member_id" id="id" autocomplete="off" required/>
                 <label for="id">User Name</label>
@@ -108,7 +108,7 @@
                 <label for="pw">Password</label>
             </div>
             <div class="btn-area">
-                <button id="btn" type="submit">Login</button>
+                <button id="btn" type="submit" name="Login">Login</button>
             </div>
             <div class="caption">
                 <a href="">Forgot Password?</a>
@@ -137,26 +137,6 @@
             }, 1500);
         }
     })
-
-    $(function(){
-        $("#btnLogin").click(function(){
-            userid=$("#member_id").val();
-            var passwd=$("#member_password").val(); if(userid == ""){
-                alert("아이디를 입력하세요");
-                $("#member_id").focus(); //입력포커스 이동
-
-                return; //함수 종료
-            }
-            if(passwd==""){
-                alert("비밀번호를 입력하세요");
-                $("#member_password").focus();
-                return;
-            }
-            //폼 내부의 데이터를 전송할 주소
-            document.form1.action= "${path}/member/login_check.do";
-            document.form1.submit(); //제출
-        });
-    });
 </script>
 </body>
 </html>

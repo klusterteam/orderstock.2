@@ -2,9 +2,9 @@ package com.kluster.orderstock_2.member.service;
 
 import com.kluster.orderstock_2.member.aop.TimeTraceAop;
 import com.kluster.orderstock_2.member.repository.JdbcMemberRepository;
-import com.kluster.orderstock_2.member.repository.JpaMemberRepository;
 import com.kluster.orderstock_2.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

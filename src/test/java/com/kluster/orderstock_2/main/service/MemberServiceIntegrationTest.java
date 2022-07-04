@@ -1,19 +1,29 @@
 package com.kluster.orderstock_2.main.service;
 
 import com.kluster.orderstock_2.member.domain.Member;
+import com.kluster.orderstock_2.member.domain.MemberRole;
 import com.kluster.orderstock_2.member.repository.MemberRepository;
 import com.kluster.orderstock_2.member.service.MemberService;
+import lombok.extern.java.Log;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
+@Log
 class MemberServiceIntegrationTest {
 
     @Autowired
@@ -101,8 +111,9 @@ class MemberServiceIntegrationTest {
 
         // then
     }
+    /*
 
-    /*@Test
+    @Test
     public void 로그인() throws Exception{
         Member member = new Member();
         // 변수 선언 및 초기화
@@ -112,5 +123,35 @@ class MemberServiceIntegrationTest {
 
         memberRepository.getMember(member)
         System.out.println("결과 값 : " + memberRepository.getMember(member));
-    }*/
+    }
+
+   07.01
+
+   public void insertTest(){
+        for(int i=0; i<100; i++){
+            Member member = new Member();
+            member.setMember_id("user : " + i);
+            member.setMember_password("pw : " + i);
+            member.setMember_email("email : " + i);
+            MemberRole role = new MemberRole();
+            if(i <= 80){
+                role.setRoleName("Basic");
+            }else if(i <= 90){
+                role.setRoleName("Manager");
+            }else{
+                role.setRoleName("Admin");
+            }
+            member.setRoles(List.of(role));
+            memberRepository.save(member);
+        }
+    }
+
+    @Test
+    public void testMember(){
+        Optional<Member> result = Optional.ofNullable(memberRepository.findById(85L));
+        result.ifPresent(member->log.info("member " + member));
+
+    }
+
+    */
 }

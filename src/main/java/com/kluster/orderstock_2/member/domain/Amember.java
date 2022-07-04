@@ -9,6 +9,7 @@ public class Amember {
 	    private int memberPhone;
 	    private String memberAddress;
 	    private MemberCategory memberCategory;
+
 		public int getIdx() {
 			return idx;
 		}

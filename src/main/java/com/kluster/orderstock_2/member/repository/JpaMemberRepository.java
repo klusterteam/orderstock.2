@@ -1,3 +1,4 @@
+/*
 package com.kluster.orderstock_2.member.repository;
 
 import com.kluster.orderstock_2.member.domain.Member;
@@ -40,3 +41,4 @@ public class JpaMemberRepository implements MemberRepository{
                 .getResultList();
     }
 }
+*/

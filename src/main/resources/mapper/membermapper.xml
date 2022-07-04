@@ -22,7 +22,7 @@
 	</resultMap>
 
 	<!-- 로그인 -->
-	<select id="getMemberList" resultMap="member">
+	<select id="getMemberList" resultMap="Member">
 		SELECT
 			 idx
 			,member_name		
@@ -64,7 +64,7 @@
 				
 			WHERE idx = #{idx}
 	</update>
-	<select id="login_check" resultMap="member">
+	<select id="login_check" resultType="com.kluster.orderstock_2.member.mapper.AdminMemberMapper">
 			select
 			       member_id
 			     , member_password
@@ -74,15 +74,15 @@
 				member_id = ${member_Id} and member_password = ${member_password}
 	</select>
 
-	<select id="readMember"  resultMap="member">
+	<select id="readMember"  resultType="com.kluster.orderstock_2.member.mapper.AdminMemberMapper">
 		select *
 		from os_member
 		where member_id=#{member_Id}
 	</select>
 
-	<select id="readMemberWithIDPW"  resultMap="member">
+	<select id="getUser"  resultType="com.kluster.orderstock_2.member.mapper.AdminMemberMapper">
 		select *
-		from os_member
+		from os_membesr
 		where member_id=#{member_Id} and member_password=#{member_password}
 	</select>
 

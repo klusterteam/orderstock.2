@@ -1,7 +1,7 @@
 package com.kluster.orderstock_2.member.service;
 
 import com.kluster.orderstock_2.member.domain.Member;
-import com.kluster.orderstock_2.member.repository.JdbcMemberRepository;
+/*import com.kluster.orderstock_2.member.repository.JdbcMemberRepository;*/
 import com.kluster.orderstock_2.member.repository.JdbcTemplateMemberRepository;
 import com.kluster.orderstock_2.member.repository.MemberRepository;
 import org.hibernate.service.spi.InjectService;
@@ -50,6 +50,4 @@ public class MemberService {
     public Optional<Member> findOne(Long memberIdx){
         return memberRepository.findByIdx(memberIdx);
     }
-
-
 }

@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -74,4 +75,16 @@ class MemberServiceTest {
     @Test
     void findOne() {
     }
+
+    @Test
+    public void insertTest(){
+        for(int i=0; i<100; i++){
+            Member member = new Member();
+            member.setMember_id("user" + i);
+            member.setMember_password("pw" + i);
+            member.setMember_email("hihi@" + i);
+        }
+    }
+
+
 }

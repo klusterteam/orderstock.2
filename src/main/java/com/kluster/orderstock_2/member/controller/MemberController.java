@@ -1,19 +1,28 @@
 package com.kluster.orderstock_2.member.controller;
 
 import com.kluster.orderstock_2.member.domain.Member;
+import com.kluster.orderstock_2.member.repository.MemberRepository;
+import com.kluster.orderstock_2.member.service.AdminMemberService;
 import com.kluster.orderstock_2.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.MessageFormat;
 import java.util.List;
 
 @Controller
 public class MemberController {
 
-    private final MemberService memberService;
+    @Autowired
+    private MemberService memberService;
+
+    /*@Autowired
+    private PasswordEncoder passwordEncoder*/;
 
     @Autowired
     /* 생성자 주입 - DI */
@@ -32,6 +41,7 @@ public class MemberController {
     public String create(MemberForm form){
         Member member = new Member();
 
+        /*
         member.setMember_name(form.getName());
         member.setMember_id(form.getMemberId());
         member.setMember_password(form.getMemberPassword());
@@ -47,6 +57,8 @@ public class MemberController {
         System.out.println("member phone = " + member.getMember_phone());
 
         memberService.join(member);
+        */
+
 
         return "redirect:/";
     }
@@ -56,12 +68,6 @@ public class MemberController {
         List<Member> members = memberService.findMembers();
         model.addAttribute("members", members);
         return "members/memberList";
-    }
-
-
-    @GetMapping("/login")
-    public String login(){
-        return "members/login";
     }
 
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -74,4 +80,17 @@ public class MemberController {
         return "main";
     }
 
+   /* @Autowired
+    private MemberRepository memberRepository;
+
+    @GetMapping("/signUp")
+    public String signUp(){
+        Member user = Member.builder()
+                .member_id("galid")
+                .member_password(passwordEncoder.encode("1234"))
+                .build();
+        memberRepository.save(user);
+
+        return "redirect:/login";
+    }*/
 }

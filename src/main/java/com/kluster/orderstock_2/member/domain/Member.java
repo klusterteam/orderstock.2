@@ -1,16 +1,24 @@
 package com.kluster.orderstock_2.member.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@EqualsAndHashCode(of = "member_id")
+/*DTO*/
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idx;
     private String member_name;
     private String member_id;
@@ -75,6 +83,7 @@ public class Member {
         this.member_address = member_address;
     }
 
+
     @Override
     public String toString() {
         return "Member{" +
@@ -87,4 +96,24 @@ public class Member {
                 ", member_address='" + member_address + '\'' +
                 '}';
     }
+
+    @Builder
+    public Member(String member_id, String member_name, String member_password){
+        this.member_id = member_id;
+        this.member_name = member_name;
+        this.member_password = member_password;
+    }
+
+
+    /* 07.01 */
+/*
+    @CreationTimestamp
+    private Date regdate;
+
+    @UpdateTimestamp
+    private Date updatedate;
+
+   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
+    private List<MemberRole> roles;*/
 }
