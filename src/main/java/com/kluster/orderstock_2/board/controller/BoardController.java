@@ -25,6 +25,7 @@ public class BoardController {
 	public String getBoardList (Model model) {
 		List<Board> boardList = boardService.getBoardList();
 		model.addAttribute("boardList",boardList);
+		System.out.println(boardList.get(0).getBoardCode());
 		return "boardmanagement";
 	}
 	@PostMapping("/update")
