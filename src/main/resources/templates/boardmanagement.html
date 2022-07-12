@@ -175,7 +175,7 @@ if ($('#tree_menu').is(':visible')) {
 	/* 타임리프로 가져온 데이터 자바스크립트에서 가져오기  */
     var boardList = /*[[${boardList}]]*/ 'default';
 /*]]>*/
-
+	console.log(boardList)
 $(document).ready(function(){
 /* 목록 아이템 선택시 게시판 정보 폼에 입력 */
 	$(".boardList").click(function() {		// 모든 <button>요소에 click 이벤트를 설정함.
@@ -294,7 +294,7 @@ $(".btn-new").click(function(){
 	tempMap.boardSortOrder = 1;
 	tempMap.status = "create";
 	boardList.push(tempMap);
-	console.log(boardList)
+
 	/* 새 게시판 html element 만들기 */	
 	const ul = document.createElement("ul");+
 	ul.setAttribute("class","depth_2");

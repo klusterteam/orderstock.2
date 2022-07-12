@@ -8,6 +8,9 @@
 	<resultMap id="member" type="com.kluster.orderstock_2.member.domain.Amember">
 		<result property="idx" column="idx"></result>
 		<result property="memberName" column="member_name"></result>
+		<result property="memberAddress" column="member_address"></result>
+		<result property="memberPassword" column="member_password"></result>
+		<result property="memberId" column="member_id"></result>
 		<result property="memberEmail" column="member_email"></result>
 		<result property="memberPhone" column="member_phone"></result>
 		<result property="memberNickName" column="member_nickname"></result>
@@ -34,7 +37,33 @@
 			
 		order by idx desc
 	</select>
-
+<!-- 멤버 디테일 -->
+<select id="getMemberDetail" resultMap="member" parameterType="int">
+		SELECT
+			*
+			,c.member_category_number_idx
+			,c.member_category_name
+		from
+			os_member as m
+			inner join
+			os_member_category as c
+			on m.member_category_number = c.member_category_number_idx
+		WHERE
+			idx = #{idx}
+		
+	</select>
+<!-- 회원 수정  -->
+	<update id="memberModipy" parameterType="com.kluster.orderstock_2.member.domain.Amember" >
+		UPDATE os_member
+			SET 
+				  member_name =  #{memberName}
+				, member_password =  #{memberPassword}
+				, member_email=  #{memberEmail}
+				, member_phone =  #{memberPhone}
+				, member_address = #{memberAddress}
+				
+			WHERE idx = #{idx}
+	</update>
 	<select id="login_check" resultMap="member">
 			select
 			       member_id
