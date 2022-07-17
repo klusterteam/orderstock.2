@@ -26,51 +26,85 @@
  
     
     <table>
-      <tbody>
-        <tr>
-          <th>제목</th>
-          <td><input name="" value="" type="text"></td>
-          <td rowspan="2">
-            <div id="search-btn">
-              <button type="submit">검색</button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th>옵션</th>
-          <td>
-            <select>
-			    <option value=""></option>
-			    
-		</select>
-          </td>
-        </tr>
-      </tbody>
+    	<form name="searchForm">
+		  <tbody>
+		    <tr>
+		      <td>
+		        <select name="type">
+				    <option value="">검색내용</option>
+				    <option value="name">이름</option>
+				    <option value="email">이메일</option>
+				    <option value="phone">전화번호</option>
+				    
+				</select>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td><input name="keyword" value="" type="text"></td>
+		      <td><input type="button" onclick="memberSearchBtn();" style="display: inline-block;" class="btn btn-outline-primary" value="검색"></td>
+		    </tr>
+		  </tbody>
+    	</form>
     </table>
-		<table class="table table-hover">
-			<thead >
-				<tr>
-					<td>번호</td>
-					<td>이름</td>
-					<td>회원구분</td>
-					<td>이메일</td>
-					<td>전화번호</td>
-					<td>로그인기록</td>
-					<td>상세보기</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="memberlist : ${memberList}">
-					<td th:text="${memberlist.idx}"></td>
-					<td th:text="${memberlist.memberName}"></td>
-					<td th:text="${memberlist.memberCategory.memberCategoryName}"></td>
-					<td th:text="${memberlist.memberEmail}"></td>
-					<td th:text="${memberlist.memberPhone}"></td>
-					<td>구현중</td>
-					<td >  <a th:href="@{/admin/memberdetail(idx=${memberlist.idx})}" class="btn btn-primary" >상세보기</a></td>
-				</tr>
-			</tbody>
-		</table>
+    <script>
+    	function memberSearchBtn(){
+			var str='';
+			$.ajax({
+				type: 'get',
+				url: '/admin/getMemberSearch',
+				data: $("form[name=searchForm]").serialize(),
+				success : function(data){
+					console.log(data);
+					$('#memberListTbody').empty();
+						for(var i= 0; i<data.length; i++){
+							console.log(data[i].idx);
+							str='<tr>'
+							str+='<td>'+data[i].idx+'</td>'
+							str+='<td>'+data[i].memberName+'</td>'
+							str+='<td>'+data[i].memberCategory.memberCategoryName+'</td>'
+							str+='<td>'+data[i].memberEmail+'</td>'
+							str+='<td>'+data[i].memberPhone+'</td>'
+							str+='<td>구현중</td>'
+							//str+='<td>구현중</td>'
+							//str+='<td>구현중</td>'
+							//str+='<td><a th:href="@{/admin/memberdetail(idx=${'+data[i].idx+'})}" class="btn btn-primary" >상세보기</a></td>'
+							//str+='<td><a th:href="@{/admin/memberdelete(idx=${'+data[i].idx+'})}" class="btn btn-danger">삭제</a></td>'
+							str+='</tr>'
+							$('#memberListTbody').append(str);
+						}
+						
+							
+						
+					
+				}
+			});
+		}
+    </script>
+	<table class="table table-hover">
+		<thead >
+			<tr>
+				<td>번호</td>
+				<td>이름</td>
+				<td>회원구분</td>
+				<td>이메일</td>
+				<td>전화번호</td>
+				<td>로그인기록</td>
+				<td>관리</td>
+			</tr>
+		</thead>
+		<tbody id="memberListTbody">
+			<tr th:each="memberlist : ${memberList}">
+				<td th:text="${memberlist.idx}"></td>
+				<td th:text="${memberlist.memberName}"></td>
+				<td th:text="${memberlist.memberCategory.memberCategoryName}"></td>
+				<td th:text="${memberlist.memberEmail}"></td>
+				<td th:text="${memberlist.memberPhone}"></td>
+				<td>구현중</td>
+				<td >  <a th:href="@{/admin/memberdetail(idx=${memberlist.idx})}" class="btn btn-primary" >상세보기</a>
+						<a th:href="@{/admin/memberdelete(idx=${memberlist.idx})}" class="btn btn-danger">삭제</a></td>
+			</tr>
+		</tbody>
+	</table>
 		
 		
 		

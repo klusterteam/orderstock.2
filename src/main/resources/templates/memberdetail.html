@@ -26,8 +26,8 @@
       
       <div class="card">
       	<div class="card-body">
-      		<h5 class="card-title">Floating labels Form</h5>
-      		<form class="row g-3" th:action="@{/admin/membermodipy}" method="post">
+      		<h5 class="card-title">회원</h5>
+      		<form class="row g-3" th:action="@{/admin/membermodify}" method="post">
       			<input name="idx" type="hidden" th:value="${memDetail.idx}">
       			<input  name="memberCategory.memberCategoryNumberIdx"  type="hidden" th:value="${memDetail.memberCategory.memberCategoryNumberIdx}">
       			<div class="col-md-6">
@@ -75,8 +75,8 @@
 		        </div>
 
         	<div class="text-center"> 
-        		<button type="submit" class="btn btn-primary">Submit</button> 
-        		<button type="reset" class="btn btn-secondary">Reset</button>
+        		<button type="submit" class="btn btn-primary">등록</button> 
+        		<a href="javascript:history.back();"class="btn btn-danger">뒤로가기</a>
         	</div>
         </form>
         </div>

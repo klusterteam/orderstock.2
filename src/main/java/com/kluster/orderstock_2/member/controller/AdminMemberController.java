@@ -38,11 +38,26 @@ public class AdminMemberController {
 		 System.out.println("memberdetail값-------------------"+memberdetail);
 		  return "memberdetail";
 	  }
-	  @PostMapping("/membermodipy")
-	  	public String membermodipy(Amember amember , Model model) {
+	  @PostMapping("/membermodify")
+	  	public String membermodify(Amember amember , Model model) {
 		 System.out.println("받은값"+amember);
 		  //수정시 수정한 디테일로 넘어가는거 구현해야함ㄴ
-		  int membermodipy = adminMemberService.memberModipy(amember);
+		 adminMemberService.memberModify(amember);
 		    return "redirect:/admin/memberlist";
 	  }
+	  @GetMapping("/memberdelete")
+	  public String deleteMember(@RequestParam(name="idx",required = false)int idx) {
+		  adminMemberService.deleteMember(idx);
+		  return "redirect:/admin/memberlist";
+	  }
+	  @GetMapping("/getMemberSearch")
+	  @ResponseBody
+	  public List<Amember> getMemberSearch(@RequestParam("type") String type,
+			  								@RequestParam("keyword") String keyword, Model model){
+		  Amember amember = new Amember();
+		  amember.setKeyword(keyword);
+		  amember.setType(type);
+		  return adminMemberService.getMemberSearchList(amember);
+	  }
+	  
 }

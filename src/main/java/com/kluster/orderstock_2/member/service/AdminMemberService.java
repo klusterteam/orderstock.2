@@ -25,9 +25,17 @@ public class AdminMemberService {
     	Amember memberDetail = adminMemberMapper.getMemberDetail(idx);
     	return memberDetail;
     }
-    public int memberModipy(Amember amember) {
-    	int membermodipy = adminMemberMapper.memberModipy(amember);
-    	return membermodipy;
+    public int memberModify(Amember amember) {
+    	int membermodify = adminMemberMapper.memberModify(amember);
+    	return membermodify;
     	
+    }
+    public int deleteMember(int idx) {
+    	int deletemember = adminMemberMapper.deleteMember(idx);
+    	return deletemember;
+    	
+    }
+    public List<Amember> getMemberSearchList(Amember amember){
+    	return adminMemberMapper.getMemberSearchList(amember);
     }
 }
