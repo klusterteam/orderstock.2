@@ -21,8 +21,13 @@ public class WholestockService {
         this.wholestockMapper = wholestockMapper;
     }
 
-    public List<Wholestock> getWholestockItem(){
-        List<Wholestock> wholestockList = wholestockMapper.getWholestockItem();
+    public List<Wholestock> getStorage(String userId){
+        List<Wholestock> storageList = wholestockMapper.getStorage(userId);
+        return storageList;
+    }
+
+    public List<Wholestock> getWholestockItem(Wholestock wholestock){
+        List<Wholestock> wholestockList = wholestockMapper.getWholestockItem(wholestock);
         return wholestockList;
     }
 
@@ -44,6 +49,10 @@ public class WholestockService {
 
     public int setWholestockItem(Wholestock wholestock) {
         return wholestockMapper.setWholestockItem(wholestock);
+    }
+
+    public int deleteWholestockItem(String itemCode){
+        return wholestockMapper.deleteWholestockItem(itemCode);
     }
 
 }
