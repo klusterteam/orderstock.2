@@ -22,6 +22,7 @@
         <result property="itemProd" column="item_prod"></result>
         <result property="itemLife" column="item_life"></result>
         <result property="storageCode" column="storage_code"></result>
+        <result property="storageName" column="storage_name"></result>
         <result property="itemDate" column="item_date"></result>
         <result property="recSts" column="rec_sts"></result>
         <result property="originCode" column="origin_code"></result>
@@ -29,6 +30,18 @@
         <result property="itemTypeCode" column="item_type_code"></result>
         <result property="itemTypeName" column="item_type_name"></result>
     </resultMap>
+
+    <select id="getStorage" resultMap="wholestock_storage" parameterType="java.lang.String">
+        SELECT
+            storage_code,
+            storage_name,
+            storage_type,
+            storage_own
+        FROM
+            os_wholestock_storage
+        WHERE
+            storage_own = #{userId}
+    </select>
 
     <select id="getOriginCountry" resultMap="wholestock_item" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
         SELECT
@@ -54,7 +67,7 @@
         </if>
     </select>
 
-    <select id="getWholestockItem" resultMap="wholestock_item">
+    <select id="getWholestockItem" resultMap="wholestock_item" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
         SELECT
             A.item_code,
             A.item_name,
@@ -66,6 +79,7 @@
             A.item_prod,
             A.item_life,
             A.storage_code,
+            D.storage_name,
             A.item_date
         FROM
             os_wholestock_item A
@@ -77,8 +91,16 @@
             os_item_type_category C
         ON
             A.item_type = C.item_type_code
+        INNER JOIN
+            os_wholestock_storage D
+        ON
+            A.storage_code = D.storage_code
         WHERE
             A.rec_sts='A'
+        <if test = "storageCode != null">
+            AND
+            D.storage_code = #{storageCode}
+        </if>
     </select>
 
     <insert id="setWholestockItem" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
@@ -90,4 +112,10 @@
                 #{itemName}, #{itemType}, #{itemOrigin}, #{itemUnit}, #{itemQuan}, #{itemDesc}, #{itemProd},
                 #{itemLife}, #{storageCode}, NOW(), 'A')
     </insert>
+
+    <update id="deleteWholestockItem" parameterType="java.lang.String">
+        UPDATE os_wholestock_item
+        SET rec_sts = 'D'
+        WHERE item_code = #{itemCode}
+    </update>
 </mapper>

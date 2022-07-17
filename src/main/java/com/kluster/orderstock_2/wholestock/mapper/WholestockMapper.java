@@ -7,8 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface WholestockMapper {
-    List<Wholestock> getWholestockItem();
+    List<Wholestock> getWholestockItem(Wholestock wholestock);
     List<Wholestock> getItemType(Wholestock wholestock);
     List<Wholestock> getOriginCountry(Wholestock wholestock);
+    List<Wholestock> getStorage(String userId);
     int setWholestockItem(Wholestock wholestock);
+    int deleteWholestockItem(String itemCode);
 }

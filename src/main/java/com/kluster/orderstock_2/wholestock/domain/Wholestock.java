@@ -43,6 +43,11 @@ public class Wholestock {
     private String itemTypeCode;
     private String itemTypeName;
 
+    /*private String storageCode;*/
+    private String storageName;
+    private String storageType;
+    private String storageOwn;
+
     public String getItemCode() {
         return itemCode;
     }
@@ -171,6 +176,30 @@ public class Wholestock {
         this.itemTypeName = itemTypeName;
     }
 
+    public String getStorageName() {
+        return storageName;
+    }
+
+    public void setStorageName(String storageName) {
+        this.storageName = storageName;
+    }
+
+    public String getStorageType() {
+        return storageType;
+    }
+
+    public void setStorageType(String storageType) {
+        this.storageType = storageType;
+    }
+
+    public String getStorageOwn() {
+        return storageOwn;
+    }
+
+    public void setStorageOwn(String storageOwn) {
+        this.storageOwn = storageOwn;
+    }
+
     @Override
     public String toString() {
         return "Wholestock{" +
@@ -182,14 +211,18 @@ public class Wholestock {
                 ", itemQuan=" + itemQuan +
                 ", itemDesc='" + itemDesc + '\'' +
                 ", itemProd='" + itemProd + '\'' +
-                ", itemLife=" + itemLife +
+                ", itemLife='" + itemLife + '\'' +
                 ", storageCode='" + storageCode + '\'' +
-                ", itemDate=" + itemDate +
+                ", itemDate='" + itemDate + '\'' +
                 ", recSts='" + recSts + '\'' +
                 ", originCode='" + originCode + '\'' +
                 ", originName='" + originName + '\'' +
                 ", itemTypeCode='" + itemTypeCode + '\'' +
                 ", itemTypeName='" + itemTypeName + '\'' +
+                ", storageCode='" + storageCode + '\'' +
+                ", storageName='" + storageName + '\'' +
+                ", storageType='" + storageType + '\'' +
+                ", storageOwn='" + storageOwn + '\'' +
                 '}';
     }
 }
