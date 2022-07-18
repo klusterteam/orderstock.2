@@ -13,5 +13,9 @@ public interface AdminMemberMapper {
 	
 	Amember getMemberDetail(int idx);
 	
-	public int memberModipy(Amember amember);
+	int memberModify(Amember amember);
+	
+	int deleteMember(int idx);
+	
+	List<Amember> getMemberSearchList(Amember amember);
 }

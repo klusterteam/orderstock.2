@@ -53,7 +53,7 @@
 		
 	</select>
 <!-- 회원 수정  -->
-	<update id="memberModipy" parameterType="com.kluster.orderstock_2.member.domain.Amember" >
+	<update id="memberModify" parameterType="com.kluster.orderstock_2.member.domain.Amember" >
 		UPDATE os_member
 			SET 
 				  member_name =  #{memberName}
@@ -64,6 +64,13 @@
 				
 			WHERE idx = #{idx}
 	</update>
+	<delete id="deleteMember" parameterType="int">
+		DELETE
+		FROM 
+			os_member
+		WHERE
+			idx = #{idx};
+	</delete>
 	<select id="login_check" resultMap="member">
 			select
 			       member_id
@@ -84,6 +91,29 @@
 		select *
 		from os_member
 		where member_id=#{member_Id} and member_password=#{member_password}
+	</select>
+	<select id="getMemberSearchList" parameterType="com.kluster.orderstock_2.member.domain.Amember" resultMap="member">
+		SELECT *
+		from
+			os_member as m
+			inner join
+			os_member_category as c
+			on m.member_category_number = c.member_category_number_idx
+		
+		<choose>
+			<when test="type != null and type.equals('name')">
+			WHERE
+			 member_name LIKE CONCAT ('%',#{keyword}, '%')
+			</when>
+			<when test="type != null and type.equals('email')">
+			WHERE
+			 member_email LIKE CONCAT ('%',#{keyword}, '%')
+			</when>
+			<when test="type != null and type.equals('phone')">
+			WHERE
+			 member_phone LIKE CONCAT ('%',#{keyword}, '%')
+			</when>
+		</choose>
 	</select>
 
 </mapper>

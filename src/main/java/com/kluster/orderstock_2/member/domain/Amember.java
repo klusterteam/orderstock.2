@@ -9,6 +9,12 @@ public class Amember {
 	    private int memberPhone;
 	    private String memberAddress;
 	    private MemberCategory memberCategory;
+	    
+	    private String type;
+	    private String keyword;
+	    
+	    
+	    
 		public int getIdx() {
 			return idx;
 		}
@@ -57,6 +63,18 @@ public class Amember {
 		public void setMemberCategory(MemberCategory memberCategory) {
 			this.memberCategory = memberCategory;
 		}
+		public String getType() {
+			return type;
+		}
+		public void setType(String type) {
+			this.type = type;
+		}
+		public String getKeyword() {
+			return keyword;
+		}
+		public void setKeyword(String keyword) {
+			this.keyword = keyword;
+		}
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
@@ -76,9 +94,13 @@ public class Amember {
 			builder.append(memberAddress);
 			builder.append(", memberCategory=");
 			builder.append(memberCategory);
+			builder.append(", type=");
+			builder.append(type);
+			builder.append(", keyword=");
+			builder.append(keyword);
 			builder.append("]");
 			return builder.toString();
 		}
 	    
-	    
+		
 }
