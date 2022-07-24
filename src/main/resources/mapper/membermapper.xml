@@ -14,26 +14,30 @@
 		<result property="memberEmail" column="member_email"></result>
 		<result property="memberPhone" column="member_phone"></result>
 		<result property="memberNickName" column="member_nickname"></result>
+		<result property="memberCategoryNumber" column="member_category_number"></result>
+		<result property="memberDeletedAt" column="member_deleted_at"></result>
 		<association property="memberCategory" javaType="com.kluster.orderstock_2.member.domain.MemberCategory">
         	<id 	property="memberCategoryNumberIdx" 	column="member_category_number_idx"/>
         	<result property="memberCategoryName" 		column="member_category_name" />
         	
         </association>
 	</resultMap>
+	<resultMap id="memberCategory" type="com.kluster.orderstock_2.member.domain.MemberCategory">
+		<result property="memberCategoryNumberIdx" 	column="member_category_number_idx"/>
+       	<result property="memberCategoryName" 		column="member_category_name" />
+	</resultMap>
 
 	<!-- 로그인 -->
 	<select id="getMemberList" resultMap="member">
 		SELECT
-			 idx
-			,member_name		
-			,member_email		
-			,member_phone
-			,c.member_category_name
+			*
 		from
 			os_member as m
 			inner join
 			os_member_category as c
 			on m.member_category_number = c.member_category_number_idx
+		WHERE
+		m.member_deleted_at is null
 			
 		order by idx desc
 	</select>
@@ -61,13 +65,13 @@
 				, member_email=  #{memberEmail}
 				, member_phone =  #{memberPhone}
 				, member_address = #{memberAddress}
-				
+				, member_category_number = #{memberCategoryNumber}
 			WHERE idx = #{idx}
 	</update>
 	<delete id="deleteMember" parameterType="int">
-		DELETE
-		FROM 
-			os_member
+		UPDATE os_member
+		set
+			member_deleted_at = now()
 		WHERE
 			idx = #{idx};
 	</delete>
@@ -99,21 +103,25 @@
 			inner join
 			os_member_category as c
 			on m.member_category_number = c.member_category_number_idx
-		
+		WHERE
+			m.member_deleted_at is null
 		<choose>
 			<when test="type != null and type.equals('name')">
-			WHERE
-			 member_name LIKE CONCAT ('%',#{keyword}, '%')
+			and
+			 m.member_name LIKE CONCAT ('%',#{keyword}, '%')
 			</when>
 			<when test="type != null and type.equals('email')">
-			WHERE
-			 member_email LIKE CONCAT ('%',#{keyword}, '%')
+			and
+			 m.member_email LIKE CONCAT ('%',#{keyword}, '%')
 			</when>
 			<when test="type != null and type.equals('phone')">
-			WHERE
-			 member_phone LIKE CONCAT ('%',#{keyword}, '%')
+			and
+			 m.member_phone LIKE CONCAT ('%',#{keyword}, '%')
 			</when>
 		</choose>
+	</select>
+	<select id="getMemberCategory" resultMap="memberCategory">
+		SELECT * FROM os_member_category
 	</select>
 
 </mapper>

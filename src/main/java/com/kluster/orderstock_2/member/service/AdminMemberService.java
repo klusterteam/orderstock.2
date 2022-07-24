@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.Member;
+import com.kluster.orderstock_2.member.domain.MemberCategory;
 import com.kluster.orderstock_2.member.mapper.AdminMemberMapper;
 
 @Service
@@ -37,5 +38,10 @@ public class AdminMemberService {
     }
     public List<Amember> getMemberSearchList(Amember amember){
     	return adminMemberMapper.getMemberSearchList(amember);
+    }
+    
+    public List<MemberCategory> getMemberCategory(){
+    	List<MemberCategory> memberCategory = adminMemberMapper.getMemberCategory();
+    	return memberCategory;
     }
 }

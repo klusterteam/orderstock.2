@@ -25,61 +25,26 @@
       
  
     
-    <table>
+
     	<form name="searchForm">
-		  <tbody>
-		    <tr>
-		      <td>
-		        <select name="type">
-				    <option value="">검색내용</option>
-				    <option value="name">이름</option>
-				    <option value="email">이메일</option>
-				    <option value="phone">전화번호</option>
-				    
-				</select>
-		      </td>
-		    </tr>
-		    <tr>
-		      <td><input name="keyword" value="" type="text"></td>
-		      <td><input type="button" onclick="memberSearchBtn();" style="display: inline-block;" class="btn btn-outline-primary" value="검색"></td>
-		    </tr>
-		  </tbody>
+			<div class="col-md-4">
+	
+			        <select class="form-select"name="type">
+					    <option value="">검색내용</option>
+					    <option value="name">이름</option>
+					    <option value="email">이메일</option>
+					    <option value="phone">전화번호</option>
+					</select>
+			
+
+			     <input name="keyword" class="form-control"value="" type="text">
+			     <input type="button" onclick="memberSearchBtn();" style="display: inline-block;" class="btn btn-outline-primary" value="검색">
+	
+			</div>
+
     	</form>
-    </table>
-    <script>
-    	function memberSearchBtn(){
-			var str='';
-			$.ajax({
-				type: 'get',
-				url: '/admin/getMemberSearch',
-				data: $("form[name=searchForm]").serialize(),
-				success : function(data){
-					console.log(data);
-					$('#memberListTbody').empty();
-						for(var i= 0; i<data.length; i++){
-							console.log(data[i].idx);
-							str='<tr>'
-							str+='<td>'+data[i].idx+'</td>'
-							str+='<td>'+data[i].memberName+'</td>'
-							str+='<td>'+data[i].memberCategory.memberCategoryName+'</td>'
-							str+='<td>'+data[i].memberEmail+'</td>'
-							str+='<td>'+data[i].memberPhone+'</td>'
-							str+='<td>구현중</td>'
-							//str+='<td>구현중</td>'
-							//str+='<td>구현중</td>'
-							//str+='<td><a th:href="@{/admin/memberdetail(idx=${'+data[i].idx+'})}" class="btn btn-primary" >상세보기</a></td>'
-							//str+='<td><a th:href="@{/admin/memberdelete(idx=${'+data[i].idx+'})}" class="btn btn-danger">삭제</a></td>'
-							str+='</tr>'
-							$('#memberListTbody').append(str);
-						}
-						
-							
-						
-					
-				}
-			});
-		}
-    </script>
+
+
 	<table class="table table-hover">
 		<thead >
 			<tr>
@@ -117,6 +82,5 @@
 
     </body>
 </th:block>
-
 
 </html>
