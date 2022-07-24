@@ -56,7 +56,12 @@
         		</div>
 				<div class="col-md-6">
       				<div class="form-floating">
-       					<input type="text" class="form-control" name="memberCategoryName" id="memberCategoryName" placeholder="Your division" th:value="${memDetail.memberCategory.memberCategoryName}">
+      					<select class="form-select" name="memberCategoryNumber"  id="memberCategoryName" th:value="${memDetail.memberCategory.memberCategoryName}" >
+      						<option th:each="mc : ${memCategory}" th:selected="${memDetail.memberCategory.memberCategoryNumberIdx}==${mc.memberCategoryNumberIdx}"th:value="${mc.memberCategoryNumberIdx}"th:text="${mc.memberCategoryName}">관리자</option>
+
+      						
+      					</select>
+       					<!--<input type="text" class="form-control" name="memberCategoryName"  placeholder="Your division" th:value="${memDetail.memberCategory.memberCategoryName}">-->
         				<label for="floatingName">Your division</label>
         			</div>
         		</div>

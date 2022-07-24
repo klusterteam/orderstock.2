@@ -8,13 +8,11 @@ public class Amember {
 	    private String memberEmail;
 	    private int memberPhone;
 	    private String memberAddress;
+	    private int memberCategoryNumber;
 	    private MemberCategory memberCategory;
-	    
+	    private java.sql.Timestamp memberDeletedAt;
 	    private String type;
 	    private String keyword;
-	    
-	    
-	    
 		public int getIdx() {
 			return idx;
 		}
@@ -57,11 +55,23 @@ public class Amember {
 		public void setMemberAddress(String memberAddress) {
 			this.memberAddress = memberAddress;
 		}
+		public int getMemberCategoryNumber() {
+			return memberCategoryNumber;
+		}
+		public void setMemberCategoryNumber(int memberCategoryNumber) {
+			this.memberCategoryNumber = memberCategoryNumber;
+		}
 		public MemberCategory getMemberCategory() {
 			return memberCategory;
 		}
 		public void setMemberCategory(MemberCategory memberCategory) {
 			this.memberCategory = memberCategory;
+		}
+		public java.sql.Timestamp getMemberDeletedAt() {
+			return memberDeletedAt;
+		}
+		public void setMemberDeletedAt(java.sql.Timestamp memberDeletedAt) {
+			this.memberDeletedAt = memberDeletedAt;
 		}
 		public String getType() {
 			return type;
@@ -92,8 +102,12 @@ public class Amember {
 			builder.append(memberPhone);
 			builder.append(", memberAddress=");
 			builder.append(memberAddress);
+			builder.append(", memberCategoryNumber=");
+			builder.append(memberCategoryNumber);
 			builder.append(", memberCategory=");
 			builder.append(memberCategory);
+			builder.append(", memberDeletedAt=");
+			builder.append(memberDeletedAt);
 			builder.append(", type=");
 			builder.append(type);
 			builder.append(", keyword=");
@@ -101,6 +115,10 @@ public class Amember {
 			builder.append("]");
 			return builder.toString();
 		}
+	
 	    
+	    
+	    
+	 
 		
 }

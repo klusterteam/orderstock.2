@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.Member;
+import com.kluster.orderstock_2.member.domain.MemberCategory;
 import com.kluster.orderstock_2.member.service.AdminMemberService;
 @Controller
 @RequestMapping("/admin")
@@ -34,14 +35,17 @@ public class AdminMemberController {
 	  	public String memberdetail(@RequestParam(name="idx",required = false) int idx
 	  								,Model model) {
 		  Amember memberdetail = adminMemberService.getMemberDetail(idx);
+		  List<MemberCategory> memberCategory = adminMemberService.getMemberCategory();
 		  model.addAttribute("memDetail",memberdetail);
+		  model.addAttribute("memCategory",memberCategory);
 		 System.out.println("memberdetail값-------------------"+memberdetail);
 		  return "memberdetail";
 	  }
 	  @PostMapping("/membermodify")
 	  	public String membermodify(Amember amember , Model model) {
-		 System.out.println("받은값"+amember);
-		  //수정시 수정한 디테일로 넘어가는거 구현해야함ㄴ
+		 System.out.println("받은값"+amember.getMemberCategory().getMemberCategoryName());
+		 
+		 
 		 adminMemberService.memberModify(amember);
 		    return "redirect:/admin/memberlist";
 	  }
