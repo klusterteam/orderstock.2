@@ -5,9 +5,9 @@
 <th:block layout:fragment="content">
     <main id="main" class="main">
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary">전체</button>
+            <button type="button" id="storage-tab-default" class="btn btn-outline-primary" th:onclick="getItemListByStorage()">전체</button>
             <th:block th:each="l : ${storageList}">
-                <button type="button" class="btn btn-outline-primary" onclick="getItemListByStorage([[${l.storageCode}]])">[[${l.storageName}]]</button>
+                <button type="button" th:id="'storage-tab-'+${l.storageCode}" class="btn btn-outline-primary" th:onclick="getItemListByStorage([[${l.storageCode}]])">[[${l.storageName}]]</button>
             </th:block>
         </div>
         <table class="table-bordered" style="margin-bottom: 10px; margin-top: 10px;">
@@ -54,6 +54,7 @@
                 </th:block>
             </tbody>
         </table>
+        <input type="hidden" id="storageCode" th:value="${storageCode}"/>
         <button class="btn btn-primary btn-sm" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addItem()">등록</button>
         <button class="btn btn-danger btn-sm" type="submit">삭제</button>
 

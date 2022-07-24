@@ -1,4 +1,20 @@
 /*재고 관리*/
+
+$(function (){
+    let storageTab = $('#storageCode').val();
+    let storageTabDefault = $('#storage-tab-default');
+    let storageTabSelected = $('#storage-tab-' + storageTab);
+
+    if(!storageTab){
+        storageTabDefault.removeClass('btn-outline-primary');
+        storageTabDefault.addClass('btn-primary');
+    }else{
+        storageTabSelected.removeClass('btn-outline-primary');
+        storageTabSelected.addClass('btn-primary');
+    }
+    return false;
+})
+
 function deleteItem(itemCode){
     if(confirm("선택한 재고 항목을 폐기 처분하시겠습니까?")){
         location.href = "wholestockitemlist/deleteitem?itemCode=" + itemCode;
@@ -97,6 +113,10 @@ function saveItem(){
 }
 
 function getItemListByStorage(storageCode){
-    location.href = "wholestockitemlist?storageCode=" + storageCode;
+    if(!storageCode){
+        location.href = "wholestockitemlist";
+    }else{
+        location.href = "wholestockitemlist?storageCode=" + storageCode;
+    }
     return false;
 }

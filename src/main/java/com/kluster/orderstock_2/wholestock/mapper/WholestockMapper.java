@@ -12,5 +12,6 @@ public interface WholestockMapper {
     List<Wholestock> getOriginCountry(Wholestock wholestock);
     List<Wholestock> getStorage(String userId);
     int setWholestockItem(Wholestock wholestock);
+    int updateItemStorage(Wholestock wholestock);
     int deleteWholestockItem(String itemCode);
 }

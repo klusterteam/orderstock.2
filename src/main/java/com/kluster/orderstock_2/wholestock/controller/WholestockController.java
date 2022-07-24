@@ -42,6 +42,7 @@ public class WholestockController {
         model.addAttribute("itemType", itemType);
         model.addAttribute("originCountry", originCountry);
         model.addAttribute("storageList", storageList);
+        model.addAttribute("storageCode", storageCode);
         model.addAttribute("todayDate", todayDate);
 
         return "wholestock";
@@ -86,6 +87,12 @@ public class WholestockController {
     @PostMapping("/wholestockitemlist/setitem")
     public String setWholestockItem(Wholestock wholestock) throws Exception {
         wholestockService.setWholestockItem(wholestock);
+        return "redirect:/wholestockitemlist";
+    }
+
+    @PostMapping("/wholestockitemlist/updatestorage")
+    public String updateItemStorage(Wholestock wholestock) throws Exception{
+        wholestockService.updateItemStorage(wholestock);
         return "redirect:/wholestockitemlist";
     }
 }
