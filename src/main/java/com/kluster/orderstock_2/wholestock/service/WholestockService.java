@@ -51,6 +51,10 @@ public class WholestockService {
         return wholestockMapper.setWholestockItem(wholestock);
     }
 
+    public int updateItemStorage(Wholestock wholestock){
+        return wholestockMapper.updateItemStorage(wholestock);
+    }
+
     public int deleteWholestockItem(String itemCode){
         return wholestockMapper.deleteWholestockItem(itemCode);
     }

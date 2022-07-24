@@ -113,6 +113,12 @@
                 #{itemLife}, #{storageCode}, NOW(), 'A')
     </insert>
 
+    <update id="updateItemStorage" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
+        UPDATE os_wholestock_item
+        SET storage_code = #{storageCode}
+        WHERE item_code = #{itemCode}
+    </update>
+
     <update id="deleteWholestockItem" parameterType="java.lang.String">
         UPDATE os_wholestock_item
         SET rec_sts = 'D'
