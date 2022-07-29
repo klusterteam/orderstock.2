@@ -8,6 +8,7 @@ import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.Member;
 import com.kluster.orderstock_2.member.domain.MemberCategory;
 import com.kluster.orderstock_2.member.mapper.AdminMemberMapper;
+import com.kluster.orderstock_2.util.Pagination;
 
 @Service
 public class AdminMemberService {
@@ -17,8 +18,8 @@ public class AdminMemberService {
         this.adminMemberMapper = adminMemberMapper;
     }
     
-    public List<Amember> getMemberList(){
-    	List<Amember> memberList = adminMemberMapper.getMemberList();
+    public List<Amember> getMemberList(int startIndex, int pageSize){
+    	List<Amember> memberList = adminMemberMapper.getMemberList(startIndex,pageSize);
     	return memberList;
     }
     
@@ -43,5 +44,8 @@ public class AdminMemberService {
     public List<MemberCategory> getMemberCategory(){
     	List<MemberCategory> memberCategory = adminMemberMapper.getMemberCategory();
     	return memberCategory;
+    }
+    public int getMemberListCnt() {
+    	return adminMemberMapper.getMemberListCnt();
     }
 }

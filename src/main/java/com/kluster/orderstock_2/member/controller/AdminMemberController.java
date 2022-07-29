@@ -15,6 +15,7 @@ import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.Member;
 import com.kluster.orderstock_2.member.domain.MemberCategory;
 import com.kluster.orderstock_2.member.service.AdminMemberService;
+import com.kluster.orderstock_2.util.Pagination;
 @Controller
 @RequestMapping("/admin")
 public class AdminMemberController {
@@ -26,11 +27,27 @@ public class AdminMemberController {
 	}
 	
 	  @GetMapping("/memberlist")
-	    public String memberlist(Model model) {
-		  List<Amember> memberList = adminMemberService.getMemberList();
+	    public String memberlist(Model model
+	    						 ,@RequestParam(required = false, defaultValue = "1")int page
+	    						){
+		  //전체 게시글 개수
+		  int totalListCnt = adminMemberService.getMemberListCnt();
+		  //Pagination 객체 생성
+		  Pagination pagination = new Pagination(totalListCnt, page);
+		  
+		  //db select start index
+		  int startIndex = pagination.getStartIndex();
+		  //ㅠㅔ이지당 보여지는 게시글의 최대개수
+		  int pageSize = pagination.getPageSize();
+		  
+		  
+		  
+		  List<Amember> memberList = adminMemberService.getMemberList(startIndex,pageSize);
+		  model.addAttribute("pagination",pagination);
 		  model.addAttribute("memberList",memberList);
 	        return "memberlist";
 	    }
+	  
 	  @GetMapping("/memberdetail")
 	  	public String memberdetail(@RequestParam(name="idx",required = false) int idx
 	  								,Model model) {

@@ -7,10 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.Member;
 import com.kluster.orderstock_2.member.domain.MemberCategory;
+import com.kluster.orderstock_2.util.Pagination;
 
 @Mapper
 public interface AdminMemberMapper {
-	List<Amember> getMemberList();
+	List<Amember> getMemberList(int startIndex , int pageSize);
 	
 	Amember getMemberDetail(int idx);
 	
@@ -21,4 +22,6 @@ public interface AdminMemberMapper {
 	List<Amember> getMemberSearchList(Amember amember);
 	
 	List<MemberCategory> getMemberCategory();
+	
+	int getMemberListCnt();
 }
