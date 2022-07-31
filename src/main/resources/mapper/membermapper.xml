@@ -38,8 +38,15 @@
 			on m.member_category_number = c.member_category_number_idx
 		WHERE
 		m.member_deleted_at is null
-			
+		
 		order by idx desc
+		LIMIT #{startIndex}, #{pageSize}
+	</select>
+	<select id="getMemberListCnt" resultType="int">
+		SELECT			
+		count(*) as totalListCnt		
+		FROM			
+		os_member
 	</select>
 <!-- 멤버 디테일 -->
 <select id="getMemberDetail" resultMap="member" parameterType="int">
