@@ -47,6 +47,8 @@
 		count(*) as totalListCnt		
 		FROM			
 		os_member
+		where
+		member_deleted_at is null
 	</select>
 <!-- 멤버 디테일 -->
 <select id="getMemberDetail" resultMap="member" parameterType="int">
