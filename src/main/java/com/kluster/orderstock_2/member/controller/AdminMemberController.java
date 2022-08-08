@@ -44,6 +44,7 @@ public class AdminMemberController {
 		  
 		  List<Amember> memberList = adminMemberService.getMemberList(startIndex,pageSize);
 		  model.addAttribute("pagination",pagination);
+		  model.addAttribute("totalListCnt",totalListCnt);
 		  model.addAttribute("memberList",memberList);
 	        return "memberlist";
 	    }
