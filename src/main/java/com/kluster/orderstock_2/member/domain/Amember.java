@@ -6,7 +6,7 @@ public class Amember {
 	    private String memberId;
 	    private String memberPassword;
 	    private String memberEmail;
-	    private int memberPhone;
+	    private String memberPhone;
 	    private String memberAddress;
 	    private int memberCategoryNumber;
 	    private MemberCategory memberCategory;
@@ -43,10 +43,10 @@ public class Amember {
 		public void setMemberEmail(String memberEmail) {
 			this.memberEmail = memberEmail;
 		}
-		public int getMemberPhone() {
+		public String getMemberPhone() {
 			return memberPhone;
 		}
-		public void setMemberPhone(int memberPhone) {
+		public void setMemberPhone(String memberPhone) {
 			this.memberPhone = memberPhone;
 		}
 		public String getMemberAddress() {
