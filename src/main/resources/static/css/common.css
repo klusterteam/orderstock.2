@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.board-title,.h5 {
+	color:red;
+	font-weight: bold !important;
+	font-size: 30px;
+}
+.post-list .post{
+	text-align : center;
+}
+
