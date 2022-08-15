@@ -1,3 +1,4 @@
+/*
 package com.kluster.orderstock_2.main.service;
 
 import com.kluster.orderstock_2.member.domain.Member;
@@ -26,7 +27,9 @@ class MemberServiceTest {
         memberRepository.clearStore();
     }
 
-    /* 테스트 코드는 한글이름으로 가능 */
+    */
+/* 테스트 코드는 한글이름으로 가능 *//*
+
     @Test
     void 회원가입() {
         // given
@@ -56,12 +59,18 @@ class MemberServiceTest {
 
         Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
 
-       /* try{
+       */
+/* try{
             memberService.join(member2);
             fail();
         } catch (IllegalStateException e){
-            Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다."); *//* 이미 존재하는 회원입니다.<< 이부분이 다르면 오류 *//*
-        }*/
+            Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다."); *//*
+*/
+/* 이미 존재하는 회원입니다.<< 이부분이 다르면 오류 *//*
+*/
+/*
+        }*//*
+
 
 
         // then
@@ -74,4 +83,4 @@ class MemberServiceTest {
     @Test
     void findOne() {
     }
-}
+}*/

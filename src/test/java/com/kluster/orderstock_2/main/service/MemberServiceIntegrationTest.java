@@ -1,3 +1,4 @@
+/*
 package com.kluster.orderstock_2.main.service;
 
 import com.kluster.orderstock_2.member.domain.Member;
@@ -20,9 +21,14 @@ class MemberServiceIntegrationTest {
     MemberService memberService ;
     @Autowired MemberRepository memberRepository;
 
-   /*
+   */
+/*
    * 06.10
-   * *//* 테스트 코드는 한글이름으로 가능 *//*
+   * *//*
+*/
+/* 테스트 코드는 한글이름으로 가능 *//*
+*/
+/*
     @Test
     public void 회원가입() throws Exception {
         // given
@@ -54,7 +60,8 @@ class MemberServiceIntegrationTest {
 
 
         // then
-        */
+        *//*
+
 
     @Test
     public void 회원가입() throws Exception {
@@ -80,7 +87,9 @@ class MemberServiceIntegrationTest {
         System.out.println("member.address = " + member.getMember_address());
         System.out.println("member.email = " + member.getMember_email());
         System.out.println("member.phone = " + member.getMember_phone());
-        /* AssertThat(Actual).isEqualTo(expected) */
+        */
+/* AssertThat(Actual).isEqualTo(expected) *//*
+
     }
 
     @Test
@@ -102,7 +111,8 @@ class MemberServiceIntegrationTest {
         // then
     }
 
-    /*@Test
+    */
+/*@Test
     public void 로그인() throws Exception{
         Member member = new Member();
         // 변수 선언 및 초기화
@@ -112,5 +122,6 @@ class MemberServiceIntegrationTest {
 
         memberRepository.getMember(member)
         System.out.println("결과 값 : " + memberRepository.getMember(member));
-    }*/
-}
+    }*//*
+
+}*/
