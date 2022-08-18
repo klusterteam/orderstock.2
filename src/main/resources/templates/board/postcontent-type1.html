@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/niceadminlayout}">
+
+<script type="text/javascript" src="../static/EasyTree/jquery.easytree.min.js"></script>
+<link rel="stylesheet" href="../static/EasyTree/skin-win8/ui.easytree.css" class="skins" type="text/css" />
+<th:block layout:fragment="content">
+	<main id="main" class="main">
+		<section class="section profile">
+		<div class="card" style="margin-bottom:10px">
+            <div class="card-body" style="padding-top:20px">
+			<div class="col-xl-12" style="text-align: right; padding-bottom : 12px">
+				<input class="btn btn-primary" type="button" value="저장">
+			</div>
+              <!-- General Form Elements -->
+              <form>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-md-1 col-form-label">제목</label>
+                  <div class="col-md-11">
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-md-1 col-form-label">카테고리</label>
+                  <div class="col-md-2">
+                    <select class="form-select" aria-label="Default select example">
+                      <option selected>게시판</option>
+                      <option value="1">자유게시판</option>
+                      <option value="2">Q&A</option>
+                      <option value="3">매장소개</option>
+                    </select>
+                 </div>
+                 <div class="col-md-2">
+                    <select class="form-select" aria-label="Default select example">
+                      <option selected>선택</option>
+                      <option value="1">카테고리1</option>
+                      <option value="2">카테고리2</option>
+                      <option value="3">카테고리3</option>
+                    </select>
+                  </div>
+                   <div class="col-md-7"></div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-md-1 col-form-label">파일 첨부</label>
+                  <div class="col-md-11">
+                    <input class="form-control" type="file" id="formFile">
+                  </div>
+                </div>
+
+              </form>
+              <!-- End General Form Elements -->
+
+            </div>
+          </div>
+		
+			<div class="card">
+				<div class="card-body" style="padding-top:20px">
+					<textarea class="tinymce-editor">
+					</textarea><!-- End TinyMCE Editor -->
+				</div>
+			</div>
+		</section>
+    </main>
+</th:block>
+
+</html>

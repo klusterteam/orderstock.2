@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/niceadminlayout}">
+
+<script type="text/javascript" src="../static/EasyTree/jquery.easytree.min.js"></script>
+<link rel="stylesheet"	href="../static/EasyTree/skin-win8/ui.easytree.css" class="skins"	type="text/css" />
+<th:block layout:fragment="content">
+	<main id="main" class="main">
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title board-title" th:text="${boardTitle}">[게시판 이름]</h5>
+							<p th:text="${boardIntroduction}">[게시판 소개]</p>
+							<!-- Table with stripped rows -->
+							<div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+								<div class="dataTable-top row">
+									<div class="dataTable-info col-lg-2">전체 <span th:text="${totalCnt}">[건수]</span> 건</div>
+									<div class="col-lg-8"></div>
+									<div class="col-lg-2" style="text-align: right">
+										<input class="btn btn-primary" type="button" onclick="location.href='postcontent-type1'" value="새 글 작성">
+									</div>
+								</div>
+								<div class="dataTable-container">
+									<table class="table datatable dataTable-table">
+										<thead>
+											<tr >
+												<th scope="col" data-sortable="" style="width: 10%; text-align: center;">
+													<a href="#" class="dataTable-sorter">#</a>
+												</th>
+												<th scope="col" data-sortable="" style="width: 50%; text-align: center;">
+													<a href="#" class="dataTable-sorter">제목</a>
+												</th>
+												<th scope="col" data-sortable="" style="width: 10%; text-align: center;">
+													<a href="#" class="dataTable-sorter">작성자</a>
+												</th>
+												<th scope="col" data-sortable="" style="width: 20%; text-align: center;">
+													<a href="#" class="dataTable-sorter">작성일</a>
+												</th>
+												<th scope="col" data-sortable="" style="width: 10%; text-align: center;">
+													<a href="#" class="dataTable-sorter">조회수</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody class="post-list">
+											<th:block th:each="p : ${postList}">
+												<tr>
+													<td class="post" id="rowIndex" th:text="${pStat.count}"></td>
+													<td class="post" th:text="${p.postTitle}"></td>
+													<td class="post" th:text="${p.memberId}"></td>
+													<td class="post" th:text="${p.postWriteDT}"></td>
+													<td class="post" th:text="${p.postViewCount}"></td>
+												</tr>
+											</th:block>
+										</tbody>
+									</table>
+								</div>
+								<div class="dataTable-bottom">
+									<div class="dataTable-dropdown">
+										<label>
+											<select class="dataTable-selector">
+												<option value="5">5</option>
+												<option value="10" selected>10</option>
+												<option value="15">15</option>
+												<option value="20">20</option>
+												<option value="25">25</option>
+											</select> 개씩 보기
+										</label>
+									</div>
+									<div class="dataTable-search">
+										<input class="dataTable-input" placeholder="Search..."
+											type="text">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- 게시판에서만 사용하는 스크립트 -->
+	<script th:src="@{/js/board.js}"></script>
+</th:block>
+
+</html>

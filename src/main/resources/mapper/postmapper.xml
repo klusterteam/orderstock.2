@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kluster.orderstock_2.board.mapper.PostMapper">
+	<!--RESULTMAP 1 : 도매상 창고-->
+    <resultMap id="os_post" type="com.kluster.orderstock_2.board.domain.Post">
+        <result property="postCode" column="post_code"></result>
+        <result property="boardCode" column="board_code"></result>
+        <result property="categoryCode" column="category_code"></result>
+        <result property="postTitle" column="post_title"></result>
+        <result property="memberId" column="member_id"></result>
+        <result property="memberIdx" column="member_idx"></result>
+        <result property="postWriteDT" column="post_write_date"></result>
+        <result property="postUpdateId" column="post_update_id"></result>
+        <result property="postUpdateDT" column="post_update_date"></result>
+        <result property="postRemoveDT" column="post_remove_date"></result>
+        <result property="postNotice" column="post_notice"></result>
+        <result property="postActiveStatus" column="post_active_status"></result>
+        <result property="postViewCount" column="post_view_count"></result>
+        <result property="postLikeCount" column="post_like_count"></result>
+    </resultMap>
+<!-- 
+post_code
+board_code
+category_code
+post_title
+member_id
+member_idx
+post_write_date
+post_update_id
+post_update_date
+post_remove_date
+post_notice
+post_active_status
+post_view_count
+post_like_count 
+-->
+	<select id="getPostList" resultMap="os_post">
+		SELECT
+			 post_code
+			,board_code
+			,category_code
+			,post_title
+			,member_id
+			,post_write_date
+			,post_active_status
+			,post_view_count
+		FROM
+			os_post
+		WHERE
+			board_code = #{boardCode}
+	</select>
+</mapper>

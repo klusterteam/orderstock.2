@@ -10,24 +10,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kluster.orderstock_2.board.domain.Board;
+import com.kluster.orderstock_2.board.domain.Post;
 import com.kluster.orderstock_2.board.service.BoardService;
+import com.kluster.orderstock_2.board.service.PostService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	private final BoardService boardService;
+	private final PostService postService;
 	
-	public BoardController(BoardService boardService) {
+	public BoardController(BoardService boardService, PostService postService) {
 		this.boardService = boardService;
+		this.postService = postService;
 	}
 	
 	@GetMapping("/getBoardList")
 	public String getBoardList (Model model) {
 		List<Board> boardList = boardService.getBoardList();
 		model.addAttribute("boardList",boardList);
-		System.out.println(boardList.get(0).getBoardCode());
-		return "boardmanagement";
+		return "board/boardmanagement";
 	}
+	
 	@PostMapping("/update")
 	@ResponseBody
 	public void updateBoardList (String boardCode, String boardTitle, String categoryCode, String boardActiveStatus, String boardSortOrder) {
@@ -43,7 +47,73 @@ public class BoardController {
 	public void deleteBoardList (String boardCode) {
 		boardService.deleteBoardList(boardCode);
 	}
-		
+
+	
+	@GetMapping("/postcontent")
+	public String getPostPage (Model model) {
+		return "board/postcontent-type1";
+	}
+	
+	// 자유 게시판 (1)
+	@GetMapping("/community")
+	public String communityPage (Model model) {
+		int boardCode = 1;
+		List<Post> postList = postService.getPostList(boardCode);
+		model.addAttribute("totalCnt",postList.size());
+		model.addAttribute("boardTitle","자유게시판");
+		model.addAttribute("boardIntroduction","자유롭게 게시글을 작성해주세요");
+		model.addAttribute("postList",postList);
+		return "board/postlist";
+	}
+	// 공지사항 (2)
+	@GetMapping("/notice")
+	public String noticePage (Model model) {
+		int boardCode = 2;
+		List<Post> postList = postService.getPostList(boardCode);
+		model.addAttribute("totalCnt",postList.size());
+		model.addAttribute("boardTitle","공지사항");
+		model.addAttribute("postList",postList);
+		return "board/postlist";
+	}
+	// FAQ (4)
+	@GetMapping("/FAQ")
+	public String FaqPage (Model model) {
+		int boardCode = 4;
+		List<Post> postList = postService.getPostList(boardCode);
+		model.addAttribute("totalCnt",postList.size());
+		model.addAttribute("boardTitle","FAQ");
+		model.addAttribute("boardIntroduction","자주 묻는 질문");
+		model.addAttribute("postList",postList);
+		return "board/postlist";
+	}
+	// QNA (5)
+	@GetMapping("/QNA")
+	public String QnaPage (Model model) {
+		int boardCode = 5;
+		List<Post> postList = postService.getPostList(boardCode);
+		model.addAttribute("totalCnt",postList.size());
+		model.addAttribute("boardTitle","Q&A");
+		model.addAttribute("boardIntroduction","문의사항 및 건의사항을 작성해주세요");
+		model.addAttribute("postList",postList);
+		return "board/postlist";
+	}
+	// 매장 소개 (3)
+	@GetMapping("/storeIntro")
+	public String storeIntroPage (Model model) {
+		int boardCode = 3;
+		List<Post> postList = postService.getPostList(boardCode);
+		model.addAttribute("totalCnt",postList.size());
+		model.addAttribute("boardTitle","매장 소개");
+		model.addAttribute("boardIntroduction","매장에 대해 홍보하는 게시판입니다.");
+		model.addAttribute("postList",postList);
+		return "board/postlist";
+	}
+	//게시글 작성
+	@GetMapping("/postcontent-type1")
+	public String postContentPage (Model model) {
+		return "board/postcontent-type1";
+	}
+
 }
 
 
