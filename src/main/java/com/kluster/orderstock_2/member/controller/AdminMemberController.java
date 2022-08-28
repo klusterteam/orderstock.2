@@ -1,26 +1,23 @@
 package com.kluster.orderstock_2.member.controller;
 
-import java.sql.JDBCType;
 import java.util.List;
 
+import com.kluster.orderstock_2.member.domain.MemberLogin;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.MemberCategory;
 import com.kluster.orderstock_2.member.service.AdminMemberService;
 import com.kluster.orderstock_2.util.Pagination;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
@@ -91,7 +88,6 @@ public class AdminMemberController {
 		return adminMemberService.getMemberSearchList(amember);
 	}
 
-
 	/*
 	 * 	재혁
 	 * * * * * * * * * */
@@ -105,14 +101,66 @@ public class AdminMemberController {
 	// 회원 가입 처리
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerPOST(Amember amember, RedirectAttributes redirectAttributes) throws Exception{
-		/*
-		String hashedPw = BCrypt.hashpw(Amember.getMemberPassword(), BCrypt.gensalt());
+
+		String hashedPw = BCrypt.hashpw(amember.getMemberPassword(), BCrypt.gensalt());
 		amember.setMemberPassword(hashedPw);
-		*/
+
 		adminMemberService.register(amember);
 		redirectAttributes.addFlashAttribute("msg", "REGISTERED");
 
 		return "redirect:/admin/login";
+	}
+
+	@PostMapping("/login")
+	public String login(@RequestParam(name = "member_Id", required = false) String memberId
+			            ,@RequestParam(name = "member_Password", required = false) String memberPassword
+						, HttpSession httpSession
+						, RedirectAttributes redirectAttributes
+						// 0. 차후 비즈코드로 권한 이관시
+						/*, MemberBiz memberBiz*/
+						, MemberLogin memberLogin){
+		// 1. 회원이 존재할 경우
+		if(memberId != null && !"".equals(memberId) &&
+				memberPassword != null && !"".equals(memberPassword)){
+			Amember member = adminMemberService.getMemberInfoById(memberId);
+
+			if(memberPassword.equals(member.getMemberPassword())){
+				httpSession.setAttribute("SID", memberId);
+				httpSession.setAttribute("SNAME", member.getMemberName());
+
+				System.out.println("SID"+memberId+" <----- member_Id");
+				System.out.println("SNAME"+member.getMemberName()+" <----- member_Name");
+
+				return "redirect:/main?member_id=" + member.getMemberId();
+			}else {
+				if(memberPassword.equals(member.getMemberPassword())){
+					httpSession.setAttribute("SID", memberId);
+					httpSession.setAttribute("SNAME", member.getMemberName());
+
+					System.out.println("SID"+memberId+" <----- member_Id");
+					System.out.println("SNAME"+member.getMemberName()+" <----- member_Name");
+				}
+			}
+		}
+		return "redirect:/";
+	}
+
+	// 로그인 화면
+	@RequestMapping("login")
+	public String login(Model model, @RequestParam(name = "member_Id", required = false) String memberId
+			,@RequestParam(name = "member_Password", required = false) String memberPassword){
+
+			System.out.println(memberId + " <:::::: member_Id");
+			System.out.println(memberPassword + " <:::::: member_Password");
+
+		if(memberId != null)
+			model.addAttribute("member_Id", memberId);
+			model.addAttribute("member_Password", memberPassword);
+
+			model.addAttribute("title", "로그인");
+			model.addAttribute("location", "로그인");
+
+		return "/login";
 	}
 }
 

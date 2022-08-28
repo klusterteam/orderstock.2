@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Member {
+public class MemberLogin {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;

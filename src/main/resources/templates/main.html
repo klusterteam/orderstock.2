@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/niceadminlayout}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:c="http://www.w3.org/1999/XSL/Transform"
+	  layout:decorate="~{layout/niceadminlayout}">
 	
 	
 <th:block layout:fragment="content">
+	<c:if test="${msg == 'success'}">
+		<h2>${sessionScope.member_name}(${sessionScope.member_id})님 환영합니다</h2>
+	</c:if>
 	<main id="main" class="main">
 	    here for the main page of orderstock project #2 by kluster
 
@@ -15,7 +18,7 @@
 	                <p>
 	                    <a href="/members/new">회원 가입</a>
 	                    <a href="/members">회원 목록</a>
-	                    <a href="/login">로그인</a>
+	                    <a href="/admin/login">로그인</a>
 	                </p>
 	            </div><!--/Container-->
 	        </div>

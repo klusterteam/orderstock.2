@@ -161,4 +161,42 @@
 	<select id="readWithPw" resultType="com.kluster.orderstock_2.member.domain.Amember">
 		select * from os_member where member_id = #{member_Id} and member_password = #{member_Password}
 	</select>
+
+	<select id="loginCheck" resultType="String">
+		SELECT member_name AS memberName FROM os_member
+		where member_id = #{member_Id} AND member_password=#{member_Password}
+	</select>
+
+	<select id="viewMember" resultType="com.kluster.orderstock_2.login.domain.LoginVO">
+		select
+		    member_name as memberName,
+		    member_id as memberId,
+		    member_email as memberEmail
+		from os_member
+		where member_id = #{member_Id} and member_password = #{member_Password}
+	</select>
+	<!-- 로그인, 내정보조회 -->
+	<select id="getMemberInfoById" parameterType="String" resultType="com.kluster.orderstock_2.member.domain.Amember">
+		SELECT
+			member_id
+			 , member_pw
+			 , member_name
+			 , member_email
+		FROM
+			os_member
+		WHERE
+			member_id = #{member_Id};
+	</select>
+
+	<!-- 로그인내역코드 자동증가 -->
+	<!--<select id="getLoginCode" resultType="String">
+		SELECT
+			CASE
+				WHEN COUNT(1) = 0 THEN 'login_001'
+				ELSE
+					CONCAT('login_', LPAD(MAX(CAST(SUBSTRING(login_num,7,3)AS DECIMAL)+1),3,0))
+				END AS loginNum
+		FROM
+			tb_member_login;
+	</select>-->
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.kluster.orderstock_2.member.domain.MemberLogin;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,13 @@ import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.MemberCategory;
 import com.kluster.orderstock_2.member.mapper.AdminMemberMapper;
 
+import javax.servlet.http.HttpSession;
+
 /*
  *   DaoImplement
  * * * * * * * * * * * * * * */
 
 @Service
-@Repository
 public class AdminMemberService implements AdminMemberMapper{
     private final AdminMemberMapper adminMemberMapper;
     private static final String namespace = "com.kluster.orderstock_2.board.mapper.BoardMapper";
@@ -98,5 +100,36 @@ public class AdminMemberService implements AdminMemberMapper{
         return sqlSession.selectOne(namespace+".readWithPw", paramMap);
     }
 
+    // 회원 로그인 체크
+    @Override
+    public boolean loginCheck(Amember vo, HttpSession httpSession) {
+        String name = sqlSession.selectOne("vo.loginCheck", vo);
+        return (name == null) ? false : true;
+    }
+
+    // 회원 로그인 정보
+
+    @Override
+    public Amember viewMember(Amember vo) {
+        return sqlSession.selectOne("member.viewMember", vo);
+    }
+
+    // 로그 아웃
+
+    //회원 정보 조회(로그인,)
+    public Amember getMemberInfoById(String memberId) {
+        Amember member = adminMemberMapper.getMemberInfoById(memberId);
+        return member;
+    }
+
+    //로그인내역 입력
+    public int addLogin(MemberLogin memberLogin) {
+        return adminMemberMapper.addLogin(memberLogin);
+    }
+
+    @Override
+    public void logout(HttpSession httpSession) {
+
+    }
 }
 
