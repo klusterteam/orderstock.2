@@ -8,4 +8,18 @@
 .post-list .post{
 	text-align : center;
 }
-
+.post-list .post-title:hover{
+	 color:black;
+	 text-decoration: underline;
+	 cursor: pointer;
+}
+.post-list .post-title:active{
+	 color:black;
+	 font-weight:600;
+}
+.hide{
+	visibility : hidden;
+}
+.dataTable-container.post-list-table{
+	height : 453px;
+}
