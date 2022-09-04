@@ -13,10 +13,8 @@ import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.MemberCategory;
 import com.kluster.orderstock_2.member.service.AdminMemberService;
 import com.kluster.orderstock_2.util.Pagination;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -108,58 +106,54 @@ public class AdminMemberController {
 		adminMemberService.register(amember);
 		redirectAttributes.addFlashAttribute("msg", "REGISTERED");
 
-		return "redirect:/admin/login";
+		return "redirect:/login";
 	}
 
-	@PostMapping("/login")
-	public String login(@RequestParam(name = "member_Id", required = false) String memberId
-			            ,@RequestParam(name = "member_Password", required = false) String memberPassword
+	/* 로그인 처리 */
+	@GetMapping("/login2")
+	public String login(@RequestParam(name = "member_id", required = false) String member_id
+			            ,@RequestParam(name = "member_password", required = false) String member_password
 						, HttpSession httpSession
 						, RedirectAttributes redirectAttributes
 						// 0. 차후 비즈코드로 권한 이관시
 						/*, MemberBiz memberBiz*/
-						, MemberLogin memberLogin){
+						, MemberLogin memberLogin) {
 		// 1. 회원이 존재할 경우
-		if(memberId != null && !"".equals(memberId) &&
-				memberPassword != null && !"".equals(memberPassword)){
-			Amember member = adminMemberService.getMemberInfoById(memberId);
+		System.out.println("[ 확인 ] GetMapping > member_password : " + member_password);
+		System.out.println("[ 확인 ] GetMapping > memberLogin.getMember_password() : " + memberLogin.getMember_password());
 
-			if(memberPassword.equals(member.getMemberPassword())){
-				httpSession.setAttribute("SID", memberId);
-				httpSession.setAttribute("SNAME", member.getMemberName());
 
-				System.out.println("SID"+memberId+" <----- member_Id");
-				System.out.println("SNAME"+member.getMemberName()+" <----- member_Name");
+		if(member_id != null && !"".equals(member_id) &&
+				member_password != null && !"".equals(member_password)){
+			Amember amember = adminMemberService.getMemberInfoById(member_id);
 
-				return "redirect:/main?member_id=" + member.getMemberId();
+			if(member_password.equals(memberLogin.getMember_password())){
+				System.out.println("GetMapping > member_password : " + member_password);
+				System.out.println("GetMapping > memberLogin.getMember_password() : " + memberLogin.getMember_password());
+
+				httpSession.setAttribute("GetMapping > member_password : > SID : ", member_id);
+				httpSession.setAttribute("GetMapping > member_password : > SNAME : ", memberLogin.getMember_password());
+
+				System.out.println("GetMapping > member_password : > SID : " + member_id);
+				System.out.println("GetMapping > member_password : > SNAME : " + memberLogin.getMember_password());
+
+				System.out.println("GetMapping > member_password : > SID/SNAME > redirect:/main?" + member_id);
+				return "redirect:/main?" + member_id;
 			}else {
-				if(memberPassword.equals(member.getMemberPassword())){
-					httpSession.setAttribute("SID", memberId);
-					httpSession.setAttribute("SNAME", member.getMemberName());
-
-					System.out.println("SID"+memberId+" <----- member_Id");
-					System.out.println("SNAME"+member.getMemberName()+" <----- member_Name");
+				if (member_id == null){
+					System.out.println("member_id 가 존재하지 않음 > redirect:/admin/login");
+					return "redirect:/admin/login";
 				}
 			}
 		}
 		return "redirect:/";
 	}
 
-	// 로그인 화면
-	@RequestMapping("login")
-	public String login(Model model, @RequestParam(name = "member_Id", required = false) String memberId
-			,@RequestParam(name = "member_Password", required = false) String memberPassword){
-
-			System.out.println(memberId + " <:::::: member_Id");
-			System.out.println(memberPassword + " <:::::: member_Password");
-
-		if(memberId != null)
-			model.addAttribute("member_Id", memberId);
-			model.addAttribute("member_Password", memberPassword);
-
-			model.addAttribute("title", "로그인");
-			model.addAttribute("location", "로그인");
-
+	// 로그인 화면 접속페이지로 이동
+	@GetMapping("/login")
+	public String login( Model model){
+		model.addAttribute("title","로그인");
+		model.addAttribute("location","로그인");
 		return "/login";
 	}
 }

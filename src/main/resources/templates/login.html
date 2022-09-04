@@ -98,18 +98,18 @@
 <body>
     <section class="login-form">
         <h1>Kluster Corporation</h1>
-        <form th:action="@{/login}" method="post" name="loginForm">
+        <form th:action="@{/login}" method="get" name="loginForm">
 
             <!-- 아이디 -->
             <div class="int-area">
-                <input type="text" id="id" name="member_Id" autocomplete="off" th:value="${member_Id}" required/>
-                <label for="id">User Name</label>
+                <input type="text" id="member_id" name="member_id" autocomplete="off" th:value="${member_id}" required/>
+                <label for="member_id">User Name</label>
             </div>
 
             <!-- 패스워드 -->
             <div class="int-area">
-                <input type="password" class="form-control" name="member_Password" id ="pw" autocomplete="off" required>
-                <label for="pw">Password</label>
+                <input type="password" class="form-control" name="member_password" id ="member_password" autocomplete="off" required>
+                <label for="member_password">Password</label>
             </div>
 
             <!-- 로그인 -->
@@ -126,9 +126,9 @@
 <th:block>
     <script>
         $(document).ready(function(){
-            $('#btn').click(function(){
-                var member_id = $("#member_Id").val();
-                var member_password = $("#member_Password").val();
+            $("#btn").click(function(){
+                var member_id = $("#member_id").val();
+                var member_password = $("#member_password").val();
 
                 if(member_id == ""){
                     alert("아이디를 입력하세요.");
@@ -141,28 +141,27 @@
                     $("#member_password").focus();
                     return;
                 }
+                alert("member_id :::: "+member_id +"  member_password :::: " + member_password);
+                document.loginForm.action="/admin/login2?member_id="+ member_id+"&member_password="+ member_password;
+                document.loginForm.submit();
             });
         });
 
-        let id = $('#id');
-        let pw = $('#pw');
-        let btn = $('#btn');
-
         $(btn).on('click', function(){
-            if($(id).val() === ""){
-                $(id).next('label').addClass('warning');
+            if($("#memberId").val() === ""){
+                $("#memberId").next('label').addClass('warning');
                 setTimeout(function (){
                     $('label').removeClass('warning');
                 }, 1500);
 
             }
-            else if($(pw).val() === ""){
-                $(pw).next('label').addClass('warning');
+            else if($("#memberPw").val() === ""){
+                $("#memberPw").next('label').addClass('warning');
                 setTimeout(function (){
                     $('label').removeClass('warning');
                 }, 1500);
             }
-        })
+        });
     </script>
 </th:block>
 </body>

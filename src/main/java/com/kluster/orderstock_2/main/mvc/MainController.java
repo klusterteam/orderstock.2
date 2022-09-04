@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.kluster.orderstock_2.member.service.AdminMemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 	private final MainService mainService;
+	private final AdminMemberService adminMemberService;
 	
-	public MainController(MainService mainService) {
+	public MainController(MainService mainService, AdminMemberService adminMemberService) {
 		this.mainService = mainService;
+		this.adminMemberService = adminMemberService;
 	}
 	
     @GetMapping("/")
@@ -26,6 +29,14 @@ public class MainController {
     	session.setAttribute("menuListD2",menuListD2);
         return "main";
     }
+	@GetMapping("/main")
+	public String mainLogin(Model model, HttpSession session) {
+		List<MenuVo> menuListD1 = mainService.getMenuList();
+		List<MenuVo> menuListD2 = mainService.getMenuList();
+		session.setAttribute("menuListD1",menuListD1);
+		session.setAttribute("menuListD2",menuListD2);
+		return "main";
+	}
 		
 }
 

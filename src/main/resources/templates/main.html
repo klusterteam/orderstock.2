@@ -8,15 +8,19 @@
 	<c:if test="${msg == 'success'}">
 		<h2>${sessionScope.member_name}(${sessionScope.member_id})님 환영합니다</h2>
 	</c:if>
+	<input type="hidden" th:value="${session.SID}" name="id">
 	<main id="main" class="main">
 	    here for the main page of orderstock project #2 by kluster
-
+			<div th:text="${session.SID}">sdfsdf</div>
 	        <div class="container">
-	            <div>
+	            <form method="get" action={memberId}>
+
+
+				</form>
 	                <h1>Project #2 by kluster</h1>
 	                <p>회원기능</p>
 	                <p>
-	                    <a href="/members/new">회원 가입</a>
+	                    <a href="/admin/register">회원 가입</a>
 	                    <a href="/members">회원 목록</a>
 	                    <a href="/admin/login">로그인</a>
 	                </p>
@@ -24,4 +28,10 @@
 	        </div>
 	</main>
 </th:block>
+
+<script>
+
+	let url = document.location.href;
+	console.log(url);
+</script>
 </html>

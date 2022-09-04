@@ -179,7 +179,7 @@
 	<select id="getMemberInfoById" parameterType="String" resultType="com.kluster.orderstock_2.member.domain.Amember">
 		SELECT
 			member_id
-			 , member_pw
+			 , member_password
 			 , member_name
 			 , member_email
 		FROM

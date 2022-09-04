@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 
 
  <header id="header" class="header fixed-top d-flex align-items-center" th:fragment="headerFragment">
@@ -36,12 +36,22 @@
             <span class="badge bg-primary badge-number">4</span>
           </a><!-- End Notification Icon -->
 
+       <!--   <c:choose>
+            <c:when test="${sessionScope.member_id == null}">
+              <a href="{path}/login.do">로그인</a>
+            </c:when>
+            <c:otherwise>
+              ${sessionScope.member_name}님이 로그인중입니다.
+              <a href="{path}/logout.do">로그아웃</a>
+            </c:otherwise>
+          </c:choose>-->
+
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               You have 4 new notifications
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
             </li>
-            <li>
+            <li>˙
               <hr class="dropdown-divider">
             </li>
 
@@ -103,6 +113,7 @@
           </ul><!-- End Notification Dropdown Items -->
 
         </li><!-- End Notification Nav -->
+
 
         <li class="nav-item dropdown">
 

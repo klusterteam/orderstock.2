@@ -3,16 +3,17 @@ package com.kluster.orderstock_2.member.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.kluster.orderstock_2.member.domain.MemberLogin;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.kluster.orderstock_2.member.domain.Amember;
 import com.kluster.orderstock_2.member.domain.MemberCategory;
 import com.kluster.orderstock_2.member.mapper.AdminMemberMapper;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,8 +23,9 @@ import javax.servlet.http.HttpSession;
 
 @Service
 public class AdminMemberService implements AdminMemberMapper{
-    private final AdminMemberMapper adminMemberMapper;
-    private static final String namespace = "com.kluster.orderstock_2.board.mapper.BoardMapper";
+    private AdminMemberMapper adminMemberMapper;
+
+    private String namespace = "com.kluster.orderstock_2.member.mapper.membMapper";
     private final SqlSession sqlSession;
 
     /*
@@ -108,18 +110,16 @@ public class AdminMemberService implements AdminMemberMapper{
     }
 
     // 회원 로그인 정보
-
     @Override
     public Amember viewMember(Amember vo) {
         return sqlSession.selectOne("member.viewMember", vo);
     }
 
-    // 로그 아웃
-
     //회원 정보 조회(로그인,)
-    public Amember getMemberInfoById(String memberId) {
-        Amember member = adminMemberMapper.getMemberInfoById(memberId);
-        return member;
+    public Amember getMemberInfoById(String member_id) {
+        Amember amember = adminMemberMapper.getMemberInfoById(member_id);
+        System.out.println("member_id : " + member_id + " <----login2 : getMemberInfoById");
+        return amember;
     }
 
     //로그인내역 입력
@@ -129,7 +129,7 @@ public class AdminMemberService implements AdminMemberMapper{
 
     @Override
     public void logout(HttpSession httpSession) {
-
+        httpSession.invalidate(); // 세션 초기화
     }
 }
 
