@@ -1,4 +1,4 @@
-package com.kluster.orderstock_2.member.controller;
+package com.kluster.orderstock_2.member.domain;
 
 public class MemberForm {
 

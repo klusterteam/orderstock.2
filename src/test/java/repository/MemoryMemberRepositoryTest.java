@@ -1,3 +1,4 @@
+/*
 package repository;
 
 import com.kluster.orderstock_2.member.domain.Member;
@@ -12,7 +13,9 @@ import static org.assertj.core.api.Assertions.*;
 public class MemoryMemberRepositoryTest {
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
-    /* 초기화 */
+    */
+/* 초기화 *//*
+
     @AfterEach
     public void afterEach(){
         repository.clearStore();
@@ -60,3 +63,4 @@ public class MemoryMemberRepositoryTest {
         assertThat(result.size()).isEqualTo(2);
     }
 }
+*/

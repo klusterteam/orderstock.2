@@ -133,4 +133,32 @@
 		SELECT * FROM os_member_category
 	</select>
 
+	<select id="getTime" resultType="string">
+		SELECT NOW()
+	</select>
+
+	<insert id="insertMember">
+		INSERT INTO os_member as m (
+			m.member_id,
+		    m.member_password,
+		    m.member_name,
+		    m.member_email
+		)values(
+		    #{member_Id},
+		    #{member_Password},
+		    #{member_Name},
+		    #{member_Email}
+		)
+	</insert>
+
+	<select id="selectMember" resultType="com.kluster.orderstock_2.member.domain.Amember">
+		SELECT
+		    *
+		FROM os_member
+		where m.member_id = #{member_Id}
+	</select>
+
+	<select id="readWithPw" resultType="com.kluster.orderstock_2.member.domain.Amember">
+		select * from os_member where member_id = #{member_Id} and member_password = #{member_Password}
+	</select>
 </mapper>
