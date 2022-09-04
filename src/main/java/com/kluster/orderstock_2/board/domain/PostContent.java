@@ -6,7 +6,7 @@ public class PostContent {
 	/* 게시클 내용 DTO [os_post_content]
 	 *  postCode : 게시글 코드
 	 *  postContent : 게시글 내용
-	 *  itemCode : 상품 코드(상품 관련 데이터를 가져올 때 사용)
+	 *  itemCode : 상품 코드(상품 관련 데이터를 가져올 때 사용)[사용 보류]
 	 * */
 	private String postCode;
 	private String postContent;

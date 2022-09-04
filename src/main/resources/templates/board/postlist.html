@@ -14,6 +14,7 @@
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title board-title" th:text="${boardTitle}">[게시판 이름]</h5>
+							<div id="boardCode" th:text="${boardCode}" class="hide">[게시판 코드]</div>
 							<p th:text="${boardIntroduction}">[게시판 소개]</p>
 							<!-- Table with stripped rows -->
 							<div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
@@ -21,10 +22,10 @@
 									<div class="dataTable-info col-lg-2">전체 <span th:text="${totalCnt}">[건수]</span> 건</div>
 									<div class="col-lg-8"></div>
 									<div class="col-lg-2" style="text-align: right">
-										<input class="btn btn-primary" type="button" onclick="location.href='postcontent-type1'" value="새 글 작성">
+										<input class="btn btn-primary" id="btnNewPost" type="button" value="새 글 작성">
 									</div>
 								</div>
-								<div class="dataTable-container">
+								<div class="dataTable-container post-list-table">
 									<table class="table datatable dataTable-table">
 										<thead>
 											<tr >
@@ -47,13 +48,28 @@
 										</thead>
 										<tbody class="post-list">
 											<th:block th:each="p : ${postList}">
-												<tr>
-													<td class="post" id="rowIndex" th:text="${pStat.count}"></td>
-													<td class="post" th:text="${p.postTitle}"></td>
-													<td class="post" th:text="${p.memberId}"></td>
-													<td class="post" th:text="${p.postWriteDT}"></td>
-													<td class="post" th:text="${p.postViewCount}"></td>
-												</tr>
+<!-- 												<th:block th:if="${#lists.size('postList')}"> -->
+<!-- 													<tr> -->
+<!-- 														<td class="post" id="rowIndex" th:text="${pStat.count}"></td> -->
+<!-- 														<td class="post post-title"> -->
+<!-- 															<a th:text="${p.postTitle}" th:postCode ="${p.postCode}" th:onclick="selectPostList(this.getAttribute('postCode'), this)"></a> -->
+<!-- 														</td> -->
+<!-- 														<td class="post" th:text="${p.memberId}"></td> -->
+<!-- 														<td class="post" th:text="${p.postWriteDT}"></td> -->
+<!-- 														<td class="post" th:text="${p.postViewCount}"></td> -->
+<!-- 													</tr> -->
+<!-- 												</th:block> -->
+<!-- 												<th:block th:unless="p : ${postList}"> -->
+													<tr>
+														<td class="post" id="rowIndex" th:text="${pStat.count}"></td>
+														<td class="post post-title">
+															<a th:text="${p.postTitle}" th:postCode ="${p.postCode}" th:onclick="selectPostList(this.getAttribute('postCode'), this)"></a>
+														</td>
+														<td class="post" th:text="${p.memberId}"></td>
+														<td class="post" th:text="${p.postWriteDT}"></td>
+														<td class="post" th:text="${p.postViewCount}"></td>
+													</tr>
+<!-- 												</th:block> -->
 											</th:block>
 										</tbody>
 									</table>
@@ -84,6 +100,18 @@
 	</main>
 	<!-- 게시판에서만 사용하는 스크립트 -->
 	<script th:src="@{/js/board.js}"></script>
+	<script>
+		function selectPostList(psPostCode, psPostTitle){
+			var postTitle = psPostTitle.text;
+			location.href='postcontent-type3?postCode='+psPostCode+"&postTitle="+postTitle;
+		}
+		
+		$(document).ready(function(){
+	   		$("#btnNewPost").click(function() {
+				var boardCode = $("#boardCode").text();
+				location.href='postcontent-type1?boardCode='+boardCode;
+	   		})
+		})
+	</script>
 </th:block>
-
 </html>

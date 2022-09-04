@@ -20,6 +20,10 @@
         <result property="postViewCount" column="post_view_count"></result>
         <result property="postLikeCount" column="post_like_count"></result>
     </resultMap>
+    <resultMap id="os_post_content"  type="com.kluster.orderstock_2.board.domain.PostContent">
+		<result property="postCode" column="post_code"></result>
+		<result property="postContent" column="post_content"></result>
+    </resultMap>
 <!-- 
 post_code
 board_code
@@ -51,4 +55,33 @@ post_like_count
 		WHERE
 			board_code = #{boardCode}
 	</select>
+	
+	<select id="getPostContent"  resultMap="os_post_content">
+		SELECT
+			post_content 
+		FROM
+			os_post_content
+		WHERE
+			post_code = #{postCode}
+	</select>
+	<select id="getPostCode" resultType="String">
+<!-- 	<select id="getPostCode" resultType="com.kluster.orderstock_2.board.domain.PostContent"> -->
+		SELECT 
+			post_code
+		FROM 
+			os_post 
+		ORDER BY 
+			post_code DESC LIMIT 1
+	</select>
+	
+	<insert id="savePost" parameterType="com.kluster.orderstock_2.board.domain.Post">
+		INSERT INTO os_post (board_code,category_code,post_title,member_id,member_idx,post_write_date,post_notice,post_active_status)
+		VALUES (#{boardCode},#{categoryCode},#{postTitle},#{memberId},#{memberIdx},#{postWriteDT},#{postNotice},#{postActiveStatus})
+	</insert>
+	
+	<insert id="savePostContent"  parameterType="com.kluster.orderstock_2.board.domain.PostContent">
+		INSERT INTO os_post_content (post_code, post_content)
+		VALUES (#{postCode}, #{postContent})
+	</insert>
+	
 </mapper>
