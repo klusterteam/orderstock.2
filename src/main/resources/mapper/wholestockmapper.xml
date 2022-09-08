@@ -101,6 +101,10 @@
             AND
             D.storage_code = #{storageCode}
         </if>
+        <if test = "itemCode != null">
+            AND
+            A.item_code = #{itemCode}
+        </if>
     </select>
 
     <insert id="setWholestockItem" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">

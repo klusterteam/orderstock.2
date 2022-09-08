@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/niceadminlayout}">
+    <th:block layout:fragment="content">
+        <main id="main" class="main">
+            <div class="alert alert-dark alert-dismissible fade show">
+                <div><a th:href="@{/wholestockitemlist}"><strong>재고 관리하기</a> > 재고 이동</strong>
+                    <p style="float: right">USER0001, KLUSTER</p></div>
+            </div>
+            <div class="card mb-3">
+                <table class="table-bordered" style="margin-bottom: 10px; margin-top: 10px;">
+                    <thead>
+                    <tr>
+                        <th scope="col">선택</th>
+                        <th scope="col">재고번호</th>
+                        <th scope="col">품명</th>
+                        <th scope="col">유형</th>
+                        <th scope="col">원산지</th>
+                        <th scope="col">단위</th>
+                        <th scope="col">수량</th>
+                        <th scope="col">상세</th>
+                        <th scope="col">생산자</th>
+                        <th scope="col">유통기한</th>
+                        <th scope="col">등록일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="t : ${wholestockItemList}">
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="confirmedItem" name="confirmedItem" th:value="${t.itemCode}" th:text="${t.itemCode}">
+                            </td>
+                            <td th:text="${t.itemName}"></td>
+                            <td th:text="${t.itemTypeName}"></td>
+                            <td th:text="${t.originName}"></td>
+                            <td th:text="${t.itemUnit}"></td>
+                            <td th:text="${t.itemQuan}"></td>
+                            <td th:text="${t.itemDesc}"></td>
+                            <td th:text="${t.itemProd}"></td>
+                            <td th:text="${t.itemLife}"></td>
+                            <td th:text="${t.itemDate}"></td>
+                        </tr>
+                        <input type="hidden" id="storageMoveName" th:value="${t.storageName}">
+                        <input type="hidden" id="storageMoveCode" th:value="${t.storageCode}">
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <span class="badge bg-primary" style="margin-bottom: 5px;">현재 위치</span>
+                    <div class="alert alert-primary alert-dismissible fade show">
+                        <h4 class="alert-heading" id="storageMoveNameSelected"></h4>
+                    </div>
+                    <span class="badge bg-success" style="margin-bottom: 5px;">이동할 위치 선택</span>
+                        <form id="storageMoveConfirm" th:action="@{/wholestockitemlist/updatestorage}" method="post">
+                            <th:block th:each="s : ${storageList}">
+                                <input type="hidden" name="storageCode" th:value="${s.storageCode}">
+                                <div class="alert alert-success alert-dismissible fade show" th:onclick="storageMoveCheckConfirm()">
+                                    <h4 id ="storageMoveCheckName" class="storageMoveCheck alert-heading">[[${s.storageName}]]</h4>
+                                </div>
+                            </th:block>
+                            <input type="hidden" id="confirmedItem_obj" name="itemCode" value="">
+                        </form>
+                </div>
+                <div class="col-sm-6" style="margin-top: 25px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">이 재고의 이동 내역</h5>
+                            <div class="activity">
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">date : 2022-01-01</div>
+                                    <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+                                    <div class="activity-content">
+                                        storage name
+                                    </div>
+                                </div>
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">date : 2022-01-01</div>
+                                    <i class="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
+                                    <div class="activity-content">
+                                        storage name
+                                    </div>
+                                </div>
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">date : 2022-01-01</div>
+                                    <i class="bi bi-circle-fill activity-badge text-primary align-self-start"></i>
+                                    <div class="activity-content">
+                                        storage name
+                                    </div>
+                                </div>
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">date : 2022-01-01</div>
+                                    <i class="bi bi-circle-fill activity-badge text-info align-self-start"></i>
+                                    <div class="activity-content">
+                                        storage name
+                                    </div>
+                                </div>
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">date : 2022-01-01</div>
+                                    <i class="bi bi-circle-fill activity-badge text-warning align-self-start"></i>
+                                    <div class="activity-content">
+                                        storage name
+                                    </div>
+                                </div>
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">date : 2022-01-01</div>
+                                    <i class="bi bi-circle-fill activity-badge text-muted align-self-start"></i>
+                                    <div class="activity-content">
+                                        storage name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </th:block>
+</html>

@@ -25,11 +25,7 @@ function deleteItem(itemCode){
     }
 }
 
-function addItem(){
-    alert("재고를 수동으로 입력합니다.");
-    return false;
-}
-
+/*재고의 수동 등록*/
 function saveItem(){
     let itemName = document.getElementById("itemNameForm");
     let itemType = document.getElementById("itemTypeNameForm");
@@ -119,4 +115,11 @@ function getItemListByStorage(storageCode){
         location.href = "wholestockitemlist?storageCode=" + storageCode;
     }
     return false;
+}
+
+/*재고의 창고 이동 시 재고를 선택하여 재고 이동 히스토리 페이지로 넘어감*/
+function storageMove(){
+    let itemCode =  document.getElementById("itemCodeForStorageMove");
+    document.getElementById("itemCode").value = itemCode.value;
+    document.itemList.submit();
 }
