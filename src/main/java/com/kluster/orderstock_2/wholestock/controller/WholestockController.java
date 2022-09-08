@@ -2,7 +2,6 @@ package com.kluster.orderstock_2.wholestock.controller;
 
 import com.kluster.orderstock_2.wholestock.domain.Wholestock;
 import com.kluster.orderstock_2.wholestock.service.WholestockService;
-import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,10 +44,10 @@ public class WholestockController {
         model.addAttribute("storageCode", storageCode);
         model.addAttribute("todayDate", todayDate);
 
-        return "wholestock";
+        return "wholestock/wholestock";
     }
     /*도매상 2 : 도매상의 재고 목록 > 폐기*/
-    @GetMapping("wholestockitemlist/deleteitem")
+    @PostMapping("wholestockitemlist/deleteitem")
     public String wholestockItemDelete(@RequestParam(value = "itemCode", required = true)
                                        String itemCode) throws Exception{
 
@@ -90,6 +89,22 @@ public class WholestockController {
         return "redirect:/wholestockitemlist";
     }
 
+    /*도매상 5 : 재고의 창고 이동 1단계(선택한 재고를 히스토리 및 재고 이동 페이지로 넘겨준다)*/
+    @PostMapping("/wholestockitemlist/updatestoragelist")
+    public String updateItemStorageList(@ModelAttribute Wholestock wholestock, Model model) throws Exception{
+
+        /*test userId of session*/
+        String userId = "USER0001";
+        List<Wholestock> wholestockItemList = wholestockService.getWholestockItem(wholestock);
+        List<Wholestock> storageList = wholestockService.getStorage(userId);
+
+        model.addAttribute("wholestockItemList", wholestockItemList);
+        model.addAttribute("storageList", storageList);
+
+        return "wholestock/wholestockstoragemove";
+    }
+
+    /*도매상 6 : 재고의 창고 이동 2단계(재고를 최종적으로 현재 창고에서 다른 창고로 이동)*/
     @PostMapping("/wholestockitemlist/updatestorage")
     public String updateItemStorage(Wholestock wholestock) throws Exception{
         wholestockService.updateItemStorage(wholestock);
