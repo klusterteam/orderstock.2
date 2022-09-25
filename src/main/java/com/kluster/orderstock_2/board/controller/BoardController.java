@@ -2,6 +2,7 @@ package com.kluster.orderstock_2.board.controller;
 
 import java.util.List;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -119,9 +120,18 @@ public class BoardController {
 	//게시글 작성
 	@GetMapping("/postcontent-type1")
 	public String postContentPage (Model model, String boardCode) {
-		System.out.println("boardCode : "+ boardCode );
 		model.addAttribute("boardCode", boardCode);
 		return "board/postcontent-type1";
+	}
+	
+	//게시글 작성
+	@GetMapping("/postcontent-type2")
+	public String postContentUpdate (Model model, PostContent postContent, String postTitle) {
+		String vsPostContent = String.valueOf(postContent.getPostContent());
+		System.out.println(postContent.getPostContent());
+		model.addAttribute("postContent", vsPostContent);
+		model.addAttribute("postTitle", postTitle);
+		return "board/postcontent-type2";
 	}
 	
 	//게시글 조회
@@ -130,6 +140,7 @@ public class BoardController {
 		PostContent postContents = postService.getPostContent(postCode);
 		String postContent = postContents.getPostContent();
 		model.addAttribute("postTitle", postTitle);
+		model.addAttribute("postCode", postCode);
 		model.addAttribute("postContent", postContent);
 		return "board/postcontent-type3";
 	}

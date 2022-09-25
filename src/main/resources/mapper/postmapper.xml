@@ -84,4 +84,7 @@ post_like_count
 		VALUES (#{postCode}, #{postContent})
 	</insert>
 	
+	<delete id="deletePostContent">
+		DELETE FROM os_post WHERE post_code = #{postCode}
+	</delete>
 </mapper>

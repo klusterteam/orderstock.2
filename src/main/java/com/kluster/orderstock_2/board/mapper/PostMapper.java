@@ -22,4 +22,6 @@ public interface PostMapper {
 
 	void savePostContent(PostContent postContentObj);
 
+	void deletePostContent(Post postCode);
+
 }
