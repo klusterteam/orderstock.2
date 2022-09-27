@@ -13,6 +13,11 @@
 	 text-decoration: underline;
 	 cursor: pointer;
 }
+.card-body .btn-text-underline:hover{
+	 color: #4154f1;
+	 text-decoration: underline;
+	 cursor: pointer;
+}
 .post-list .post-title:active{
 	 color:black;
 	 font-weight:600;
@@ -22,4 +27,13 @@
 }
 .dataTable-container.post-list-table{
 	height : 453px;
+}
+
+.tinymce-editor-view{
+	height : 100%;
+	min-height: 500px;	
+}
+.tinymce-editor2{
+	height : 100%;
+	min-height: 500px;	
 }

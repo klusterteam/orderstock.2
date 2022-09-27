@@ -12,11 +12,24 @@
             <div class="card-body" style="padding-top:20px">
               <!-- General Form Elements -->
               <form>
-                <div class="row mb-3">
+              <div class="row">
+                <div class="row mb-3 col-md-8">
                   <div class="col-md-12 col-form-label">
                   		<h2 th:text="${postTitle}">[postT]</h2>
                   </div>
                 </div>
+                <div class="row mb-3 col-md-4">
+                  <div class="col-md-8"></div>
+                  
+                  <div class="col-md-2">
+	                  <p class="btn-text-underline" id="btn-update-content">수정</p>
+                  </div>
+                  <div class="col-md-2">
+	                  <p class="btn-text-underline" id="btn-delete-content">삭제</p>
+                  </div>
+                </div>
+              
+              </div>
 
                 <div class="row mb-3">
                   <label class="col-md-1 col-form-label">카테고리</label>
@@ -46,13 +59,57 @@
 			<!-- 게시글 작성 tinymce-editor 에디터 -->
 			<div class="card">
 				<div class="card-body" style="padding-top:20px;">
-					<div class="card-body" style="padding-top:20px; border:1px solid gray">
+					<div class="card-body tinymce-editor-view" style="padding-top:20px; border:1px solid gray">
 						<div th:utext="${postContent}"></div>
 					</div>
 				</div>
 			</div>
 		</section>
     </main>
-</th:block>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	/* 타임리프로 가져온 데이터 자바스크립트에서 가져오기  */
+	var postCode = /*[[${postCode}]]*/ 'default';
+	var postTitle = /*[[${postTitle}]]*/ 'default';
+	/*]]>*/
 
+</script>
+    
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btn-update-content").click(function(){
+		var request = $.ajax({
+			url : "/post/updatePostContent", 
+			method : "POST", 
+			data : {
+				postCode : postCode,
+				postTitle : postTitle
+			},
+			dataType : "text",
+			success : function(response){
+				window.location.href = response
+			}
+		});
+	})
+	$("#btn-delete-content").click(function(){
+		if(confirm("삭제된 게시글은 다시 복구할 수 없습니다.\n 정말 삭제하시겠습니까?")){
+			// 확인 선택시 삭제 request 전송 
+			var request = $.ajax({
+				url : "/post/deletePostContent", 
+				method : "POST", 
+				data : {
+					postCode : postCode,
+				},
+				dataType : "text",
+				success : function(response){
+					window.location.href = "/board/community"
+				}
+			});
+		}else{
+			return false;
+		}
+	})
+})
+</script>
+</th:block>
 </html>

@@ -2,6 +2,7 @@ package com.kluster.orderstock_2.board.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,17 +25,28 @@ public class PostController {
 	@PostMapping("/savePostContent")
 	@ResponseBody
 	public void savePostContent (PostContent postContent, Post post) {
-//		String PCode = postContent.getPostCode();
-		String PContent = postContent.getPostContent();
-//		System.out.println("★★★★★★★★★★★★★★★★★");
-		System.out.println(PContent);
-//		System.out.println("★★★★★★★★★★★★★★★★★");
 		postService.savePostContent(postContent, post);
+	}
+	//게시글 작성
+	@PostMapping("/updatePostContent")
+	@ResponseBody
+	public String updatePostContent (Model model, String postCode, String postTitle)  {
+		PostContent postContents = postService.getPostContent(postCode);
+		String postContent = postContents.getPostContent();
+		System.out.println(postContent);
+		model.addAttribute("postTitle", postTitle);
+		model.addAttribute("postCode", postCode);
+		model.addAttribute("postContent", postContent);
+		return "/board/postcontent-type2?postContent="+postContent+"&postTitle="+postTitle;
+	}
+	//게시글 작성
+	@PostMapping("/deletePostContent")
+	@ResponseBody
+	public void deletePostContent (Post PostCode) {
+		postService.deletePostContent(PostCode);
 	}
 
 	
-	
-
 }
 
 

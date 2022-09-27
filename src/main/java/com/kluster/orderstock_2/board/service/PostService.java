@@ -43,4 +43,8 @@ public class PostService {
 		return postContent;
 	}
 
+	public void deletePostContent(Post postCode) {
+		PostMapper.deletePostContent(postCode);
+	}
+
 }

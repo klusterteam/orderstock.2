@@ -48,18 +48,6 @@
 										</thead>
 										<tbody class="post-list">
 											<th:block th:each="p : ${postList}">
-<!-- 												<th:block th:if="${#lists.size('postList')}"> -->
-<!-- 													<tr> -->
-<!-- 														<td class="post" id="rowIndex" th:text="${pStat.count}"></td> -->
-<!-- 														<td class="post post-title"> -->
-<!-- 															<a th:text="${p.postTitle}" th:postCode ="${p.postCode}" th:onclick="selectPostList(this.getAttribute('postCode'), this)"></a> -->
-<!-- 														</td> -->
-<!-- 														<td class="post" th:text="${p.memberId}"></td> -->
-<!-- 														<td class="post" th:text="${p.postWriteDT}"></td> -->
-<!-- 														<td class="post" th:text="${p.postViewCount}"></td> -->
-<!-- 													</tr> -->
-<!-- 												</th:block> -->
-<!-- 												<th:block th:unless="p : ${postList}"> -->
 													<tr>
 														<td class="post" id="rowIndex" th:text="${pStat.count}"></td>
 														<td class="post post-title">
@@ -69,7 +57,6 @@
 														<td class="post" th:text="${p.postWriteDT}"></td>
 														<td class="post" th:text="${p.postViewCount}"></td>
 													</tr>
-<!-- 												</th:block> -->
 											</th:block>
 										</tbody>
 									</table>
