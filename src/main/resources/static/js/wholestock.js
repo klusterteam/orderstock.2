@@ -118,8 +118,8 @@ function getItemListByStorage(storageCode){
 }
 
 /*재고의 창고 이동 시 재고를 선택하여 재고 이동 히스토리 페이지로 넘어감*/
-function storageMove(){
-    let itemCode =  document.getElementById("itemCodeForStorageMove");
-    document.getElementById("itemCode").value = itemCode.value;
+function storageMove(storageCode){
+    let updateStorageItemCode = document.getElementById("updateStorageItemCode");
+    updateStorageItemCode.value = storageCode;
     document.itemList.submit();
 }

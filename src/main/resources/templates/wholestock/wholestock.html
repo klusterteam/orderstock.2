@@ -52,7 +52,7 @@
                                     <input type="hidden" id="itemCodeForStorageMove" name="itemCode" th:value="${t.itemCode}"/>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm" th:onclick="storageMove()">이동</button>
+                                    <button type="button" class="btn btn-warning btn-sm" th:onclick="storageMove([[${t.itemCode}]])">이동</button>
                                     <button type="button" class="btn btn-success btn-sm">납품</button>
                                     <button type="button" class="btn btn-danger btn-sm" th:onclick="deleteItem([[${t.itemCode}]])">폐기</button>
                                 </td>
@@ -70,7 +70,7 @@
             </div>
         </th:block>
         <form name="itemList" th:action="@{wholestockitemlist/updatestoragelist}" method="post">
-            <input type="hidden" id="itemCode" name="itemCode"/>
+            <input type="hidden" id="updateStorageItemCode" name="itemCode"/>
         </form>
         <input type="hidden" id="storageCode" th:value="${storageCode}"/>
         <button class="btn btn-primary btn-sm" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addItem()">등록</button>
