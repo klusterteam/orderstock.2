@@ -31,6 +31,16 @@
         <result property="itemTypeName" column="item_type_name"></result>
     </resultMap>
 
+    <!--RESULTMAP 3 : 재고의 창고 로그 -->
+    <resultMap id="wholestock_storage_log" type="com.kluster.orderstock_2.wholestock.domain.Wholestock">
+        <result property="logSeq" column="log_seq"></result>
+        <result property="itemCode" column="item_code"></result>
+        <result property="storageCode" column="storage_code"></result>
+        <result property="logDate" column="log_date"></result>
+        <result property="logNote" column="log_note"></result>
+        <result property="memberId" column="member_id"></result>
+    </resultMap>
+
     <select id="getStorage" resultMap="wholestock_storage" parameterType="java.lang.String">
         SELECT
             storage_code,
@@ -128,4 +138,24 @@
         SET rec_sts = 'D'
         WHERE item_code = #{itemCode}
     </update>
+
+    <insert id="setWholestockStorageLog" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
+        INSERT INTO os_wholestock_storage_log (log_seq, item_code, storage_code, log_date, log_note, member_id)
+        VALUES ((SELECT CONCAT(A.itemEntryDate, '-', RIGHT(CONCAT('000000', rowCount + 1), 7))
+                 FROM (SELECT CONCAT(SUBSTR(DATE_FORMAT(NOW(), '%Y%m%d'), 1, 8))                        itemEntryDate,
+                              (SELECT COUNT(item_code) FROM os_wholestock_storage_log WHERE log_date = CURDATE()) rowCount) A),
+                #{itemCode}, #{storageCode}, NOW(), #{logNote}, #{memberId})
+    </insert>
+
+    <select id="getWholestockStorageLog" resultMap="wholestock_storage_log" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
+        SELECT
+            log_seq,
+            item_code,
+            storage_code,
+            log_date,
+            log_note,
+            member_id
+        FROM
+            os_wholestock_storage_log
+    </select>
 </mapper>

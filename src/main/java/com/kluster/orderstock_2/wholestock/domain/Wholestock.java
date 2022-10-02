@@ -48,6 +48,16 @@ public class Wholestock {
     private String storageType;
     private String storageOwn;
 
+
+    /*os_wholestock_storage_log 재고 창고 이동
+    logSeq : 재고 이동 코드
+    logNote : 재고 이동 상세 설명
+    logDate : 재고 이동 일자*/
+
+    private String logSeq;
+    private String logNote;
+    private String logDate;
+
     public String getItemCode() {
         return itemCode;
     }
@@ -200,6 +210,30 @@ public class Wholestock {
         this.storageOwn = storageOwn;
     }
 
+    public String getLogSeq() {
+        return logSeq;
+    }
+
+    public void setLogSeq(String logSeq) {
+        this.logSeq = logSeq;
+    }
+
+    public String getLogNote() {
+        return logNote;
+    }
+
+    public void setLogNote(String logNote) {
+        this.logNote = logNote;
+    }
+
+    public String getLogDate() {
+        return logDate;
+    }
+
+    public void setLogDate(String logDate) {
+        this.logDate = logDate;
+    }
+
     @Override
     public String toString() {
         return "Wholestock{" +
@@ -219,10 +253,12 @@ public class Wholestock {
                 ", originName='" + originName + '\'' +
                 ", itemTypeCode='" + itemTypeCode + '\'' +
                 ", itemTypeName='" + itemTypeName + '\'' +
-                ", storageCode='" + storageCode + '\'' +
                 ", storageName='" + storageName + '\'' +
                 ", storageType='" + storageType + '\'' +
                 ", storageOwn='" + storageOwn + '\'' +
+                ", logSeq='" + logSeq + '\'' +
+                ", logNote='" + logNote + '\'' +
+                ", logDate='" + logDate + '\'' +
                 '}';
     }
 }

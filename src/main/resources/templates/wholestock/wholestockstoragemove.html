@@ -5,7 +5,7 @@
     <th:block layout:fragment="content">
         <main id="main" class="main">
             <div class="alert alert-dark alert-dismissible fade show">
-                <div><a th:href="@{/wholestockitemlist}"><strong>재고 관리하기</a> > 재고 이동</strong>
+                <div><a th:href="@{/wholestockitemlist}"><strong>재고 관리하기</strong></a><strong> > 재고 이동</strong>
                     <p style="float: right">USER0001, KLUSTER</p></div>
             </div>
             <div class="card mb-3">
@@ -48,21 +48,25 @@
                 </table>
             </div>
             <div class="row">
-                <div class="col-sm-6">
-                    <span class="badge bg-primary" style="margin-bottom: 5px;">현재 위치</span>
-                    <div class="alert alert-primary alert-dismissible fade show">
-                        <h4 class="alert-heading" id="storageMoveNameSelected"></h4>
+                <div class="col-sm-6" style="margin-top: 25px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">창고 선택</h5>
+                            <!--FORM 1 창고 이동 아이템 storageMoveConfirm-->
+                            <form id="storageMoveConfirm" th:action="@{/wholestockitemlist/updatestorage}" method="post">
+                                <input type="hidden" id="confirmedStorageCode" name="storageCode" value="">
+                                <input type="hidden" id="confirmedItemCode" name="itemCode" value="">
+                            </form>
+                            <div class="d-grid gap-2 mt-3">
+                                <th:block th:each="s : ${storageList}">
+                                    <button type="button" id="confirmedStorageName" class="btn btn-secondary" th:onclick="storageMoveCheckConfirm([[${s.storageCode}]])">
+                                        [[${s.storageName}]]
+                                        <span th:id="'currentStorage_'+ ${s.storageCode}" class="badge bg-primary" style="display: none;">재고품의 현재 위치</span>
+                                    </button>
+                                </th:block>
+                            </div>
+                        </div>
                     </div>
-                    <span class="badge bg-success" style="margin-bottom: 5px;">이동할 위치 선택</span>
-                        <form id="storageMoveConfirm" th:action="@{/wholestockitemlist/updatestorage}" method="post">
-                            <th:block th:each="s : ${storageList}">
-                                <input type="hidden" name="storageCode" th:value="${s.storageCode}">
-                                <div class="alert alert-success alert-dismissible fade show" th:onclick="storageMoveCheckConfirm()">
-                                    <h4 id ="storageMoveCheckName" class="storageMoveCheck alert-heading">[[${s.storageName}]]</h4>
-                                </div>
-                            </th:block>
-                            <input type="hidden" id="confirmedItem_obj" name="itemCode" value="">
-                        </form>
                 </div>
                 <div class="col-sm-6" style="margin-top: 25px;">
                     <div class="card">
@@ -70,45 +74,69 @@
                             <h5 class="card-title">이 재고의 이동 내역</h5>
                             <div class="activity">
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label">date : 2022-01-01</div>
-                                    <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+                                    <div class="activite-label">
+                                        <span class="badge rounded-pill bg-primary">입고</span>
+                                        <span>2022-01-01</span>
+                                    </div>
                                     <div class="activity-content">
-                                        storage name
+                                        <span class="itemHistoryDetails">냉장고</span>
+                                        <span class="itemHistoryDetails">이준혁</span>
+                                        <span class="itemHistoryDetails">최초 입고</span>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label">date : 2022-01-01</div>
-                                    <i class="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
+                                    <div class="activite-label">
+                                        <span class="badge rounded-pill bg-warning">이동</span>
+                                        <span>2022-01-02</span>
+                                    </div>
                                     <div class="activity-content">
-                                        storage name
+                                        <span class="itemHistoryDetails">냉장고</span>
+                                        <span class="itemHistoryDetails">이준혁</span>
+                                        <span class="itemHistoryDetails">요청에 따른 창고 이동</span>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label">date : 2022-01-01</div>
-                                    <i class="bi bi-circle-fill activity-badge text-primary align-self-start"></i>
+                                    <div class="activite-label">
+                                        <span class="badge rounded-pill bg-warning">이동</span>
+                                        <span>2021-01-03</span>
+                                    </div>
                                     <div class="activity-content">
-                                        storage name
+                                        <span class="itemHistoryDetails">냉장고</span>
+                                        <span class="itemHistoryDetails">이준혁</span>
+                                        <span class="itemHistoryDetails"></span>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label">date : 2022-01-01</div>
-                                    <i class="bi bi-circle-fill activity-badge text-info align-self-start"></i>
+                                    <div class="activite-label">
+                                        <span class="badge rounded-pill bg-success">납품</span>
+                                        <span class="itemHistoryDetails">2022-01-03</span>
+                                    </div>
                                     <div class="activity-content">
-                                        storage name
+                                        <span class="itemHistoryDetails">냉장고</span>
+                                        <span class="itemHistoryDetails">이준혁</span>
+                                        <span class="itemHistoryDetails">(주)경훈에 납품</span>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label">date : 2022-01-01</div>
-                                    <i class="bi bi-circle-fill activity-badge text-warning align-self-start"></i>
+                                    <div class="activite-label">
+                                        <span class="badge rounded-pill bg-secondary">분실</span>
+                                        <span>2022-01-04</span>
+                                    </div>
                                     <div class="activity-content">
-                                        storage name
+                                        <span class="itemHistoryDetails">냉장고</span>
+                                        <span class="itemHistoryDetails">이준혁</span>
+                                        <span class="itemHistoryDetails"></span>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label">date : 2022-01-01</div>
-                                    <i class="bi bi-circle-fill activity-badge text-muted align-self-start"></i>
+                                    <div class="activite-label">
+                                        <span class="badge rounded-pill bg-danger">폐기</span>
+                                        <span>2022-01-05</span>
+                                    </div>
                                     <div class="activity-content">
-                                        storage name
+                                        <span class="itemHistoryDetails">냉장고</span>
+                                        <span class="itemHistoryDetails">이준혁</span>
+                                        <span class="itemHistoryDetails"></span>
                                     </div>
                                 </div>
                             </div>

@@ -3,14 +3,14 @@ package com.kluster.orderstock_2.member.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+/*import javax.persistence.*;*/
 
 @Getter
 @Setter
-@Entity
+/*@Entity*/
 public class MemberLogin {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    /*@Id @GeneratedValue(strategy = GenerationType.IDENTITY)*/
     private Long idx;
     private String member_name;
     private String member_id;

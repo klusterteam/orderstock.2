@@ -1,16 +1,12 @@
 package com.kluster.orderstock_2.member.aop;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-@Aspect
 @Component
 public class TimeTraceAop {
 
     /* 변경사항 수정 */
-    @Around("execution(* com.kluster.orderstock_2..*(..))")
+    /*@Around("execution(* com.kluster.orderstock_2..*(..))")
     public Object execute(ProceedingJoinPoint joinPoint)throws Throwable{
         long start = System.currentTimeMillis();
         System.out.println("START : " + joinPoint.toString() + "<-- 접속 시간");
@@ -21,5 +17,5 @@ public class TimeTraceAop {
             long timeMs = finish - start;
             System.out.println("END : "+ joinPoint.toString() + " " + timeMs+" ms <-- 종료 시간");
         }
-    }
+    }*/
 }
