@@ -59,5 +59,14 @@ public class WholestockService {
         return wholestockMapper.deleteWholestockItem(itemCode);
     }
 
+    public int setWholestockStorageLog(Wholestock wholestock){
+        return wholestockMapper.setWholestockStorageLog(wholestock);
+    }
+
+    public List<Wholestock> getWholestockStorageLog(Wholestock wholestock){
+        List<Wholestock> wholestockStorageLog = wholestockMapper.getWholestockStorageLog(wholestock);
+        return wholestockStorageLog;
+    }
+
 }
 

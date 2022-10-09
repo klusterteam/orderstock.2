@@ -56,6 +56,12 @@
                             <form id="storageMoveConfirm" th:action="@{/wholestockitemlist/updatestorage}" method="post">
                                 <input type="hidden" id="confirmedStorageCode" name="storageCode" value="">
                                 <input type="hidden" id="confirmedItemCode" name="itemCode" value="">
+                                <input type="hidden" id="storageLogNote" name="logNote" value="">
+                                <input type="hidden" id="storageLogType" name="logType" value="">
+                                <input type="hidden" id="storageLogId" name="memberId" value="">
+                            </form>
+                            <form>
+
                             </form>
                             <div class="d-grid gap-2 mt-3">
                                 <th:block th:each="s : ${storageList}">

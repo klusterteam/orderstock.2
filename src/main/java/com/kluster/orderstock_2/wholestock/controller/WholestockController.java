@@ -23,11 +23,11 @@ public class WholestockController {
     @GetMapping("wholestockitemlist")
     public String wholestockItemList(@ModelAttribute Wholestock wholestock, Model model,
                                      @RequestParam(value = "storageCode", required = false)
-                                        String storageCode) throws Exception{
+                                     String storageCode) throws Exception {
 
         /*test userId of session*/
         String userId = "USER0001";
-        if(storageCode != null){
+        if (storageCode != null) {
             wholestock.setStorageCode(storageCode);
         }
 
@@ -46,10 +46,11 @@ public class WholestockController {
 
         return "wholestock/wholestock";
     }
+
     /*도매상 2 : 도매상의 재고 목록 > 폐기*/
     @PostMapping("wholestockitemlist/deleteitem")
     public String wholestockItemDelete(@RequestParam(value = "itemCode", required = true)
-                                       String itemCode) throws Exception{
+                                       String itemCode) throws Exception {
 
         wholestockService.deleteWholestockItem(itemCode);
 
@@ -60,10 +61,10 @@ public class WholestockController {
     @ResponseBody
     @GetMapping(value = "wholestockitemlist/setitem/getcategories", produces = "application/json")
     public Map<String, String> wholestockItemListGetCategories(@RequestParam String itemTypeCode, @RequestParam String originCode)
-                                                                throws Exception {
+            throws Exception {
         //JSONObject data = new JSONObject() >>>>> empty response
         Map<String, String> data = new HashMap<String, String>();
-        if(itemTypeCode != null){
+        if (itemTypeCode != null) {
             Wholestock wholestock = new Wholestock();
             wholestock.setItemTypeCode(itemTypeCode);
             List<Wholestock> itemTypeResult = wholestockService.getItemType(wholestock);
@@ -71,7 +72,7 @@ public class WholestockController {
             String itemTypeName = itemTypeNameList.getItemTypeName();
             data.put("itemTypeName", itemTypeName);
         }
-        if(originCode != null){
+        if (originCode != null) {
             Wholestock wholestock = new Wholestock();
             wholestock.setOriginCode(originCode);
             List<Wholestock> originCodeResult = wholestockService.getOriginCountry(wholestock);
@@ -91,7 +92,7 @@ public class WholestockController {
 
     /*도매상 5 : 재고의 창고 이동 1단계(선택한 재고를 히스토리 및 재고 이동 페이지로 넘겨준다)*/
     @PostMapping("/wholestockitemlist/updatestoragelist")
-    public String updateItemStorageList(@ModelAttribute Wholestock wholestock, Model model) throws Exception{
+    public String updateItemStorageList(@ModelAttribute Wholestock wholestock, Model model) throws Exception {
 
         /*test userId of session*/
         String userId = "USER0001";
@@ -106,10 +107,24 @@ public class WholestockController {
 
     /*도매상 6 : 재고의 창고 이동 2단계(재고를 최종적으로 현재 창고에서 다른 창고로 이동)*/
     @PostMapping("/wholestockitemlist/updatestorage")
-    public String updateItemStorage(Wholestock wholestock) throws Exception{
+    public String updateItemStorage(@ModelAttribute Wholestock wholestock) throws Exception {
+        //test userId of session
+        wholestock.setMemberId("USER0001");
+
         wholestockService.updateItemStorage(wholestock);
+        wholestockService.setWholestockStorageLog(wholestock);
         return "redirect:/wholestockitemlist";
     }
+
+    /*도매상 7 : 재고의 창고 이동 로그*/
+    @PostMapping("/wholestockitemlist/getStorageMoveLog")
+        public String getStorageMoveLog(@ModelAttribute Wholestock wholestock, Model model) throws Exception {
+
+            List<Wholestock> storageMoveLog = wholestockService.getWholestockStorageLog(wholestock);
+            model.addAttribute("storageMoveLog", storageMoveLog);
+            return "redirect:/wholestockitemlist";
+    }
+
 }
 
 

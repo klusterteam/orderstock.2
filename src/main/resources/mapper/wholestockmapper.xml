@@ -38,6 +38,7 @@
         <result property="storageCode" column="storage_code"></result>
         <result property="logDate" column="log_date"></result>
         <result property="logNote" column="log_note"></result>
+        <result property="logType" column="log_type"></result>
         <result property="memberId" column="member_id"></result>
     </resultMap>
 
@@ -140,11 +141,11 @@
     </update>
 
     <insert id="setWholestockStorageLog" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
-        INSERT INTO os_wholestock_storage_log (log_seq, item_code, storage_code, log_date, log_note, member_id)
+        INSERT INTO os_wholestock_storage_log (log_seq, item_code, storage_code, log_date, log_note, log_type, member_id)
         VALUES ((SELECT CONCAT(A.itemEntryDate, '-', RIGHT(CONCAT('000000', rowCount + 1), 7))
                  FROM (SELECT CONCAT(SUBSTR(DATE_FORMAT(NOW(), '%Y%m%d'), 1, 8))                        itemEntryDate,
                               (SELECT COUNT(item_code) FROM os_wholestock_storage_log WHERE log_date = CURDATE()) rowCount) A),
-                #{itemCode}, #{storageCode}, NOW(), #{logNote}, #{memberId})
+                #{itemCode}, #{storageCode}, NOW(), #{logNote}, #{logType}, #{memberId})
     </insert>
 
     <select id="getWholestockStorageLog" resultMap="wholestock_storage_log" parameterType="com.kluster.orderstock_2.wholestock.domain.Wholestock">
@@ -154,8 +155,10 @@
             storage_code,
             log_date,
             log_note,
+            log_type,
             member_id
         FROM
             os_wholestock_storage_log
+        WHERE item_code = #{itemCode}
     </select>
 </mapper>

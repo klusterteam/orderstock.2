@@ -14,4 +14,6 @@ public interface WholestockMapper {
     int setWholestockItem(Wholestock wholestock);
     int updateItemStorage(Wholestock wholestock);
     int deleteWholestockItem(String itemCode);
+    int setWholestockStorageLog(Wholestock wholestock);
+    List<Wholestock> getWholestockStorageLog(Wholestock wholestock);
 }
