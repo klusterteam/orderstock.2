@@ -52,14 +52,65 @@ public class Wholestock {
     /*os_wholestock_storage_log 재고 창고 이동
     logSeq : 재고 이동 코드
     logNote : 재고 이동 상세 설명
-    logDate : 재고 이동 일자*/
+    logDate : 재고 이동 일자
+    logType : 재고 이동 타입*/
 
     private String logSeq;
     private String logNote;
     private String logDate;
 
+    private String logType;
+
+    private String memberId;
+
     public String getItemCode() {
         return itemCode;
+    }
+
+    public String getLogType() {
+        return logType;
+    }
+
+    @Override
+    public String toString() {
+        return "Wholestock{" +
+                "itemCode='" + itemCode + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", itemType='" + itemType + '\'' +
+                ", itemOrigin='" + itemOrigin + '\'' +
+                ", itemUnit='" + itemUnit + '\'' +
+                ", itemQuan=" + itemQuan +
+                ", itemDesc='" + itemDesc + '\'' +
+                ", itemProd='" + itemProd + '\'' +
+                ", itemLife='" + itemLife + '\'' +
+                ", storageCode='" + storageCode + '\'' +
+                ", itemDate='" + itemDate + '\'' +
+                ", recSts='" + recSts + '\'' +
+                ", originCode='" + originCode + '\'' +
+                ", originName='" + originName + '\'' +
+                ", itemTypeCode='" + itemTypeCode + '\'' +
+                ", itemTypeName='" + itemTypeName + '\'' +
+                ", storageName='" + storageName + '\'' +
+                ", storageType='" + storageType + '\'' +
+                ", storageOwn='" + storageOwn + '\'' +
+                ", logSeq='" + logSeq + '\'' +
+                ", logNote='" + logNote + '\'' +
+                ", logDate='" + logDate + '\'' +
+                ", logType='" + logType + '\'' +
+                ", memberId='" + memberId + '\'' +
+                '}';
+    }
+
+    public void setLogType(String logType) {
+        this.logType = logType;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
     public void setItemCode(String itemCode) {
@@ -234,31 +285,4 @@ public class Wholestock {
         this.logDate = logDate;
     }
 
-    @Override
-    public String toString() {
-        return "Wholestock{" +
-                "itemCode='" + itemCode + '\'' +
-                ", itemName='" + itemName + '\'' +
-                ", itemType='" + itemType + '\'' +
-                ", itemOrigin='" + itemOrigin + '\'' +
-                ", itemUnit='" + itemUnit + '\'' +
-                ", itemQuan=" + itemQuan +
-                ", itemDesc='" + itemDesc + '\'' +
-                ", itemProd='" + itemProd + '\'' +
-                ", itemLife='" + itemLife + '\'' +
-                ", storageCode='" + storageCode + '\'' +
-                ", itemDate='" + itemDate + '\'' +
-                ", recSts='" + recSts + '\'' +
-                ", originCode='" + originCode + '\'' +
-                ", originName='" + originName + '\'' +
-                ", itemTypeCode='" + itemTypeCode + '\'' +
-                ", itemTypeName='" + itemTypeName + '\'' +
-                ", storageName='" + storageName + '\'' +
-                ", storageType='" + storageType + '\'' +
-                ", storageOwn='" + storageOwn + '\'' +
-                ", logSeq='" + logSeq + '\'' +
-                ", logNote='" + logNote + '\'' +
-                ", logDate='" + logDate + '\'' +
-                '}';
-    }
 }
