@@ -57,7 +57,7 @@
                                 <input type="hidden" id="confirmedStorageCode" name="storageCode" value="">
                                 <input type="hidden" id="confirmedItemCode" name="itemCode" value="">
                                 <input type="hidden" id="storageLogNote" name="logNote" value="">
-                                <input type="hidden" id="storageLogType" name="logType" value="">
+                                <input type="hidden" id="storageLogType" name="logType" value="MOVE">
                                 <input type="hidden" id="storageLogId" name="memberId" value="">
                             </form>
                             <form>
@@ -79,72 +79,41 @@
                         <div class="card-body">
                             <h5 class="card-title">이 재고의 이동 내역</h5>
                             <div class="activity">
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">
-                                        <span class="badge rounded-pill bg-primary">입고</span>
-                                        <span>2022-01-01</span>
+                                <th:block th:each="l : ${storageMoveLog}">
+                                    <div class="activity-item d-flex">
+                                        <div th:if="${l.logType == 'STOC'}">
+                                            <div class="activite-label">
+                                                <span class="badge rounded-pill bg-primary">입고</span>
+                                            </div>
+                                        </div>
+                                        <div th:if="${l.logType == 'MOVE'}">
+                                            <div class="activite-label">
+                                                <span class="badge rounded-pill bg-warning">이동</span>
+                                            </div>
+                                        </div>
+                                        <div th:if="${l.logType == 'FORW'}">
+                                            <div class="activite-label">
+                                                <span class="badge rounded-pill bg-success">납품</span>
+                                            </div>
+                                        </div>
+                                        <div th:if="${l.logType == 'DUMP'}">
+                                            <div class="activite-label">
+                                                <span class="badge rounded-pill bg-danger">폐기</span>
+                                            </div>
+                                        </div>
+                                        <div th:if="${l.logType == 'MISS'}">
+                                            <div class="activite-label">
+                                                <span class="badge rounded-pill bg-secondary">분실</span>
+                                            </div>
+                                        </div>
+                                        <span>[[${l.logDate}]]</span>
+                                        <div class="activity-content">
+                                            <span>[[${l.storageCode}]]</span>
+                                            <span>[[${l.memberId}]]</span>
+                                            <span>[[${l.logNote}]]</span>
+                                        </div>
                                     </div>
-                                    <div class="activity-content">
-                                        <span class="itemHistoryDetails">냉장고</span>
-                                        <span class="itemHistoryDetails">이준혁</span>
-                                        <span class="itemHistoryDetails">최초 입고</span>
-                                    </div>
-                                </div>
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">
-                                        <span class="badge rounded-pill bg-warning">이동</span>
-                                        <span>2022-01-02</span>
-                                    </div>
-                                    <div class="activity-content">
-                                        <span class="itemHistoryDetails">냉장고</span>
-                                        <span class="itemHistoryDetails">이준혁</span>
-                                        <span class="itemHistoryDetails">요청에 따른 창고 이동</span>
-                                    </div>
-                                </div>
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">
-                                        <span class="badge rounded-pill bg-warning">이동</span>
-                                        <span>2021-01-03</span>
-                                    </div>
-                                    <div class="activity-content">
-                                        <span class="itemHistoryDetails">냉장고</span>
-                                        <span class="itemHistoryDetails">이준혁</span>
-                                        <span class="itemHistoryDetails"></span>
-                                    </div>
-                                </div>
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">
-                                        <span class="badge rounded-pill bg-success">납품</span>
-                                        <span class="itemHistoryDetails">2022-01-03</span>
-                                    </div>
-                                    <div class="activity-content">
-                                        <span class="itemHistoryDetails">냉장고</span>
-                                        <span class="itemHistoryDetails">이준혁</span>
-                                        <span class="itemHistoryDetails">(주)경훈에 납품</span>
-                                    </div>
-                                </div>
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">
-                                        <span class="badge rounded-pill bg-secondary">분실</span>
-                                        <span>2022-01-04</span>
-                                    </div>
-                                    <div class="activity-content">
-                                        <span class="itemHistoryDetails">냉장고</span>
-                                        <span class="itemHistoryDetails">이준혁</span>
-                                        <span class="itemHistoryDetails"></span>
-                                    </div>
-                                </div>
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">
-                                        <span class="badge rounded-pill bg-danger">폐기</span>
-                                        <span>2022-01-05</span>
-                                    </div>
-                                    <div class="activity-content">
-                                        <span class="itemHistoryDetails">냉장고</span>
-                                        <span class="itemHistoryDetails">이준혁</span>
-                                        <span class="itemHistoryDetails"></span>
-                                    </div>
-                                </div>
+                                </th:block>
                             </div>
                         </div>
                     </div>
