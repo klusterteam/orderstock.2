@@ -99,6 +99,10 @@ public class WholestockController {
         List<Wholestock> wholestockItemList = wholestockService.getWholestockItem(wholestock);
         List<Wholestock> storageList = wholestockService.getStorage(userId);
 
+        /*재고품의 이동 히스토리*/
+        List<Wholestock> storageMoveLog = wholestockService.getWholestockStorageLog(wholestock);
+        model.addAttribute("storageMoveLog", storageMoveLog);
+
         model.addAttribute("wholestockItemList", wholestockItemList);
         model.addAttribute("storageList", storageList);
 
@@ -116,7 +120,7 @@ public class WholestockController {
         return "redirect:/wholestockitemlist";
     }
 
-    /*도매상 7 : 재고의 창고 이동 로그*/
+    /*도매상 7 : 재고의 창고 이동 로그*/ /*-> 보존 여부 확인 필요*/
     @PostMapping("/wholestockitemlist/getStorageMoveLog")
         public String getStorageMoveLog(@ModelAttribute Wholestock wholestock, Model model) throws Exception {
 

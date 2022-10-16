@@ -10,13 +10,13 @@ $(function (){
 /*재고의 위치를 이동*/
 function storageMoveCheckConfirm(storageCode){
 
-        let storageMoveCode = document.getElementById('storageMoveCode').val();
+        let storageMoveCode = document.getElementById('storageMoveCode').value;
         if(storageMoveCode == storageCode){
             alert("현재 위치와 이동할 위치가 같습니다.");
             return false;
         }
 
-        let confirmedStorageName = document.getElementById('confirmedStorageName').text();
+        let confirmedStorageName = document.getElementById('confirmedStorageName').textContent;
         let confirmedItem = document.getElementById("confirmedItem");
         let storageLogType = document.getElementById("storageLogType");
         let storageLogNote = document.getElementById("storageLogNote");
