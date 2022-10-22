@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/niceadminlayout}">
+
+<th:block layout:fragment="content">
+    <body>
+ <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>레시피 등록</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+      <!-- 여기서부터 시작 -->
+      <form name="form" method="post">
+			<table width="400" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+			    <td colspan="2" align="left" bgcolor="#FFFFFF">
+			      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+			        <tr>
+			         <td colspan="5" bgcolor="#FFFFFF" height="25" align="left">
+			         <input name="addButton" type="button" style="cursor:hand" onClick="insRow()" value="추가">
+			       
+			        </tr>
+			        <tr>
+			         <td height="25">
+			           <table id="addTable" width="400" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+			            <tr>
+			              <td><input type="text" name="addText" style="width:350px; height:20px;"></td>
+			              <td align="left"></td>
+			            </tr>
+			          </table></td>
+			        </tr>
+			       </table>
+			      </td>
+			   </tr>
+			 </table>
+			 <table width="400" border="0" cellspacing="0" cellpadding="0">
+			    <tr>
+			      <td height="10">
+			      </td>
+			    </tr>
+			    <tr>
+			      <td align="center">
+			      <input type="button" name="button" value="확인" onClick="frmCheck();">
+			      </td>
+			    </tr>
+			 </table>
+			</form>
+  <script language="javascript">
+
+var oTbl;
+
+function insRow() {
+  oTbl = document.getElementById("addTable");
+  var oRow = oTbl.insertRow();
+  oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+  var oCell = oRow.insertCell();
+
+  var frmTag = "<input type=text name=addText style=width:350px; height:20px;> ";
+  frmTag += "<input type=button value='삭제' onClick='removeRow()' style='cursor:hand'>";
+  oCell.innerHTML = frmTag;
+}
+
+function removeRow() {
+  oTbl.deleteRow(oTbl.clickedRowIndex);
+}
+
+function frmCheck()
+{
+  var frm = document.form;
+  
+  for( var i = 0; i <= frm.elements.length - 1; i++ ){
+     if( frm.elements[i].name == "addText" )
+     {
+         if( !frm.elements[i].value ){
+             alert("텍스트박스에 값을 입력하세요!");
+                 frm.elements[i].focus();
+	 return;
+          }
+      }
+   }
+ }
+
+</script>    
+      
+ 
+    
+
+	<!-- 여기가 끝 -->
+    </div>
+    </section>
+
+  </main><!-- End #main -->
+
+    </body>
+</th:block>
+
+</html>

@@ -3,9 +3,9 @@ package com.kluster.orderstock_2.util;
 public class Pagination {
 
 	//페이지 당 보여지는 게시글 최대 개수
-	private int pageSize = 3;
+	private int pageSize = 5;
 	//페이징된 버튼의 블럭당 최대 개수
-	private int blockSize=3;
+	private int blockSize = 5;
 	//현제페이지
 	private int page = 1;
 	//현재 블럭
