@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kluster.orderstock_2.inventory.mapper.InventoryMapper">
+    <resultMap id="os_inventory" type="com.kluster.orderstock_2.inventory.domain.Inventory">
+        <result property="itemCode" column="item_code"></result>
+        <result property="itemName" column="item_name"></result>
+        <result property="itemCategory" column="item_category"></result>
+        <result property="itemUnit" column="item_unit"></result>
+        <result property="itemQuan" column="item_quan"></result>
+        <result property="itemDesc" column="item_desc"></result>
+        <result property="itemProdDate" column="item_prod_date"></result>
+        <result property="itemExprDate" column="item_expr_date"></result>
+        <result property="itemRecvDate" column="item_recv_date"></result>
+    </resultMap>
+
+    <select id="getInventoryList" resultMap="os_inventory">
+        SELECT DISTINCT 
+            item_category 
+        FROM os_inventory
+    </select>
+    <select id="getItemTotalQuan" parameterType="String" resultType="map">
+        SELECT 
+            #{itemCategory} as itemCategory
+            ,SUM(oi.item_quan) as totalQuan
+            ,oi.item_unit as itemUnit
+        FROM
+            os_inventory oi 
+        WHERE 
+            item_category = #{itemCategory}
+    </select>
+    
+    <select id="getDetailList" parameterType = "String" resultMap="os_inventory">
+        SELECT
+            oi.item_code 
+            ,oi.item_name 
+            ,oi.item_category 
+            ,oi.item_unit 
+            ,oi.item_quan 
+            ,oi.item_desc 
+            ,oi.item_prod_date 
+            ,oi.item_expr_date 
+            ,oi.item_recv_date  
+        FROM 
+            os_inventory oi 
+        WHERE 
+            item_category = #{itemCategory}
+        
+    </select>
+
+
+
+</mapper>

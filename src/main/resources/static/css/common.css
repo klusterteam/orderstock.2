@@ -37,3 +37,41 @@
 	height : 100%;
 	min-height: 500px;	
 }
+
+/* card를 선택 가능한 버튼처럼 사용하는 경우 card-selectable 클래스 사용 */
+.card .card-selectable {
+	border : 1px solid transparent
+}
+.card .card-selectable:hover {
+	border : 1px solid rgba(38, 0, 255, 0.3);
+	box-shadow: 0px 0 10px rgba(38, 0, 255, 0.1)
+}
+.card .card-selectable:active {
+	border : 1px solid rgba(38, 0, 255, 0.6);
+	box-shadow: 0px 0 10px rgba(38, 0, 255, 0.1)
+}
+
+/*  tbody에 table-h-100 클래스 지정하면 테이블 행 높이에 100px 적용*/
+.table-h-100 tr{
+	height: 100px;
+}
+/*  tbody에 table-h-50 클래스 지정하면 테이블 행 높이에 50px 적용*/
+.table-h-50 tr{
+	height: 50px;
+}
+/*  tbody에 table-h-30 클래스 지정하면 테이블 행 높이에 30px 적용*/
+.table-h-30 tr{
+	height: 30px;
+}
+.table-h-100 tr td{
+	vertical-align: middle;
+	text-align: center;
+}
+
+/* 클래스에 따라 visibility 속성을 변경 */
+.row .section-expanded {
+	visibility: visible;
+}
+.row .section-collapsed {
+	visibility: collapse;
+}

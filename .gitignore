@@ -171,3 +171,7 @@ Temporary Items
 
 !/src/main/resources/application.properties
 target/
+klusterDataBase.session.sql
+.vscode/settings.json
+.vscode/launch.json
+pom.xml

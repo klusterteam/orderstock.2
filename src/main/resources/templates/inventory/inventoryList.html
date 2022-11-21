@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/niceadminlayout}">
+
+    <th:block layout:fragment="content">
+      <main id="main" class="main">
+        <div class="row">
+          <!-- 화면 분할 (좌) -->
+          <div class ="col-lg-6" id="left-section">
+            <div class="card" >
+              <div class="card-body">
+                <h5 class="card-title">재고 목록</h5>
+
+                <th:block th:each="tq : ${totalQuantity}">
+                    <!-- 재고 항목별 카드 -->
+                  <div class="card">
+                    <div class="row g-0 card-selectable">
+                      <div class="col-md-2 card-image" style="align-self: center; text-align: center">
+                        <img src="/assets/img/tomato.jpg" class="img-fluid rounded-start" height="150px" width="150px" style="padding: 20px">
+                      </div>
+                      <div class="col-md-10 card-content">
+                        <div style="text-align: right;">
+                          <span class="badge"><i class=""></i></span>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="h5 card-title item-name" th:value="${tq.itemCategory}" th:text="${tq.itemCategory}"> [] </h5>
+                          <p class="card-text" th:text="${tq.totalQuan}">100/200</p>
+                          <div class="progress mt-3">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th:block>
+                
+                <!-- 재고 항목별 카드 -->
+                <div class="card">
+                  <div class="row g-0 card-selectable">
+                    <div class="col-md-2" style="align-self: center; text-align: center">
+                      <img src="/assets/img/carrot.png" class="img-fluid rounded-start" height="150px" width="150px" style="padding: 20px">
+                    </div>
+                    <div class="col-md-10">
+                      <div style="text-align: right;">
+                            <span class="badge bg-danger"><i class="bi bi-exclamation-octagon me-1"></i> 유통기한 임박 재고가 있습니다</span>
+                      </div>
+                      <div class="card-body">
+                        <h5 class=" h5 card-title  item-name" value ="Carrot"> 당근 </h5>
+                        <p class="card-text">70/100</p>
+                        <div class="progress mt-3">
+                          <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 재고 항목별 카드 -->
+                <div class="card">
+                  <div class="row g-0 card-selectable">
+                    <div class="col-md-2" style="align-self: center; text-align: center">
+                      <img src="/assets/img/butter.jpg" class="img-fluid rounded-start" height="150px" width="150xp" style="padding: 20px">
+                    </div>
+                    <div class="col-md-10">
+                      <!-- badge 재고 상태에 따라 클래스 및 텍스트 변경 -->
+                      <div style="text-align: right;">
+                        <span class="badge bg-primary"><i class="bi bi-info-circle me-1"></i> 잔여 재고가 10% 이하입니다</span>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="h5 card-title  item-name" value ="Butter"> 버터 </h5>
+                        <p class="card-text">3/30</p>
+                        <div class="progress mt-3">
+                          <div class="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="3" aria-valuemin="0" aria-valuemax="30">10%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 화면 분할 (우) -->
+          <div class="col-lg-6 section-collapsed" id="right-section">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><제품명></h5>
+  
+                <!-- Table with stripped rows -->
+                <table class="table table-striped" id="list222">
+                  <thead>
+                    <tr>
+                      <th scope="col">상품명</th>
+                      <th scope="col">분류</th>
+                      <th scope="col">잔여/전체</th>
+                      <th scope="col">유통기한</th>
+                    </tr>
+                  </thead>
+                    <tr>
+                      <td>Brandon Jacob</td>
+                      <td>Designer</td>
+                      <td>28</td>
+                      <td>2016-05-25</td>
+                    </tr>
+                    <tr>
+                      <td>Bridie Kessler</td>
+                      <td>Developer</td>
+                      <td>35</td>
+                      <td>2014-12-05</td>
+                    </tr>
+                    <tr>
+                      <td>Ashleigh Langosh</td>
+                      <td>Finance</td>
+                      <td>45</td>
+                      <td>2011-08-12</td>
+                    </tr>
+                    <tr>
+                      <td>Angus Grady</td>
+                      <td>HR</td>
+                      <td>34</td>
+                      <td>2012-06-11</td>
+                    </tr>
+                    <tr>
+                      <td>Raheem Lehner</td>
+                      <td>Dynamic Division Officer</td>
+                      <td>47</td>
+                      <td>2011-04-19</td>
+                    </tr>
+                    <tr>
+                      <td>Raheem Lehner</td>
+                      <td>Dynamic Division Officer</td>
+                      <td>47</td>
+                      <td>2011-04-19</td>
+                    </tr>
+                    <tr>
+                      <td>Raheem Lehner</td>
+                      <td>Dynamic Division Officer</td>
+                      <td>47</td>
+                      <td>2011-04-19</td>
+                    </tr>
+                    <tr>
+                      <td>Raheem Lehner</td>
+                      <td>Dynamic Division Officer</td>
+                      <td>47</td>
+                      <td>2011-04-19</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+      <script th:src="@{/js/inventoryList.js}"></script>
+    </th:block>
+</html>
